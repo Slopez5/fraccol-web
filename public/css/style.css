@@ -1,0 +1,82 @@
+/*Navbar*/
+
+.logo-image {
+    width: 50px;
+    height: 50px;
+    object-fit: contain;
+}
+
+
+/*Inicio*/
+
+.image-carousel {
+    width: 100wh;
+    max-height: calc(100vh - 76px);
+    object-fit: cover;
+    object-position: center;
+}
+
+.carousel-caption {
+    position: absolute;
+    top: calc(50% - 76px);
+    left: 0;
+    right: 0;
+}
+
+
+/*desarrollos*/
+
+.scroll-container {
+    overflow-x: scroll;
+    white-space: nowrap;
+}
+
+.scroll-content {
+    display: inline-block;
+}
+
+.card {
+    display: inline-block;
+    width: 200px;
+    margin-right: 10px;
+}
+
+.card-body {
+    position: absolute;
+    top: 50%;
+    right: 0;
+    left: 0;
+    text-align: center;
+    transform: translateY(-50%);
+}
+
+.card-title {
+    color: white;
+}
+
+#map {
+    height: 400px;
+}
+
+.map-container {
+    padding-top: 40px;
+    padding-bottom: 20px;
+}
+
+
+/*propiedades*/
+
+
+/*servicios*/
+
+
+/*sobre-nosotros*/
+
+
+/*blog*/
+
+
+/*contacto*/
+
+
+/*footer*/
