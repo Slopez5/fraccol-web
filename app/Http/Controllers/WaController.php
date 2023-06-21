@@ -8,12 +8,22 @@ class WaController extends Controller
 {
 
     public function envia($template) {
-        $token = '';
-        $telephone = '';
+        $token = 'EAAWai40l2qwBAKfB5I2SmQPJzyYgBgXmBbgONpx7b7ZBBktNh4nRjdOIojeaUsVECt2bGZAC9nXZA1Mgj2mpcXMAKw3SzzQ30tfbAMklIFg5ZC2ql9DQigju8tZCTy1phQYlHxTmoYi49XZA7mWDVtyGQR74NOmPIw5Ok2hfEovIzFZARVemqT8xvZCTJkpxvvUka9vmWZAhebgZDZD';
+        $telephone = '523122192524';
 
         $url = 'https://graph.facebook.com/v17.0/103971779304849/messages';
 
-        $mensaje = '';
+        $mensaje = ''
+        . '{'
+        . '"messaging_product": "whatsapp", '
+        . '"to": "'.$telephone.'", '
+        . '"type": "template", '
+        . '"template": '
+        . '{'
+        . '     "name": "hello_world",'
+        . '     "language": { "code": "en_US" } '
+        . '} '
+        . '}';
 
         $header = array("Authorization: Bearer " . $token, "Content-Type: application/json");
 
