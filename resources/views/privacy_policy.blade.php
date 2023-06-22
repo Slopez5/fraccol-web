@@ -10,7 +10,7 @@
 
 <body>
     <h1>AVISO DE PRIVACIDAD</h1>
-    <p>[Nombre de tu empresa] se compromete a proteger la privacidad y los datos personales de nuestros clientes y
+    <p>{{ $enterprise }} se compromete a proteger la privacidad y los datos personales de nuestros clientes y
         usuarios. Este aviso de privacidad describe cómo recopilamos, utilizamos y protegemos la información personal
         que recopilamos a través de nuestro sitio web, aplicaciones móviles y otros medios. Al utilizar nuestros
         servicios, aceptas las prácticas descritas en este aviso.</p>
@@ -59,15 +59,15 @@
         <p>Si tienes alguna pregunta o inquietud sobre este aviso de privacidad, no dudes en comunicarte con nosotros a
             través de los siguientes métodos de contacto:</p>
         <ul>
-            <li>Correo electrónico: [Dirección de correo electrónico]</li>
-            <li>Teléfono: [Número de teléfono]</li>
-            <li>Dirección postal: [Dirección postal]</li>
+            <li>Correo electrónico: {{ $email }}</li>
+            <li>Teléfono: {{ $phone }}</li>
+            <li>Dirección postal: {{ $address }}</li>
         </ul>
         <p>Agradecemos tu confianza al proporcionarnos tu información personal. Nos comprometemos a protegerla y
             utilizarla de manera responsable y segura.
         </p>
         <p>Atentamente,</p>
-        <p>[Tu nombre o el nombre de tu empresa] <br> [Tu cargo en la empresa]</p>
+        <p>{{ $enterprise }} <br> {{ $position }}</p>
     </ol>
 </body>
 
