@@ -26,8 +26,8 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign key constraints
-            $table->foreign('sale_closer_agent_id')->references('id')->on('sale_closer_agents');
-            $table->foreign('lead_agent_id')->references('id')->on('lead_agents');
+            $table->foreign('sale_closer_agent_id')->references('id')->on('users');
+            $table->foreign('lead_agent_id')->references('id')->on('users');
         });
     }
 

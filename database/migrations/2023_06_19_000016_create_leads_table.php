@@ -31,7 +31,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign key constraint
-            $table->foreign('lead_agent_id')->references('id')->on('lead_agents');
+            $table->foreign('lead_agent_id')->references('id')->on('users');
         });
     }
 

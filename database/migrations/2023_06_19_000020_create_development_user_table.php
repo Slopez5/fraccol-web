@@ -1,4 +1,5 @@
 <?php
+
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -12,20 +13,16 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('payment_plans', function (Blueprint $table) {
+        Schema::create('development_user', function (Blueprint $table) {
             $table->unsignedBigInteger('development_id');
-            $table->unsignedBigInteger('lot_type_id');
-            $table->decimal('price_per_sqm', 8, 2);
-            $table->integer('financing_months');
-            $table->decimal('down_payment', 8, 2);
-            $table->timestamps();
+            $table->unsignedBigInteger('lead_agent_id');
 
             // Composite primary key
-            $table->primary(['development_id', 'lot_type_id']);
+            $table->primary(['development_id', 'lead_agent_id']);
 
             // Foreign key constraints
             $table->foreign('development_id')->references('id')->on('developments');
-            $table->foreign('lot_type_id')->references('id')->on('lot_types');
+            $table->foreign('lead_agent_id')->references('id')->on('users');
         });
     }
 
@@ -36,6 +33,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('payment_plans');
+        Schema::dropIfExists('development_user');
     }
 };

@@ -25,7 +25,7 @@ return new class extends Migration
 
             // Foreign key constraints
             $table->foreign('lead_id')->references('id')->on('leads');
-            $table->foreign('lead_agent_id')->references('id')->on('lead_agents');
+            $table->foreign('lead_agent_id')->references('id')->on('users');
             $table->foreign('activity_type_id')->references('id')->on('activity_types');
         });
     }

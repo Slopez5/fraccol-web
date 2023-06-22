@@ -21,10 +21,7 @@ return new class extends Migration
             $table->string('value');
             $table->timestamps();
 
-            $table->index(['config_type', 'config_id']);
-
             // Foreign key constraints
-            $table->foreign('config_type')->references('type')->on('configurations');
             $table->foreign('config_id')->references('id')->on('configurations');
         });
     }
