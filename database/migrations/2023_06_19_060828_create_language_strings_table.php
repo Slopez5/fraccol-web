@@ -8,19 +8,29 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('language_strings', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('language_id');
+            $table->string('key');
+            $table->text('value');
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('language_id')->references('id')->on('languages');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('language_strings');
     }

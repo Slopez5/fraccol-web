@@ -8,19 +8,29 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('unit_images', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('unit_id');
+            $table->string('image_url');
+            $table->string('title')->nullable();
+            $table->string('description')->nullable();
             $table->timestamps();
+
+            // Foreign key constraint
+            $table->foreign('unit_id')->references('id')->on('units');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('unit_images');
     }

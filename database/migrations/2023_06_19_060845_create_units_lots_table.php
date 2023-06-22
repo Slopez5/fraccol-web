@@ -8,20 +8,30 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('units_lots', function (Blueprint $table) {
-            $table->id();
+            $table->unsignedBigInteger('unit_id');
+            $table->unsignedBigInteger('lot_id');
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('unit_id')->references('id')->on('units');
+            $table->foreign('lot_id')->references('id')->on('lots');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('units_lots');
     }
 };
+

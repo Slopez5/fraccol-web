@@ -8,19 +8,29 @@ return new class extends Migration
 {
     /**
      * Run the migrations.
+     *
+     * @return void
      */
-    public function up(): void
+    public function up()
     {
         Schema::create('sales_units', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('sale_id');
+            $table->unsignedBigInteger('unit_id');
             $table->timestamps();
+
+            // Foreign key constraints
+            $table->foreign('sale_id')->references('id')->on('sales');
+            $table->foreign('unit_id')->references('id')->on('units');
         });
     }
 
     /**
      * Reverse the migrations.
+     *
+     * @return void
      */
-    public function down(): void
+    public function down()
     {
         Schema::dropIfExists('sales_units');
     }
