@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\WaController;
 use Illuminate\Support\Facades\Route;
 
@@ -21,3 +22,4 @@ Route::get('/', function () {
 Route::get('/envia/{template}', [WaController::class,'envia']);
 Route::get('/webhook', [WaController::class,'webhook']);
 Route::post('/webhook', [WaController::class,'recibe']);
+Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
