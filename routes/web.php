@@ -19,7 +19,6 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/envia', [WaController::class,'envia']);
 Route::get('/webhook', [WaController::class,'webhook']);
 Route::post('/webhook', [WaController::class,'recibe']);
 Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
