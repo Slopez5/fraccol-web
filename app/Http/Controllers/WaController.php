@@ -9,40 +9,42 @@ class WaController extends Controller
 {
 
     protected $isChatGPTAvailable;
+    protected $token;
+    protected $phoneID;
 
     public function __construct()
     {
         $this->isChatGPTAvailable = false;
+        $this->token = 'EAACtHASQOBMBAEsEmGq9ZAZA0WH0NfpFKgz6LRKLtNcZButYmaBY0oQGBmpRN6atlWJMtzZBe1FZBJrTtNIkVAr5VZCBfDVm2PJ0eGKZAGp9OwjxKI8solv8HZC11NoNO4nl4lgxYbiX1tLWYsgZBVQzT9bj9Pm0A6G9isOg83cGzmiL90In2FdEBcDfsgz3kZBrjZBurWJZCXMERAZDZD';
+        $this->phoneID = '117105141416342';
     }
 
-    public function envia($mensaje)
+    public function envia($data)
     {
-        $token = 'EAACtHASQOBMBAEsEmGq9ZAZA0WH0NfpFKgz6LRKLtNcZButYmaBY0oQGBmpRN6atlWJMtzZBe1FZBJrTtNIkVAr5VZCBfDVm2PJ0eGKZAGp9OwjxKI8solv8HZC11NoNO4nl4lgxYbiX1tLWYsgZBVQzT9bj9Pm0A6G9isOg83cGzmiL90In2FdEBcDfsgz3kZBrjZBurWJZCXMERAZDZD';
-        $telephone = '523122192524';
-        $phoneID = '117105141416342';
-        $body = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($mensaje) : ChatController::getResponse($mensaje);
-        $this->sendMessage($token, $telephone, $phoneID, $body);
+        $telephone = $data->phone;
+        $body = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($data->message) : ChatController::getResponse($data->mensaje);
+        $this->sendMessage( $telephone, $body);
     }
 
-    private function sendMessage($bearer, $to, $phoneID, $body)
+    private function sendMessage( $to, $body)
     {
-        $url = 'https://graph.facebook.com/v17.0/' . $phoneID . '/messages';
+        $url = 'https://graph.facebook.com/v17.0/' . $this->phoneID . '/messages';
 
         $mensaje = ''
-        .'{'
-        .'    "messaging_product": "whatsapp",'
-        .'    "to": "523122192524",'
-        .'    "type": "text",'
-        .'    "recipient_type": "individual",'
-        .'    "text": {'
-        .'        "body": "Hola",'
-        .'        "preview_url": false'
-        .'    }'
-        .'}';
+            . '{'
+            . '    "messaging_product": "whatsapp",'
+            . '    "to": "'. $to .'",'
+            . '    "type": "text",'
+            . '    "recipient_type": "individual",'
+            . '    "text": {'
+            . '        "body": "'. $body .'",'
+            . '        "preview_url": false'
+            . '    }'
+            . '}';
 
-        $header = array("Authorization: Bearer " . $bearer, "Content-Type: application/json");
+        $header = array("Authorization: Bearer " . $this->token, "Content-Type: application/json");
 
-        $response = CurlHelper::call($url,'GET',$mensaje,$header);
+        $response = CurlHelper::call($url, 'GET', $mensaje, $header);
 
         return $response;
     }
@@ -65,8 +67,11 @@ class WaController extends Controller
             exit;
         }
         $respuesta = json_decode($respuesta, true);
-        $phone = $respuesta['entry'][0]['changes'][0]['messages'][0]['from'];
-        $mensaje = $respuesta['entry'][0]['changes'][0]['messages'][0]['text']['body'];
-        $this->envia($mensaje);
+        $wbID = $respuesta['entry'][0]['id'];
+        $profile_name = $respuesta['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name'];
+        $phone = $respuesta['entry'][0]['changes'][0]['value']['messages'][0]['from'];
+        $message = $respuesta['entry'][0]['changes'][0]['value']['messages'][0]['text']['body'];
+        $data = collect(["wbID" => $wbID, "profile_name" => $profile_name, "phone" => $phone, "message" => $message]);
+        $this->envia($data);
     }
 }
