@@ -65,8 +65,8 @@ class WaController extends Controller
             exit;
         }
         $respuesta = json_decode($respuesta, true);
-        $phone = $respuesta['entry'][0]['changes'][0]['value']['messages'][0]['from'];
-        $mensaje = $respuesta['entry'][0]['changes'][0]['value']['messages'][0]['text']['body'];
+        $phone = $respuesta['entry'][0]['changes'][0]['messages'][0]['from'];
+        $mensaje = $respuesta['entry'][0]['changes'][0]['messages'][0]['text']['body'];
         $this->envia($mensaje);
     }
 }
