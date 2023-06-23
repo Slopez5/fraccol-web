@@ -11,15 +11,13 @@ class ChatGPTController extends Controller
 
     static function getResponseGPT($mensaje)
     {
-
-        $token = "";
-
+        $token = "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";
         $data = array(
             "model" => "gpt-3.5-turbo",
             "messages" => array(
                 array(
                     "role" => "system",
-                    "content" => ""
+                    "content" => "eres un chatbot para una empresa que se dedica a la venta de espectaculos pirotecnicos en el estado de Colima para bodas, XV, Revelaciones de sexo, graduaciones y eventos en general"
                 ),
                 array(
                     "role" => "user",

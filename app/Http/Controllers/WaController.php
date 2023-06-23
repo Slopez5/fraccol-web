@@ -12,12 +12,12 @@ class WaController extends Controller
 
     public function __construct()
     {
-        $this->isChatGPTAvailable = false;
+        $this->isChatGPTAvailable = true;
     }
 
     public function envia($mensaje)
     {
-        $token = 'EAAWai40l2qwBAKfB5I2SmQPJzyYgBgXmBbgONpx7b7ZBBktNh4nRjdOIojeaUsVECt2bGZAC9nXZA1Mgj2mpcXMAKw3SzzQ30tfbAMklIFg5ZC2ql9DQigju8tZCTy1phQYlHxTmoYi49XZA7mWDVtyGQR74NOmPIw5Ok2hfEovIzFZARVemqT8xvZCTJkpxvvUka9vmWZAhebgZDZD';
+        $token = 'EAACtHASQOBMBALZABg1w1QurYMtVg5UZCdDq9cmHcgievrcIpI1DChhbR7SGci6rSZB4k3ZBhCA2DaM9x1Llepui7g8vjFhR1m8E9HD8faf6FYbxpu29gvCXaf3xoXOyQM9u9tnogNumNZCViiad99C97gVu5ZAkZAzzZCiWNCaSZAqk2JPNXX1bdzI5DZCajed2fbgxZAnZCFEISgZDZD';
         $telephone = '523122192524';
         $phoneID = '117105141416342';
         $body = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($mensaje) : ChatController::getResponse($mensaje);
