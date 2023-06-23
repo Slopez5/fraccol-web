@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 class ChatController extends Controller
 {
     //
-    static public function getResponse($mensaje) {
-        return "";
+    static public function getResponse($data) {
+        return $data["message"];
     }
 }

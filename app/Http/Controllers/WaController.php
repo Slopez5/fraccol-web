@@ -15,14 +15,14 @@ class WaController extends Controller
     public function __construct()
     {
         $this->isChatGPTAvailable = false;
-        $this->token = 'EAACtHASQOBMBAEsEmGq9ZAZA0WH0NfpFKgz6LRKLtNcZButYmaBY0oQGBmpRN6atlWJMtzZBe1FZBJrTtNIkVAr5VZCBfDVm2PJ0eGKZAGp9OwjxKI8solv8HZC11NoNO4nl4lgxYbiX1tLWYsgZBVQzT9bj9Pm0A6G9isOg83cGzmiL90In2FdEBcDfsgz3kZBrjZBurWJZCXMERAZDZD';
+        $this->token = 'EAASsgsZAF4EMBAI6CYOsL2YoSFMiiKHum1IKTGP3HIlEnPVgnR8e3TqV94EbyPnw7uDhPCZCl8QbCGXDLYfar5QzZAOpQFeWbDWgGZC8jnWbAkKNBDuLMH4QyeZBvjgnq6creFFoT4nJw628i8RiKcKOVHxCVDBor1hQy4fInzED9rMaEe4YPyRHeL8Gu04CyAiSkieFZAZBwZDZD';
         $this->phoneID = '117105141416342';
     }
 
     public function envia($data)
     {
-        $telephone = $data->phone;
-        $body = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($data->message) : ChatController::getResponse($data->mensaje);
+        $telephone = $data['phone'];
+        $body = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($data['message']) : ChatController::getResponse($data);
         $this->sendMessage( $telephone, $body);
     }
 
@@ -70,6 +70,7 @@ class WaController extends Controller
         $wbID = $respuesta['entry'][0]['id'];
         $profile_name = $respuesta['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name'];
         $phone = $respuesta['entry'][0]['changes'][0]['value']['messages'][0]['from'];
+        $phone = substr($phone, 0, 2) . substr($phone, 3);
         $message = $respuesta['entry'][0]['changes'][0]['value']['messages'][0]['text']['body'];
         $data = collect(["wbID" => $wbID, "profile_name" => $profile_name, "phone" => $phone, "message" => $message]);
         $this->envia($data);
