@@ -32,6 +32,6 @@ class CurlHelper
 
         curl_close($curl);
 
-        return collect(['success' => true, 'status_code' => $statusCode, 'response' => $response]);
+        return $response;
     }
 }

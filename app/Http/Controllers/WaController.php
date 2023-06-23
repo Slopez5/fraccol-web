@@ -12,12 +12,12 @@ class WaController extends Controller
 
     public function __construct()
     {
-        $this->isChatGPTAvailable = true;
+        $this->isChatGPTAvailable = false;
     }
 
     public function envia($mensaje)
     {
-        $token = 'EAACtHASQOBMBALZABg1w1QurYMtVg5UZCdDq9cmHcgievrcIpI1DChhbR7SGci6rSZB4k3ZBhCA2DaM9x1Llepui7g8vjFhR1m8E9HD8faf6FYbxpu29gvCXaf3xoXOyQM9u9tnogNumNZCViiad99C97gVu5ZAkZAzzZCiWNCaSZAqk2JPNXX1bdzI5DZCajed2fbgxZAnZCFEISgZDZD';
+        $token = 'EAACtHASQOBMBAEsEmGq9ZAZA0WH0NfpFKgz6LRKLtNcZButYmaBY0oQGBmpRN6atlWJMtzZBe1FZBJrTtNIkVAr5VZCBfDVm2PJ0eGKZAGp9OwjxKI8solv8HZC11NoNO4nl4lgxYbiX1tLWYsgZBVQzT9bj9Pm0A6G9isOg83cGzmiL90In2FdEBcDfsgz3kZBrjZBurWJZCXMERAZDZD';
         $telephone = '523122192524';
         $phoneID = '117105141416342';
         $body = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($mensaje) : ChatController::getResponse($mensaje);
@@ -29,17 +29,16 @@ class WaController extends Controller
         $url = 'https://graph.facebook.com/v17.0/' . $phoneID . '/messages';
 
         $mensaje = ''
-            . '{'
-            . '"messaging_product": "whatsapp", '
-            . '"to": "' . $to . '", '
-            . '"recipient_type": "individual", '
-            . '"type": "text", '
-            . '"text": '
-            . '{'
-            . '     "preview_url": false,'
-            . '     "body": "' . $body . '",'
-            . '} '
-            . '}';
+        .'{'
+        .'    "messaging_product": "whatsapp",'
+        .'    "to": "523122192524",'
+        .'    "type": "text",'
+        .'    "recipient_type": "individual",'
+        .'    "text": {'
+        .'        "body": "Hola",'
+        .'        "preview_url": false'
+        .'    }'
+        .'}';
 
         $header = array("Authorization: Bearer " . $bearer, "Content-Type: application/json");
 
