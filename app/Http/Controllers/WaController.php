@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\CurlHelper;
+use App\Models\Setting;
 use Illuminate\Http\Request;
 
 class WaController extends Controller
@@ -15,7 +16,7 @@ class WaController extends Controller
     public function __construct()
     {
         $this->isChatGPTAvailable = false;
-        $this->token = 'EAASsgsZAF4EMBAI6CYOsL2YoSFMiiKHum1IKTGP3HIlEnPVgnR8e3TqV94EbyPnw7uDhPCZCl8QbCGXDLYfar5QzZAOpQFeWbDWgGZC8jnWbAkKNBDuLMH4QyeZBvjgnq6creFFoT4nJw628i8RiKcKOVHxCVDBor1hQy4fInzED9rMaEe4YPyRHeL8Gu04CyAiSkieFZAZBwZDZD';
+        $this->token = Setting::where('company', 'whatsapp')->where('type','bearer')->where('name','fraccionamientosColima')->value;
         $this->phoneID = '117105141416342';
     }
 
@@ -51,7 +52,7 @@ class WaController extends Controller
 
     public function webhook()
     {
-        $token = 'FraccionamientosColima';
+        $token = Setting::where('company', 'whatsapp')->where('type','token')->where('name','fraccionamientosColima')->value;
         $hub_challenge = isset($_GET['hub_challenge']) ? $_GET['hub_challenge'] : '';
         $hub_verify_token = isset($_GET['hub_verify_token']) ? $_GET['hub_verify_token'] : '';
         if ($token === $hub_verify_token) {
