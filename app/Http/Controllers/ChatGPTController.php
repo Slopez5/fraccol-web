@@ -12,7 +12,7 @@ class ChatGPTController extends Controller
 
     static function getResponseGPT($mensaje)
     {
-        $token = Setting::where('company', 'openAI')->where('type','bearer')->where('name','fraccionamientosColima')->value;
+        $token = Setting::where('company', 'openAI')->where('type','bearer')->where('name','fraccionamientosColima')->get()[0]->value;
         $data = array(
             "model" => "gpt-3.5-turbo",
             "messages" => array(

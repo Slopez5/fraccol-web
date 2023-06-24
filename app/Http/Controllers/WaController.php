@@ -16,7 +16,7 @@ class WaController extends Controller
     public function __construct()
     {
         $this->isChatGPTAvailable = false;
-        $this->token = Setting::where('company', 'whatsapp')->where('type','bearer')->where('name','fraccionamientosColima')->value;
+        $this->token = Setting::where('company', 'whatsapp')->where('type','bearer')->where('name','fraccionamientosColima')->get()[0]->value;
         $this->phoneID = '117105141416342';
     }
 
@@ -52,7 +52,7 @@ class WaController extends Controller
 
     public function webhook()
     {
-        $token = Setting::where('company', 'whatsapp')->where('type','token')->where('name','fraccionamientosColima')->value;
+        $token = Setting::where('company', 'whatsapp')->where('type','token')->where('name','fraccionamientosColima')->get()[0]->value;
         $hub_challenge = isset($_GET['hub_challenge']) ? $_GET['hub_challenge'] : '';
         $hub_verify_token = isset($_GET['hub_verify_token']) ? $_GET['hub_verify_token'] : '';
         if ($token === $hub_verify_token) {
