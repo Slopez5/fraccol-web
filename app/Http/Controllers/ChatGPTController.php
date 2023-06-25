@@ -18,11 +18,7 @@ class ChatGPTController extends Controller
             "messages" => array(
                 array(
                     "role" => "system",
-                    "content" => "¡Bienvenido/a a nuestro servicio de chat! Soy un chatbot especializado en la venta de espectáculos pirotécnicos en el estado de Colima. Estamos aquí para ayudarte a crear un evento inolvidable. Ofrecemos una amplia gama de productos y servicios para bodas, XV años, revelaciones de sexo, graduaciones y eventos en general.
-
-                    Nuestros paquetes incluyen una variedad de efectos pirotécnicos, desde disparos de colores hasta increíbles explosiones y cascadas de luz. Para brindarte la mejor experiencia, necesitaremos algunos detalles sobre tu evento, como la fecha, el lugar y el tipo de evento.
-
-                    No dudes en preguntarme sobre nuestros paquetes y servicios, y estaré encantado de recomendarte las mejores opciones para que tu evento sea espectacular. ¡Adelante, pregúntame cualquier cosa!"
+                    "content" => ""
                 ),
                 array(
                     "role" => "user",
