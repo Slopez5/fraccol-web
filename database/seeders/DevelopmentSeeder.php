@@ -21,6 +21,7 @@ class DevelopmentSeeder extends Seeder
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ],
             [
                 'real_state_id' => 1,
@@ -28,6 +29,7 @@ class DevelopmentSeeder extends Seeder
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ],
             [
                 'real_state_id' => 1,
@@ -35,6 +37,7 @@ class DevelopmentSeeder extends Seeder
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ],
             [
                 'real_state_id' => 2,
@@ -42,72 +45,84 @@ class DevelopmentSeeder extends Seeder
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 2,
                 'name' => 'Alta Vista',
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 3,
                 'name' => 'Puertas de Comala',
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 1,
                 'name' => 'Verde Ladera',
                 'location' => 'Colima',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 2,
                 'name' => 'Palmares',
                 'location' => 'Colima',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 1,
                 'name' => 'El pedregal',
                 'location' => 'Colima',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 1,
                 'name' => 'Los Olivos',
                 'location' => 'Villa de Alvares',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 1,
                 'name' => 'El encanto',
                 'location' => 'Cuahtemoc',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 1,
                 'name' => 'Real Hacienda',
                 'location' => 'Cuauhtemoc',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 1,
                 'name' => 'Buenavista II',
                 'location' => 'Cuauhtemoc',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 1,
                 'name' => 'Buenavista',
                 'location' => 'Cuauhtemoc',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ], [
                 'real_state_id' => 2,
                 'name' => 'Agua Dulce',
                 'location' => 'Cuahtemoc',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
 
             ], [
                 'real_state_id' => 2,
@@ -115,6 +130,7 @@ class DevelopmentSeeder extends Seeder
                 'location' => 'Armeria',
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
+                'total_lots' => 200,
             ]
         ]);
     }

@@ -36,8 +36,8 @@
                     </div>
                 </div>
                 <!-- /.card-header -->
-                <div class="card-body table-responsive p-0">
-                    <table class="table table-hover text-nowrap">
+                <div class="card-body table-responsive p-0" style="height: 300px;">
+                    <table class="table table-head-fixed text-nowrap">
                         <thead>
                             <tr>
                                 <th>Id</th>
@@ -46,20 +46,45 @@
                                 <th>Ubicación</th>
                                 <th>Lotes</th>
                                 <th>Lotes Disponibles</th>
-                                <th>Plano</th>
+                                <th>Actions</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($developments as $development)
-                                <tr onclick="selectDevelopment()">
+                                <tr>
                                     <td>{{ $development->id }}</td>
                                     <td>{{ $development->realStateAgency->name }}</td>
                                     <td>{{ $development->name }}</td>
                                     <td>{{ $development->location }}</td>
-                                    <td>200</td>
+                                    <td>{{ $development->total_lots }}</td>
                                     <td>{{ $development->available_lots }}</td>
                                     <td>
-                                        <a href="#"><i class="far fa-file-pdf"></i></a>
+                                        <form method="POST" action="" style="display: inline;">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="icon-action" style="border: none; background-color: transparent; cursor: pointer;">
+                                                <i class="far fa-file-pdf" style="color: gray"></i>
+                                            </button>
+                                        </form>
+                                        <form method="GET" action="{{ route('development.details',$development->id) }}" style="display: inline;">
+                                            <button type="submit" class="icon-action" style="border: none; background-color: transparent; cursor: pointer;">
+                                                <i class="far far fa-eye"></i>
+                                            </button>
+                                        </form>
+                                        <form method="POST" action="" style="display: inline;">
+                                            @csrf
+                                            @method('POST')
+                                            <button type="submit" class="icon-action" style="border: none; background-color: transparent; cursor: pointer;">
+                                                <i class="far fa-edit" style="color: #4682b4"></i>
+                                            </button>
+                                        </form>
+                                        <form method="POST" action="" style="display: inline;">
+                                            @csrf
+                                            @method('DELETE')
+                                            <button type="submit" class="icon-action" style="border: none; background-color: transparent; cursor: pointer;">
+                                                <i class="far fa fa-trash" style="color: red;"></i>
+                                            </button>
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach
