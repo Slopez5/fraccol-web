@@ -47,7 +47,7 @@ class ChatGPTController extends Controller
         );
 
         $response = CurlHelper::call("https://api.openai.com/v1/chat/completions", 'POST', $data, $headers);
-        $response = json_decode($response);
+        $response = json_decode($response["response"]);
         $messageContent = $response->choices[0]->message->content;
         return $messageContent;
     }
