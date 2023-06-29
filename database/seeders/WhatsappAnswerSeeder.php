@@ -100,13 +100,13 @@ class WhatsappAnswerSeeder extends Seeder
                 "value" => 4
             ],
             [
-                "whatsapp_question_id" => 1,
+                "whatsapp_question_id" => 13,
                 "whatsapp_next_question_id" => 14,
                 "answer" => "Colaborador existente",
                 "value" => 1
             ],
             [
-                "whatsapp_question_id" => 1,
+                "whatsapp_question_id" => 13,
                 "whatsapp_next_question_id" => 15,
                 "answer" => "Colaborador nuevo",
                 "value" => 2

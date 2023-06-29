@@ -11,6 +11,6 @@ class WhatsappQuestion extends Model
     use HasFactory;
 
     public function answers(): HasMany {
-        return $this->hasMany(WhatsappAnswer::class,'id','whatsapp_answare_id');
+        return $this->hasMany(WhatsappAnswer::class,'whatsapp_question_id','id');
     }
 }

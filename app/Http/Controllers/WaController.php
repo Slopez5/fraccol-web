@@ -66,21 +66,7 @@ class WaController extends Controller
         if ($respuesta == null) {
             exit;
         }
-        $respuesta = json_decode($respuesta, true);
-        $wbID = $respuesta['entry'][0]['id'];
-        $profile_name = "";
-        if (isset($respuesta['entry'][0]['changes'][0]['value']['contacts'])){
-            $profile_name = $respuesta['entry'][0]['changes'][0]['value']['contacts'][0]['profile']['name'];
-        }
-        if (isset($respuesta['entry'][0]['changes'][0]['value']['messages'])){
-            $phone = $respuesta['entry'][0]['changes'][0]['value']['messages'][0]['from'];
-            $phone = substr($phone, 0, 2) . substr($phone, 3);
-            $message = $respuesta['entry'][0]['changes'][0]['value']['messages'][0]['text']['body'];
-        }
-        if (!empty($message)) {
-            $data = collect(["wbID" => $wbID, "profile_name" => $profile_name, "phone" => $phone, "message" => $message]);
-            $this->envia($data);
-        }
-
+        $respuesta = json_decode($respuesta);
+        logger($respuesta);
     }
 }

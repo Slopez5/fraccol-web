@@ -15,7 +15,7 @@ class CurlHelper
         }
 
         if (!empty($data)) {
-            curl_setopt($curl, CURLOPT_POSTFIELDS, $data);
+            curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
         }
 
         if (!empty($headers)) {
