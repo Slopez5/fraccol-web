@@ -2,40 +2,31 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WhatsappChat;
+use App\Models\WhatsappQuestion;
 use Illuminate\Http\Request;
 
 class ChatController extends Controller
 {
-    //
     static public function getResponse($data) {
-        $category = ChatController::detectarCategoria($data["message"]);
+        $phone = $data["phone"];
+        $wbId = $data["wbID"];
+        $message = $data["message"];
 
-        switch ($category) {
-            case 'saludo':
-                return "estas saludando";
-            case 'información':
-                return "estas pidiendo información";
-            default:
-                return $data['message'];
-        }
-    }
+        $chats = WhatsappChat::where('whatsapp_bussiness_id',$wbId)->get();
 
-    static private function detectarCategoria($texto)
-    {
+        if (count($chats) > 0) {
 
-        $categorias = [
-            'saludo' => ['buenos dias','buenas tardes','buenas noches'],
-            'información' => ['informacion', 'información', 'disponibles','disponible'],
-        ];
-
-        foreach ($categorias as $categoria => $palabrasClave) {
-            foreach ($palabrasClave as $palabra) {
-                if (stripos($texto, $palabra) !== false) {
-                    return $categoria;
-                }
+        } else {
+            $questionResponse = WhatsappQuestion::with("answers")->where('is_first_question',true)->first();
+            $question = "$questionResponse->title\n";
+            $question .= "$questionResponse->question\n\n\n";
+            foreach ($questionResponse->answers as $index => $answer) {
+                $question .= "$index.- $answer->answer\n";
             }
+            return $question;
         }
 
-        return 'Categoría no detectada';
+
     }
 }

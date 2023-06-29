@@ -22,6 +22,8 @@ class DatabaseSeeder extends Seeder
             LotSeeder::class,
             LotImagesSeeder::class,
             PaymentPlansSeeder::class,
+            WhatsappQuestionSeeder::class,
+            WhatsappAnswerSeeder::class
         ]
        );
     }
