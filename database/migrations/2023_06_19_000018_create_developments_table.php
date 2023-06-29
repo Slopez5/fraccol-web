@@ -25,6 +25,8 @@ return new class extends Migration
             $table->integer('available_lots');
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
+            $table->text('sort_description')->nullable();
+            $table->longText('full_description')->nullable();
             $table->timestamps();
 
 

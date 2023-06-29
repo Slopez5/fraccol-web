@@ -22,6 +22,11 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => "Ubicado en el pueblo mágico de Comala, lleno de tradición y gastronomía única,es un fraccionamiento el cual consta de lotes comerciales,habitacionales y en esquina; cuyas medidas van desde los 144 metros.
+                Precios de contado de $2,020.00 el metro cuadrado (comerciales y esquina) y $1,920.00 el metro cuadrado (habitacionales).
+                Financiamiento accesible para tu bolsillo que va de 1 a 5 años.
+
+                No dejes ir esta oportunidad de hacer tu sueño realidad y tener tu propia casa/negocio."
             ],
             [
                 'real_state_id' => 1,
@@ -30,6 +35,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ],
             [
                 'real_state_id' => 1,
@@ -38,6 +44,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ],
             [
                 'real_state_id' => 2,
@@ -46,6 +53,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 2,
                 'name' => 'Alta Vista',
@@ -53,6 +61,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 3,
                 'name' => 'Puertas de Comala',
@@ -60,6 +69,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 1,
                 'name' => 'Verde Ladera',
@@ -67,6 +77,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 2,
                 'name' => 'Palmares',
@@ -74,6 +85,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 1,
                 'name' => 'El pedregal',
@@ -81,6 +93,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 1,
                 'name' => 'Los Olivos',
@@ -88,6 +101,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 1,
                 'name' => 'El encanto',
@@ -95,6 +109,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 1,
                 'name' => 'Real Hacienda',
@@ -102,6 +117,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 1,
                 'name' => 'Buenavista II',
@@ -109,6 +125,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 1,
                 'name' => 'Buenavista',
@@ -116,6 +133,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ], [
                 'real_state_id' => 2,
                 'name' => 'Agua Dulce',
@@ -123,6 +141,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
 
             ], [
                 'real_state_id' => 2,
@@ -131,6 +150,7 @@ class DevelopmentSeeder extends Seeder
                 'total_land_area' => 10000.00,
                 'available_lots' => 100,
                 'total_lots' => 200,
+                'sort_description' => ''
             ]
         ]);
     }

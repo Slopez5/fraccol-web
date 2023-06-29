@@ -15,7 +15,7 @@ class WaController extends Controller
 
     public function __construct()
     {
-        $this->isChatGPTAvailable = false;
+        $this->isChatGPTAvailable = true;
         $this->token = Setting::where('company', 'whatsapp')->where('type','bearer')->where('name','fraccionamientosColima')->get()[0]->value;
         $this->phoneID = Setting::where('company', 'whatsapp')->where('type','phoneID')->where('name','fraccionamientosColima')->get()[0]->value;;
     }
