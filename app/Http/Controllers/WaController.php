@@ -31,21 +31,20 @@ class WaController extends Controller
     {
         $url = 'https://graph.facebook.com/v17.0/' . $this->phoneID . '/messages';
 
-        $mensaje = ''
-            . '{'
-            . '    "messaging_product": "whatsapp",'
-            . '    "to": "'. $to .'",'
-            . '    "type": "text",'
-            . '    "recipient_type": "individual",'
-            . '    "text": {'
-            . '        "body": "'. $body .'",'
-            . '        "preview_url": false'
-            . '    }'
-            . '}';
+        $data = [
+            'messaging_product' => 'whatsapp',
+            'to' => $to,
+            'type' => 'text',
+            'recipient_type' => 'individual',
+            'text' => [
+                'body' => $body,
+                'preview_url' => false,
+            ],
+        ];
 
         $header = array("Authorization: Bearer " . $this->token, "Content-Type: application/json");
 
-        $response = CurlHelper::call($url, 'GET', $mensaje, $header);
+        $response = CurlHelper::call($url, 'GET', $data, $header);
 
         return $response;
     }
