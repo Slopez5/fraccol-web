@@ -91,7 +91,7 @@ class WaController extends Controller
                             $metadata = $response->entry[0]->changes[0]->value->metadata;
 
                             $text = $message->text->body;
-                            $from = $message->from;
+                            $from = substr($message->from, 0, 2) . substr($message->from, 3);
                             $profile = $contact->profile->name;
 
                             $data = [
