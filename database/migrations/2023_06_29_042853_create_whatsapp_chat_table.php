@@ -11,7 +11,7 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('whatsapp_chat', function (Blueprint $table) {
+        Schema::create('whatsapp_chats', function (Blueprint $table) {
             $table->id();
             $table->string('phoneID');
             $table->unsignedBigInteger('whatsapp_question_id')->nullable();
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('whatsapp_chat');
+        Schema::dropIfExists('whatsapp_chats');
     }
 };
