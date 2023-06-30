@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\CurlHelper;
+use App\Models\ApiMonitoringLog;
 use App\Models\Setting;
 use Illuminate\Http\Request;
+use Illuminate\Validation\Rules\Exists;
 
 class WaController extends Controller
 {
@@ -22,7 +24,7 @@ class WaController extends Controller
 
     public function envia($data)
     {
-        $telephone = $data['phone'];
+        $telephone = $data['from'];
         $body = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($data['message']) : ChatController::getResponse($data);
         $this->sendMessage( $telephone, $body);
     }
@@ -67,6 +69,42 @@ class WaController extends Controller
             exit;
         }
         $respuesta = json_decode($respuesta);
-        logger($respuesta);
+        $apiLog = new ApiMonitoringLog();
+        $apiLog->request_url = "whatsapp_webhook";
+        $apiLog->request_method = "webhook";
+        $apiLog->request_payload = "webhook";
+        $apiLog->response_code = 0;
+        $apiLog->response_payload = json_encode($respuesta);
+        $apiLog->save();
+        $this->readResponse($respuesta);
+    }
+
+    public function readResponse($response){
+        if (isset($response->entry)){
+            if (count($response->entry) > 0) {
+                $whatsapp_business_account_id = $response->entry[0]->id;
+                if (isset($response->entry[0]->changes)) {
+                    if (count($response->entry[0]->changes) > 0) {
+                        if ($response->entry[0]->changes[0]->field == "messages") {
+                            $message = $response->entry[0]->changes[0]->value->messages[0];
+                            $contact = $response->entry[0]->changes[0]->value->contacts[0];
+                            $metadata = $response->entry[0]->changes[0]->value->metadata;
+
+                            $text = $message->text->body;
+                            $from = $message->from;
+                            $profile = $contact->profile->name;
+
+                            $data = [
+                                "whatsapp_business_account_id" => $whatsapp_business_account_id,
+                                "message" => $text,
+                                "from" => $from,
+                                "profile" => $profile
+                            ];
+                            $this->envia($data);
+                        }
+                    }
+                }
+            }
+        }
     }
 }
