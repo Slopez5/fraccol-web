@@ -9,8 +9,8 @@ use Illuminate\Http\Request;
 class ChatController extends Controller
 {
     static public function getResponse($data) {
-        $phone = $data["phone"];
-        $wbId = $data["wbID"];
+        $phone = $data["from"];
+        $wbId = $data["whatsapp_business_account_id"];
         $message = $data["message"];
 
         $chats = WhatsappChat::where('whatsapp_bussiness_id',$wbId)->get();
