@@ -17,9 +17,9 @@ return new class extends Migration
             $table->id();
             $table->string('request_url');
             $table->string('request_method');
-            $table->json('request_payload')->nullable();
+            $table->text('request_payload')->nullable();
             $table->integer('response_code');
-            $table->json('response_payload')->nullable();
+            $table->text('response_payload')->nullable();
             $table->timestamps();
         });
     }
