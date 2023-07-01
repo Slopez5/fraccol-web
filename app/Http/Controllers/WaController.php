@@ -75,8 +75,12 @@ class WaController extends Controller
             $chat->whatsapp_business_id = null;
             $chat->profile_name = null;
         }
+        if ($chat->value == null) {
+            $chat->value = "";
+        } else {
+            $chat->value = $value;
+        }
 
-        $chat->value = $value;
         $chat->save();
     }
 
