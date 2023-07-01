@@ -15,11 +15,43 @@ class ChatController extends Controller
         $wbId = $data["whatsapp_business_account_id"];
         $message = $data["message"];
 
-        $chats = WhatsappChat::where('whatsapp_business_id', $wbId)->where('phone', $phone)->where('is_answer', 1)->get();
+        $chat = WhatsappChat::where('whatsapp_business_id', $wbId)->where('phone', $phone)->where('is_answer', 1)->latest()->first();
 
-        if (count($chats) > 0) {
-            $data["id"] = 1;
-            $data["message"] = "";
+        if ($chat) {
+            if ($chat->whatsapp_question_id) {
+                $answer = WhatsappAnswer::where('whatsapp_question_id', $chat->whatsapp_question_id)->where('value', $message)->get();
+                if ($answer) {
+                    $questionResponse = $answer[0]->question;
+                    $question = "$questionResponse->title\n";
+                    $question .= "$questionResponse->question\n\n\n";
+                    foreach ($questionResponse->answers as $index => $answer) {
+                        $question .= "$index.- $answer->answer\n";
+                    }
+                    $data["id"] = $questionResponse->id;
+                    $data["message"] = $question;
+                    return $data;
+                } else {
+                    $questionResponse = WhatsappQuestion::find($chat->whatsapp_question_id);
+                    $question = "$questionResponse->title\n";
+                    $question .= "$questionResponse->question\n\n\n";
+                    foreach ($questionResponse->answers as $index => $answer) {
+                        $question .= "$index.- $answer->answer\n";
+                    }
+                    $data["id"] = $questionResponse->id;
+                    $data["message"] = $question;
+                    return $data;
+                }
+            } else {
+                $questionResponse = WhatsappQuestion::with("answers")->where('is_first_question', true)->first();
+                $question = "$questionResponse->title\n";
+                $question .= "$questionResponse->question\n\n\n";
+                foreach ($questionResponse->answers as $index => $answer) {
+                    $question .= "$index.- $answer->answer\n";
+                }
+                $data["id"] = $questionResponse->id;
+                $data["message"] = $question;
+                return $data;
+            }
             return $data;
         } else {
             $questionResponse = WhatsappQuestion::with("answers")->where('is_first_question', true)->first();
