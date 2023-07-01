@@ -28,7 +28,10 @@ class WaController extends Controller
     {
         $telephone = $data['from'];
         $response = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($data['message']) : ChatController::getResponse($data);
-        $this->sendMessage( $telephone, $response["message"],$response["id"]);
+        if ($response["message"] != "") {
+            $this->sendMessage( $telephone, $response["message"],$response["id"]);
+        }
+
     }
 
     private function sendMessage( $to, $body,$questionId)

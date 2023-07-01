@@ -18,7 +18,9 @@ class ChatController extends Controller
         $chats = WhatsappChat::where('whatsapp_business_id', $wbId)->where('phone', $phone)->where('is_answer', 1)->get();
 
         if (count($chats) > 0) {
-            return $message;
+            $data["id"] = 1;
+            $data["message"] = "";
+            return $data;
         } else {
             $questionResponse = WhatsappQuestion::with("answers")->where('is_first_question', true)->first();
             $question = "$questionResponse->title\n";
