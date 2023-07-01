@@ -12,6 +12,6 @@ Route::get('/development/{id}', [DevelopmentController::class,'details'])->name(
 Route::get('/images', [DevelopmentController::class,'images'])->name('development.images');
 Route::get('/chatbot/questions/create', [ChatController::class,'create'])->name('chatbot.questions.create');
 Route::post('/chatbot/questions/store', [ChatController::class,'store'])->name('chatbot.questions.store');
-Route::post('chatbot/chats', function () {
+Route::get('chatbot/chats', function () {
     WhatsappChat::truncate();
 });

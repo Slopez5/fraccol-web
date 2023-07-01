@@ -20,8 +20,8 @@ class WaController extends Controller
     public function __construct()
     {
         $this->isChatGPTAvailable = false;
-        $this->token = Setting::where('company', 'whatsapp')->where('type','bearer')->where('name','fraccionamientosColima')->get()[0]->value;
-        $this->phoneID = Setting::where('company', 'whatsapp')->where('type','phoneID')->where('name','fraccionamientosColima')->get()[0]->value;;
+        $this->token = Setting::where('company', 'whatsapp')->where('type', 'bearer')->where('name', 'fraccionamientosColima')->get()[0]->value;
+        $this->phoneID = Setting::where('company', 'whatsapp')->where('type', 'phoneID')->where('name', 'fraccionamientosColima')->get()[0]->value;;
     }
 
     public function envia($data)
@@ -29,12 +29,11 @@ class WaController extends Controller
         $telephone = $data['from'];
         $response = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($data['message']) : ChatController::getResponse($data);
         if ($response["message"] != "") {
-            $this->sendMessage( $telephone, $response["message"],$response["id"]);
+            $this->sendMessage($telephone, $response["message"], $response["id"]);
         }
-
     }
 
-    private function sendMessage( $to, $body,$questionId)
+    private function sendMessage($to, $body, $questionId)
     {
         $url = 'https://graph.facebook.com/v17.0/' . $this->phoneID . '/messages';
 
@@ -52,13 +51,14 @@ class WaController extends Controller
         $header = array("Authorization: Bearer " . $this->token, "Content-Type: application/json");
 
         $response = CurlHelper::call($url, 'GET', $data, $header);
-        $responseString =\json_encode(json_decode($response["response"]));
-        $this->saveChat(false,null,$to,null,$body,$questionId);
-        $this->saveApiLog($url,"POST",json_encode($data),$response["status_code"],$responseString);
+        $responseString = \json_encode(json_decode($response["response"]));
+        $this->saveChat(false, null, $to, null, $body, $questionId);
+        $this->saveApiLog($url, "POST", json_encode($data), $response["status_code"], $responseString);
         return $response;
     }
 
-    private function saveApiLog($url,$method,$request,$status,$response){
+    private function saveApiLog($url, $method, $request, $status, $response)
+    {
         $apiLog = new ApiMonitoringLog();
         $apiLog->request_url = $url;
         $apiLog->request_method = $method;
@@ -68,7 +68,8 @@ class WaController extends Controller
         $apiLog->save();
     }
 
-    private function saveChat($isUser = false, $whatsapp_business_account_id,$phone,$profile_name,$value,$questionId){
+    private function saveChat($isUser = false, $whatsapp_business_account_id, $phone, $profile_name, $value, $questionId)
+    {
         $chat = new WhatsappChat();
         $chat->phoneID = $this->phoneID;
         $chat->phone = $phone;
@@ -90,12 +91,13 @@ class WaController extends Controller
         $chat->save();
     }
 
-    private function getLastQuestionID($wbID,$phone){
+    private function getLastQuestionID($wbID, $phone)
+    {
         $chat = WhatsappChat::whereNull('whatsapp_business_id')
-        ->where('phone',$phone)
-        ->where('is_answer', 0)
-        ->whereNotNull('whatsapp_question_id')
-        ->latest()->first();
+            ->where('phone', $phone)
+            ->where('is_answer', 0)
+            ->whereNotNull('whatsapp_question_id')
+            ->latest()->first();
         if ($chat) {
             return $chat->whatsapp_question_id;
         }
@@ -104,7 +106,7 @@ class WaController extends Controller
 
     public function webhook()
     {
-        $token = Setting::where('company', 'whatsapp')->where('type','token')->where('name','fraccionamientosColima')->get()[0]->value;
+        $token = Setting::where('company', 'whatsapp')->where('type', 'token')->where('name', 'fraccionamientosColima')->get()[0]->value;
         $hub_challenge = isset($_GET['hub_challenge']) ? $_GET['hub_challenge'] : '';
         $hub_verify_token = isset($_GET['hub_verify_token']) ? $_GET['hub_verify_token'] : '';
         if ($token === $hub_verify_token) {
@@ -130,32 +132,34 @@ class WaController extends Controller
         $this->readResponse($respuesta);
     }
 
-    public function readResponse($response){
-        if (isset($response->entry)){
+    public function readResponse($response)
+    {
+        if (isset($response->entry)) {
             if (count($response->entry) > 0) {
                 $whatsapp_business_account_id = $response->entry[0]->id;
                 if (isset($response->entry[0]->changes)) {
                     if (count($response->entry[0]->changes) > 0) {
                         if ($response->entry[0]->changes[0]->field == "messages") {
                             if (isset($response->entry[0]->changes[0]->value->messages)) {
-                                $message = $response->entry[0]->changes[0]->value->messages[0];
-                                $contact = $response->entry[0]->changes[0]->value->contacts[0];
-                                $metadata = $response->entry[0]->changes[0]->value->metadata;
+                                if (count($response->entry[0]->changes[0]->value->messages) > 0) {
+                                    $message = $response->entry[0]->changes[0]->value->messages[0];
+                                    $contact = $response->entry[0]->changes[0]->value->contacts[0];
+                                    $metadata = $response->entry[0]->changes[0]->value->metadata;
 
-                                $text = $message->text->body;
-                                $from = substr($message->from, 0, 2) . substr($message->from, 3);
-                                $profile = $contact->profile->name;
+                                    $text = $message->text->body;
+                                    $from = substr($message->from, 0, 2) . substr($message->from, 3);
+                                    $profile = $contact->profile->name;
 
-                                $data = [
-                                    "whatsapp_business_account_id" => $whatsapp_business_account_id,
-                                    "message" => $text,
-                                    "from" => $from,
-                                    "profile" => $profile
-                                ];
-                                $this->saveChat(true,$data["whatsapp_business_account_id"],$data["from"],$data["profile"],$data["message"],$this->getLastQuestionID($whatsapp_business_account_id,$from));
-                                $this->envia($data);
+                                    $data = [
+                                        "whatsapp_business_account_id" => $whatsapp_business_account_id,
+                                        "message" => $text,
+                                        "from" => $from,
+                                        "profile" => $profile
+                                    ];
+                                    $this->saveChat(true, $data["whatsapp_business_account_id"], $data["from"], $data["profile"], $data["message"], $this->getLastQuestionID($whatsapp_business_account_id, $from));
+                                    $this->envia($data);
+                                }
                             }
-
                         }
                     }
                 }
