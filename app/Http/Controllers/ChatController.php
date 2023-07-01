@@ -15,11 +15,10 @@ class ChatController extends Controller
         $wbId = $data["whatsapp_business_account_id"];
         $message = $data["message"];
 
-        $chats = WhatsappChat::where('whatsapp_business_id', $wbId)->where('phone',$phone)->where('is_answer', 1)->get();
+        $chats = WhatsappChat::where('whatsapp_business_id', $wbId)->where('phone', $phone)->where('is_answer', 1)->get();
 
         if (count($chats) > 0) {
-            $questionResponse = WhatsappQuestion::where('phone', $phone)->last();
-            $answer = $questionResponse->answers->where("value", $message);
+
             if ($answer) {
             } else {
                 $question = "$questionResponse->title\n";
@@ -27,7 +26,9 @@ class ChatController extends Controller
                 foreach ($questionResponse->answers as $index => $answer) {
                     $question .= "$index.- $answer->answer\n";
                 }
-                return $question;
+                $data["id"] = $questionResponse->id;
+                $data["message"] = $question;
+                return $data;
             }
         } else {
             $questionResponse = WhatsappQuestion::with("answers")->where('is_first_question', true)->first();
@@ -36,7 +37,9 @@ class ChatController extends Controller
             foreach ($questionResponse->answers as $index => $answer) {
                 $question .= "$index.- $answer->answer\n";
             }
-            return $question;
+            $data["id"] = $questionResponse->id;
+            $data["message"] = $question;
+            return $data;
         }
     }
 

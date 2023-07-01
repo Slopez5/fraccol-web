@@ -27,11 +27,11 @@ class WaController extends Controller
     public function envia($data)
     {
         $telephone = $data['from'];
-        $body = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($data['message']) : ChatController::getResponse($data);
-        $this->sendMessage( $telephone, $body);
+        $response = $this->isChatGPTAvailable ? ChatGPTController::getResponseGPT($data['message']) : ChatController::getResponse($data);
+        $this->sendMessage( $telephone, $response["message"],$response["id"]);
     }
 
-    private function sendMessage( $to, $body)
+    private function sendMessage( $to, $body,$questionId)
     {
         $url = 'https://graph.facebook.com/v17.0/' . $this->phoneID . '/messages';
 
@@ -50,7 +50,7 @@ class WaController extends Controller
 
         $response = CurlHelper::call($url, 'GET', $data, $header);
         $responseString =\json_encode(json_decode($response["response"]));
-        $this->saveChat(false,null,$to,null,$body);
+        $this->saveChat(false,null,$to,null,$body,$questionId);
         $this->saveApiLog($url,"POST",json_encode($data),$response["status_code"],$responseString);
         return $response;
     }
@@ -65,13 +65,12 @@ class WaController extends Controller
         $apiLog->save();
     }
 
-    private function saveChat($isUser = false, $whatsapp_business_account_id,$phone,$profile_name,$value){
+    private function saveChat($isUser = false, $whatsapp_business_account_id,$phone,$profile_name,$value,$questionId){
         $chat = new WhatsappChat();
         $chat->phoneID = $this->phoneID;
         $chat->phone = $phone;
+        $chat->whatsapp_question_id = $questionId;
         if ($isUser) {
-            $question = WhatsappQuestion::where('phone',$phone)->where('phoneID',$this->phoneID)->last();
-            $chat->whatsapp_question_id = $question->id;
             $chat->whatsapp_business_id = $whatsapp_business_account_id;
             $chat->profile_name = $profile_name;
         } else {
@@ -86,6 +85,11 @@ class WaController extends Controller
         $chat->is_answer = $isUser;
 
         $chat->save();
+    }
+
+    private function getLastQuestionID($wbID,$phone){
+        $chats = WhatsappChat::where('whatsapp_business_id', $wbID)->where('phone',$phone)->where('is_answer', 1)->latest()->first();
+        return 1;
     }
 
     public function webhook()
@@ -138,7 +142,7 @@ class WaController extends Controller
                                     "from" => $from,
                                     "profile" => $profile
                                 ];
-                                $this->saveChat(true,$data["whatsapp_business_account_id"],$data["from"],$data["profile"],$data["message"]);
+                                $this->saveChat(true,$data["whatsapp_business_account_id"],$data["from"],$data["profile"],$data["message"],$this->getLastQuestionID($whatsapp_business_account_id,$from));
                                 $this->envia($data);
                             }
 
