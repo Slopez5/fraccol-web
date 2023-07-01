@@ -88,7 +88,11 @@ class WaController extends Controller
     }
 
     private function getLastQuestionID($wbID,$phone){
-        $chats = WhatsappChat::where('whatsapp_business_id', $wbID)->where('phone',$phone)->where('is_answer', 1)->latest()->first();
+        $chats = WhatsappChat::where('whatsapp_business_id', $wbID)
+        ->where('phone',$phone)
+        ->where('is_answer', 1)
+        ->whereNotNull('whatsapp_question_id')
+        ->latest()->first();
         return 1;
     }
 
