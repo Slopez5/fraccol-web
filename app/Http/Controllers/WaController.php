@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\CurlHelper;
 use App\Models\ApiMonitoringLog;
 use App\Models\Setting;
+use App\Models\WhatsappChat;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Exists;
 
@@ -47,8 +48,33 @@ class WaController extends Controller
         $header = array("Authorization: Bearer " . $this->token, "Content-Type: application/json");
 
         $response = CurlHelper::call($url, 'GET', $data, $header);
-
+        $responseString =json_encode($response["response"]);
+        $this->saveChat(false,null,$data["from"],null,$body);
+        $this->saveApiLog($url,"POST",json_encode($data),$response["status_code"],$responseString);
         return $response;
+    }
+
+    private function saveApiLog($url,$method,$request,$status,$response){
+        $apiLog = new ApiMonitoringLog();
+        $apiLog->request_url = $url;
+        $apiLog->request_method = $method;
+        $apiLog->request_payload = $request;
+        $apiLog->response_code = $status;
+        $apiLog->response_payload = $response;
+        $apiLog->save();
+    }
+
+    private function saveChat($isUser = false, $whatsapp_business_account_id,$phone,$profile_name,$value){
+        $chat = new WhatsappChat();
+        $chat->phoneID = $this->phoneID;
+        $chat->phone = $phone;
+        if ($isUser) {
+            $chat->whatsapp_business_id = $whatsapp_business_account_id;
+            $chat->profile_name = $profile_name;
+        }
+
+        $chat->value = $value;
+        $chat->save();
     }
 
     public function webhook()
@@ -101,6 +127,7 @@ class WaController extends Controller
                                     "from" => $from,
                                     "profile" => $profile
                                 ];
+                                $this->saveChat(true,$data["whatsapp_business_account_id"],$data["from"],$data["profile"],$data["message"]);
                                 $this->envia($data);
                             }
 
