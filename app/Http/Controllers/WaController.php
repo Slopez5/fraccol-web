@@ -80,6 +80,7 @@ class WaController extends Controller
         } else {
             $chat->value = $value;
         }
+        $chat->is_answer = $isUser;
 
         $chat->save();
     }
