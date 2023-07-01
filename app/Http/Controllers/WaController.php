@@ -97,7 +97,7 @@ class WaController extends Controller
         ->whereNotNull('whatsapp_question_id')
         ->latest()->first();
         if ($chat) {
-            return $chat->id;
+            return $chat->whatsapp_question_id;
         }
         return null;
     }

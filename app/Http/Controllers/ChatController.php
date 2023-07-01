@@ -35,7 +35,7 @@ class ChatController extends Controller
                     $question = "$questionResponse->title\n";
                     $question .= "$questionResponse->question\n\n\n";
                     foreach ($questionResponse->answers as $index => $answer) {
-                        $question .= "$index.- $answer->answer\n";
+                        $question .= $index + 1 . ".- $answer->answer\n";
                     }
                     $data["id"] = $questionResponse->id;
                     $data["message"] = $question;
@@ -46,7 +46,7 @@ class ChatController extends Controller
                 $question = "$questionResponse->title\n";
                 $question .= "$questionResponse->question\n\n\n";
                 foreach ($questionResponse->answers as $index => $answer) {
-                    $question .= "$index.- $answer->answer\n";
+                    $question .= $index + 1 . ".- $answer->answer\n";
                 }
                 $data["id"] = $questionResponse->id;
                 $data["message"] = $question;
@@ -58,7 +58,7 @@ class ChatController extends Controller
             $question = "$questionResponse->title\n";
             $question .= "$questionResponse->question\n\n\n";
             foreach ($questionResponse->answers as $index => $answer) {
-                $question .= "$index.- $answer->answer\n";
+                $question .= $index + 1 . ".- $answer->answer\n";
             }
             $data["id"] = $questionResponse->id;
             $data["message"] = $question;
