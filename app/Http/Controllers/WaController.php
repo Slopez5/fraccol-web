@@ -48,7 +48,7 @@ class WaController extends Controller
         $header = array("Authorization: Bearer " . $this->token, "Content-Type: application/json");
 
         $response = CurlHelper::call($url, 'GET', $data, $header);
-        $responseString =json_encode($response["response"]);
+        $responseString =\json_encode(json_decode($response["response"]));
         $this->saveChat(false,null,$to,null,$body);
         $this->saveApiLog($url,"POST",json_encode($data),$response["status_code"],$responseString);
         return $response;
