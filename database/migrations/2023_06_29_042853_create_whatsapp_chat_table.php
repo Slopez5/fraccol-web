@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('phoneID');
             $table->unsignedBigInteger('whatsapp_question_id')->nullable();
-            $table->string('whatsapp_bussines_id')->nullable();
+            $table->string('whatsapp_business_id')->nullable();
             $table->string('phone');
             $table->string('profile_name')->nullable();
             $table->string('value');
