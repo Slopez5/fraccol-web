@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\WhatsappAnswer;
 use App\Models\WhatsappChat;
 use App\Models\WhatsappQuestion;
 use Illuminate\Http\Request;
@@ -28,5 +29,15 @@ class ChatController extends Controller
         }
 
 
+    }
+
+    static public function create(){
+        $question = new WhatsappQuestion();
+        $question->answers = [new WhatsappAnswer()];
+        return view('admin.chatbot.create', compact('question'));
+    }
+
+    static public function store(){
+        return;
     }
 }

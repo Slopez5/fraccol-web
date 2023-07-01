@@ -86,21 +86,24 @@ class WaController extends Controller
                 if (isset($response->entry[0]->changes)) {
                     if (count($response->entry[0]->changes) > 0) {
                         if ($response->entry[0]->changes[0]->field == "messages") {
-                            $message = $response->entry[0]->changes[0]->value->messages[0];
-                            $contact = $response->entry[0]->changes[0]->value->contacts[0];
-                            $metadata = $response->entry[0]->changes[0]->value->metadata;
+                            if (isset($response->entry[0]->changes[0]->value->messages)) {
+                                $message = $response->entry[0]->changes[0]->value->messages[0];
+                                $contact = $response->entry[0]->changes[0]->value->contacts[0];
+                                $metadata = $response->entry[0]->changes[0]->value->metadata;
 
-                            $text = $message->text->body;
-                            $from = substr($message->from, 0, 2) . substr($message->from, 3);
-                            $profile = $contact->profile->name;
+                                $text = $message->text->body;
+                                $from = substr($message->from, 0, 2) . substr($message->from, 3);
+                                $profile = $contact->profile->name;
 
-                            $data = [
-                                "whatsapp_business_account_id" => $whatsapp_business_account_id,
-                                "message" => $text,
-                                "from" => $from,
-                                "profile" => $profile
-                            ];
-                            $this->envia($data);
+                                $data = [
+                                    "whatsapp_business_account_id" => $whatsapp_business_account_id,
+                                    "message" => $text,
+                                    "from" => $from,
+                                    "profile" => $profile
+                                ];
+                                $this->envia($data);
+                            }
+
                         }
                     }
                 }
