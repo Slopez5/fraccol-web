@@ -69,10 +69,10 @@ class WaController extends Controller
         $chat->phoneID = $this->phoneID;
         $chat->phone = $phone;
         if ($isUser) {
-            $chat->whatsapp_bussiness_id = $whatsapp_business_account_id;
+            $chat->whatsapp_bussines_id = $whatsapp_business_account_id;
             $chat->profile_name = $profile_name;
         } else {
-            $chat->whatsapp_bussiness_id = null;
+            $chat->whatsapp_bussines_id = null;
             $chat->profile_name = null;
         }
 
