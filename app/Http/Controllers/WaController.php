@@ -49,7 +49,7 @@ class WaController extends Controller
 
         $response = CurlHelper::call($url, 'GET', $data, $header);
         $responseString =json_encode($response["response"]);
-        $this->saveChat(false,null,$data["from"],null,$body);
+        $this->saveChat(false,null,$to,null,$body);
         $this->saveApiLog($url,"POST",json_encode($data),$response["status_code"],$responseString);
         return $response;
     }
