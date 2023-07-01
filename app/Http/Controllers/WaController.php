@@ -6,6 +6,7 @@ use App\Helpers\CurlHelper;
 use App\Models\ApiMonitoringLog;
 use App\Models\Setting;
 use App\Models\WhatsappChat;
+use App\Models\WhatsappQuestion;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Exists;
 
@@ -69,6 +70,8 @@ class WaController extends Controller
         $chat->phoneID = $this->phoneID;
         $chat->phone = $phone;
         if ($isUser) {
+            $question = WhatsappQuestion::where('phone',$phone)->where('phoneID',$this->phoneID)->last();
+            $chat->whatsapp_question_id = $question->id;
             $chat->whatsapp_business_id = $whatsapp_business_account_id;
             $chat->profile_name = $profile_name;
         } else {
