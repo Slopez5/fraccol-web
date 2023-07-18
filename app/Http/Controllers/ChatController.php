@@ -20,7 +20,7 @@ class ChatController extends Controller
         if ($chat) {
             if ($chat->whatsapp_question_id) {
                 $answer = WhatsappAnswer::where('whatsapp_question_id', $chat->whatsapp_question_id)->where('value', $message)->get();
-                if ($answer) {
+                if (count($answer) > 0) {
                     $questionResponse = $answer[0]->question;
                     $question = "$questionResponse->title\n";
                     $question .= "$questionResponse->question\n\n\n";

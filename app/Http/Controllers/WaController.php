@@ -68,23 +68,23 @@ class WaController extends Controller
         $apiLog->save();
     }
 
-    private function saveChat($isUser = false, $whatsapp_business_account_id, $phone, $profile_name, $value, $questionId)
+    private function saveChat($isUser = false, $data)
     {
         $chat = new WhatsappChat();
         $chat->phoneID = $this->phoneID;
-        $chat->phone = $phone;
-        $chat->whatsapp_question_id = $questionId;
+        $chat->phone = $data["from"];
+        $chat->whatsapp_question_id = $this->getLastQuestionID($data["whatsapp_business_account_id"],$data["from"]);
         if ($isUser) {
-            $chat->whatsapp_business_id = $whatsapp_business_account_id;
-            $chat->profile_name = $profile_name;
+            $chat->whatsapp_business_id = $data["whatsapp_business_account_id"];
+            $chat->profile_name = $data["profile"];
         } else {
             $chat->whatsapp_business_id = null;
             $chat->profile_name = null;
         }
-        if ($value == null) {
+        if ($data["message"] == null) {
             $chat->value = "";
         } else {
-            $chat->value = $value;
+            $chat->value = $data["message"];
         }
         $chat->is_answer = $isUser;
 
@@ -137,33 +137,48 @@ class WaController extends Controller
         if (isset($response->entry)) {
             if (count($response->entry) > 0) {
                 $whatsapp_business_account_id = $response->entry[0]->id;
-                if (isset($response->entry[0]->changes)) {
-                    if (count($response->entry[0]->changes) > 0) {
-                        if ($response->entry[0]->changes[0]->field == "messages") {
-                            if (isset($response->entry[0]->changes[0]->value->messages)) {
-                                if (count($response->entry[0]->changes[0]->value->messages) > 0) {
-                                    $message = $response->entry[0]->changes[0]->value->messages[0];
-                                    $contact = $response->entry[0]->changes[0]->value->contacts[0];
-                                    $metadata = $response->entry[0]->changes[0]->value->metadata;
-
-                                    $text = $message->text->body;
-                                    $from = substr($message->from, 0, 2) . substr($message->from, 3);
-                                    $profile = $contact->profile->name;
-
-                                    $data = [
-                                        "whatsapp_business_account_id" => $whatsapp_business_account_id,
-                                        "message" => $text,
-                                        "from" => $from,
-                                        "profile" => $profile
-                                    ];
-                                    $this->saveChat(true, $data["whatsapp_business_account_id"], $data["from"], $data["profile"], $data["message"], $this->getLastQuestionID($whatsapp_business_account_id, $from));
-                                    $this->envia($data);
-                                }
+                $changes = $response->entry[0]->changes;
+                if (isset($changes) & count($changes) > 0) {
+                    $value = $changes[0]->value;
+                    $field = $changes[0]->field;
+                    if (isset($value->statuses)) {
+                    } else if (isset($value->messages)) {
+                        if (count($value->messages) > 0) {
+                            $message = $value->messages[0];
+                            $contact = $value->contacts[0];
+                            $metadata = $value->metadata;
+                            switch ($message->type) {
+                                case "text":
+                                    $data = $this->getTextMessage($message);
+                                    break;
+                                case "interactive":
+                                    $this->getInteractiveMessage($message);
+                                    break;
+                                default:
+                                    break;
                             }
+                            $data["profile"] = $contact->profile->name;
+                            $data["whatsapp_business_account_id"] =  $whatsapp_business_account_id;
+                            $this->saveChat(true, $data);
+                            $this->envia($data);
                         }
                     }
                 }
             }
         }
+    }
+
+    private function getTextMessage($message)
+    {
+        $text = $message->text->body;
+        $from = substr($message->from, 0, 2) . substr($message->from, 3);
+        return [
+            "message" => $text,
+            "from" => $from,
+        ];
+    }
+    private function getInteractiveMessage($message)
+    {
+
     }
 }
