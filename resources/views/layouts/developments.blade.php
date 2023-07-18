@@ -162,7 +162,7 @@
             <h2 class="text-center">Plano de Distribución</h2>
             <div class="row">
                 <div class="col-md-12">
-                    <img src="{{ assets('images/planos/Verde_Ladera.svg') }}" alt="Plano de Distribución" class="img-fluid">
+                    <img src="{{ asset('images/planos/Verde_Ladera.svg') }}" alt="Plano de Distribución" class="img-fluid">
                 </div>
             </div>
         </div>
