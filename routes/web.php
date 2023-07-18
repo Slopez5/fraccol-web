@@ -21,6 +21,12 @@ Route::domain('verdeladera.fraccionamientoscolima.com')->group(function () {
     });
 });
 
+Route::domain('palmares.fraccionamientoscolima.com')->group(function () {
+    Route::get('/', function () {
+        return view('developments.verde_ladera');
+    });
+});
+
 Route::get('/webhook', [WaController::class,'webhook']);
 Route::post('/webhook', [WaController::class,'recibe']);
 Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
