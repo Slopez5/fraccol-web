@@ -33,6 +33,24 @@ class WaController extends Controller
         }
     }
 
+    private function addDNS()
+    {
+        $url = 'https://api.linode.com/v4/domains/2335969/records';
+        $data = [
+            'type' => 'A',
+            'name' => 'palmares',
+            'target' => '45.79.23.241',
+            'priority' => 0,
+            'weight' => 0,
+            'port' => 0,
+            'service' => null,
+            'protocol' => null,
+            'ttl_sec' => 0
+        ];
+        $header = array("Authorization: Bearer 3314a935d434235467b5b3ab99d82ac32b28ebc5ed0a1090850d732b4fe0cc2a", "Content-Type: application/json");
+        $response = CurlHelper::call($url, 'GET', $data, $header);
+    }
+
     private function sendMessage($to, $body, $questionId)
     {
         $url = 'https://graph.facebook.com/v17.0/' . $this->phoneID . '/messages';
@@ -51,7 +69,7 @@ class WaController extends Controller
         $header = array("Authorization: Bearer " . $this->token, "Content-Type: application/json");
 
         $response = CurlHelper::call($url, 'GET', $data, $header);
-        $responseString = \json_encode(json_decode($response["response"]));
+        $responseString = json_encode(json_decode($response["response"]));
         $this->saveChat(false, null, $to, null, $body, $questionId);
         $this->saveApiLog($url, "POST", json_encode($data), $response["status_code"], $responseString);
         return $response;
@@ -73,7 +91,7 @@ class WaController extends Controller
         $chat = new WhatsappChat();
         $chat->phoneID = $this->phoneID;
         $chat->phone = $data["from"];
-        $chat->whatsapp_question_id = $this->getLastQuestionID($data["whatsapp_business_account_id"],$data["from"]);
+        $chat->whatsapp_question_id = $this->getLastQuestionID($data["whatsapp_business_account_id"], $data["from"]);
         if ($isUser) {
             $chat->whatsapp_business_id = $data["whatsapp_business_account_id"];
             $chat->profile_name = $data["profile"];
@@ -179,6 +197,5 @@ class WaController extends Controller
     }
     private function getInteractiveMessage($message)
     {
-
     }
 }

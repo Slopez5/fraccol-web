@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EnterpriseController;
+use App\Http\Controllers\SalesPerson\LandingPageController;
 use App\Http\Controllers\WaController;
 use Illuminate\Support\Facades\Route;
 
@@ -15,16 +16,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::domain('verdeladera.fraccionamientoscolima.com')->group(function () {
-    Route::get('/', function () {
-        return view('developments.verde_ladera');
-    });
-});
-
-Route::domain('palmares.fraccionamientoscolima.com')->group(function () {
-    Route::get('/', function () {
-        return view('developments.verde_ladera');
-    });
+Route::domain('{subdomain}.fraccionamientoscolima.com')->group(function () {
+    Route::get('/', [LandingPageController::class,'index']);
 });
 
 Route::get('/webhook', [WaController::class,'webhook']);
