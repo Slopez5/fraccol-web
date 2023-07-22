@@ -1,4 +1,4 @@
-@extends('layouts.dashboard')
+@extends('layouts.admin')
 
 
 @section('content')
@@ -66,7 +66,7 @@
                                                 <i class="far fa-file-pdf" style="color: gray"></i>
                                             </button>
                                         </form>
-                                        <form method="GET" action="{{ route('development.details',$development->id) }}" style="display: inline;">
+                                        <form method="GET" action="" style="display: inline;">
                                             <button type="submit" class="icon-action" style="border: none; background-color: transparent; cursor: pointer;">
                                                 <i class="far far fa-eye"></i>
                                             </button>

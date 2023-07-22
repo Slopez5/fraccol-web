@@ -3,6 +3,7 @@
 namespace Database\Seeders;
 
 use App\Models\Development;
+use App\Models\Subdomain;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +15,8 @@ class DevelopmentSeeder extends Seeder
     public function run(): void
     {
         //
-        Development::insert([
+
+        $developments = [
             [
                 'real_state_id' => 1,
                 'name' => 'El Rehilete',
@@ -152,6 +154,16 @@ class DevelopmentSeeder extends Seeder
                 'total_lots' => 200,
                 'sort_description' => ''
             ]
-        ]);
+        ];
+        foreach ($developments as $key => $development) {
+            $_development = new Development($development);
+            $_development->save();
+            $subdomain = new Subdomain();
+            $subdomain->subdomain = str_replace(" ","",$_development->name);
+            $subdomain->notes = "";
+            $_development->subdomain()->save($subdomain);
+
+        }
+        Development::insert($developments);
     }
 }
