@@ -19,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 
 Route::domain('{subdomain}.fraccionamientoscolima.com')->group(function () {
     Route::get('/', [SubdomainController::class,'index']);
+});
+Route::domain('{subdomain}.{subdomain2}.fraccionamientoscolima.com')->group(function () {
     Route::get('/dashboard', [SubdomainController::class,'dashboard']);
 });
 
@@ -27,4 +29,6 @@ Route::post('/webhook', [WaController::class,'recibe']);
 Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
 Route::get('syncSubdomains', [SubdomainController::class,'syncSubdomains']);
 
-Route::get('/{subdomain}', [SubdomainController::class,'index']);
+Route::get('/', function(){
+    return view('landing_page.speedEstate');
+});
