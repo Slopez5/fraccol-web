@@ -27,7 +27,7 @@ class SubdomainController extends Controller
                 break;
             case "App\Models\Development":
                 $development = Development::find($subdomain->subdomainable->id);
-                return view('landing_page.development',["development" => $development]);
+                return view('landing_page.development', ["development" => $development]);
             default:
                 # code...
                 break;
@@ -58,9 +58,23 @@ class SubdomainController extends Controller
         };
     }
 
-    function dashboard($subdomain)
+    function dashboard($subdomain, $subdomain2)
     {
-        $subdomain = Subdomain::where('subdomain', $subdomain)->get();
+        $subdomain = Subdomain::where('subdomain', $subdomain . "." . $subdomain2)->first();
+        $type = $subdomain->subdomainable_type;
+
+        switch ($type) {
+            case "App\Models\User":
+                $user = User::find($subdomain->subdomainable->id);
+                return $this->getUserType($user);
+                break;
+            case "App\Models\Development":
+                $development = Development::find($subdomain->subdomainable->id);
+                return view('landing_page.development', ["development" => $development]);
+            default:
+                # code...
+                break;
+        }
     }
 
     public function syncSubdomains()
@@ -74,7 +88,6 @@ class SubdomainController extends Controller
         } else {
             return "sync success";
         }
-
     }
 
     private function getSubdomainsLocal($subdomains)
@@ -93,7 +106,7 @@ class SubdomainController extends Controller
                 $subdomainsNotFound->push($subdomain);
             }
         }
-        if (count($subdomainsNotFound)>0) {
+        if (count($subdomainsNotFound) > 0) {
             if ($this->page < $this->pages) {
                 logger("entre");
                 $this->page++;
