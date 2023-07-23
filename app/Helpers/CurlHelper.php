@@ -10,7 +10,7 @@ class CurlHelper
 
         curl_setopt($curl, CURLOPT_URL, $url);
         curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-        if ($method == 'GET') {
+        if ($method == 'POST') {
             curl_setopt($curl, CURLOPT_POST, true);
         }
 

@@ -33,23 +33,6 @@ class WaController extends Controller
         }
     }
 
-    private function addDNS()
-    {
-        $url = 'https://api.linode.com/v4/domains/2335969/records';
-        $data = [
-            'type' => 'A',
-            'name' => 'palmares',
-            'target' => '45.79.23.241',
-            'priority' => 0,
-            'weight' => 0,
-            'port' => 0,
-            'service' => null,
-            'protocol' => null,
-            'ttl_sec' => 0
-        ];
-        $header = array("Authorization: Bearer 3314a935d434235467b5b3ab99d82ac32b28ebc5ed0a1090850d732b4fe0cc2a", "Content-Type: application/json");
-        $response = CurlHelper::call($url, 'GET', $data, $header);
-    }
 
     private function sendMessage($to, $body, $questionId)
     {

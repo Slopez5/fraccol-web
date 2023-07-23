@@ -25,5 +25,6 @@ Route::domain('{subdomain}.fraccionamientoscolima.com')->group(function () {
 Route::get('/webhook', [WaController::class,'webhook']);
 Route::post('/webhook', [WaController::class,'recibe']);
 Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
+Route::get('syncSubdomains', [SubdomainController::class,'syncSubdomains']);
 
 Route::get('/{subdomain}', [SubdomainController::class,'index']);
