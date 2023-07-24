@@ -16,7 +16,21 @@ class DevelopmentImagesSedder extends Seeder
         //
         DevelopmentImage::insert([
             [
-                "file_url"=>"",
+                "file_url"=>"/developments/palmares/foto1.jpg",
+                "width"=>0,
+                "height"=>0,
+                "description"=>"",
+                "development_id"=>1
+            ],
+            [
+                "file_url"=>"/developments/palmares/foto2.jpg",
+                "width"=>0,
+                "height"=>0,
+                "description"=>"",
+                "development_id"=>1
+            ],
+            [
+                "file_url"=>"/developments/palmares/foto3.jpg",
                 "width"=>0,
                 "height"=>0,
                 "description"=>"",

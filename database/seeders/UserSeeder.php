@@ -37,7 +37,7 @@ class UserSeeder extends Seeder
                 "first_name" => "Sonia Norma",
                 "last_name" => "Ceballos Barbosa",
                 "phone" => "3122250707",
-                "email" => "slopez@gmail.com",
+                "email" => "sceballos@gmail.com",
                 "password" => "$2a$12$9gz/msT4sP5APbflLOL/NuG.ymOm0YPHpr9WdUqmn.tZ2STbtH3xm",
             ],
             [
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
                 "first_name" => "Ma Elena",
                 "last_name" => "Ceballos Barbosa",
                 "phone" => "3122250707",
-                "email" => "slopez@gmail.com",
+                "email" => "mceballos@gmail.com",
                 "password" => "$2a$12$9gz/msT4sP5APbflLOL/NuG.ymOm0YPHpr9WdUqmn.tZ2STbtH3xm",
             ],
             [
@@ -53,7 +53,7 @@ class UserSeeder extends Seeder
                 "first_name" => "Luis Javier",
                 "last_name" => "lopez ceballos",
                 "phone" => "3122250707",
-                "email" => "slopez@gmail.com",
+                "email" => "llopez@gmail.com",
                 "password" => "$2a$12$9gz/msT4sP5APbflLOL/NuG.ymOm0YPHpr9WdUqmn.tZ2STbtH3xm",
             ],
 

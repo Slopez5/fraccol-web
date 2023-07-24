@@ -12,6 +12,6 @@ class DashboardController extends Controller
     function dashboard(){
         $developments = Development::with('realStateAgency')->get();
         logger( $developments[0]->realStateAgency);
-        return view('admin/home',["developments" => $developments]);
+        return view('admin.home',["developments" => $developments]);
     }
 }

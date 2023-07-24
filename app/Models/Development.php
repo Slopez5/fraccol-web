@@ -19,7 +19,7 @@ class Development extends Model
 
     public function realStateAgency(): BelongsTo
     {
-        return $this->belongsTo(realStateAgency::class, 'real_state_id', 'id');
+        return $this->belongsTo(RealStateAgency::class, 'real_state_id', 'id');
     }
 
     public function lotTypes(): BelongsToMany

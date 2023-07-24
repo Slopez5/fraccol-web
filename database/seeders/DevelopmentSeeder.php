@@ -164,6 +164,6 @@ class DevelopmentSeeder extends Seeder
             $_development->subdomain()->save($subdomain);
 
         }
-        Development::insert($developments);
+        //Development::insert($developments);
     }
 }

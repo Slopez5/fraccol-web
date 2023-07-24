@@ -27,6 +27,7 @@ return new class extends Migration
             $table->date('end_date')->nullable();
             $table->text('sort_description')->nullable();
             $table->longText('full_description')->nullable();
+            $table->string('image')->nullable();
             $table->timestamps();
 
 
