@@ -31,5 +31,5 @@ Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
 Route::get('/syncSubdomains', [SubdomainController::class, 'syncSubdomains']);
 
 Route::get('/', function(){
-    return view('landing_page.speedEstate');
+    return view('landing_page.development');
 });
