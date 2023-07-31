@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EnterpriseController;
+use App\Http\Controllers\LandingPage\LandingPageDevelopmentController;
 use App\Http\Controllers\SalesPerson\LandingPageController;
 use App\Http\Controllers\SubdomainController;
 use App\Http\Controllers\WaController;
@@ -30,6 +31,4 @@ Route::post('/webhook', [WaController::class, 'recibe']);
 Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
 Route::get('/syncSubdomains', [SubdomainController::class, 'syncSubdomains']);
 
-Route::get('/', function(){
-    return view('landing_page.development');
-});
+Route::get('/', [LandingPageDevelopmentController::class,'index']);

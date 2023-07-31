@@ -7,28 +7,16 @@ use Livewire\Component;
 
 class SectionHeader extends Component
 {
-    public $development_name = 'Fraccionamiento Verde Ladera';
-    public $slogan = 'Bienvenido al lugar perfecto para vivir rodeado de naturaleza.';
+    public $development_name = '';
+    public $slogan = '';
     public $images = [];
-    public $width = 0;
 
 
-    public function mount() {
-        $this->images = [
-            [
-                "id" => 1,
-                "image" => Storage::url('developments/Palmares/Foto_1.jpeg')
-            ],
-            [
-                "id" => 2,
-                "image" => Storage::url('developments/Palmares/Foto_2.jpeg')
-            ],
-            [
-                "id" => 3,
-                "image" => Storage::url('developments/Palmares/Foto_3.jpeg')
-            ]
-        ];
-        $this->width = count($this->images)*100;
+    public function mount($header) {
+        logger($header->development_name);
+        $this->development_name = $header->development_name;
+        $this->slogan = $header->slogan;
+        $this->images = $header->images;
     }
     public function render()
     {

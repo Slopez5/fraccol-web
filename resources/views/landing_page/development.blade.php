@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fraccionamiento Campestre - Landing Page</title>
+    <title>{{ $development->name }} - Landing Page</title>
     <link rel="stylesheet" href="{{ asset('css/bootstrap.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/landingPage/development.css') }}">
     @livewireStyles
@@ -19,28 +19,28 @@
     </header>
 
     <main>
-        @livewire('landing-page.development.section-header')
+        @livewire('landing-page.development.section-header', ['header' => $development->header])
 
-        @livewire('landing-page.development.section-development-info')
+        @livewire('landing-page.development.section-development-info', ['developmentInfo' => $development->development_info])
 
-        @livewire('landing-page.development.section-amenities')
+        @livewire('landing-page.development.section-amenities', ['development' => $development])
 
-        @livewire('landing-page.development.section-location')
+        @livewire('landing-page.development.section-location', ['development' => $development])
 
-        @livewire('landing-page.development.section-prices')
+        @livewire('landing-page.development.section-prices', ['development' => $development])
 
-        @livewire('landing-page.development.section-financing-options')
+        @livewire('landing-page.development.section-financing-options', ['development' => $development])
 
-        @livewire('landing-page.development.section-blueprint')
+        @livewire('landing-page.development.section-blueprint', ['development' => $development])
 
-        @livewire('landing-page.development.section-gallery')
+        @livewire('landing-page.development.section-gallery', ['development' => $development])
 
-        @livewire('landing-page.development.section-reviews')
+        @livewire('landing-page.development.section-reviews', ['development' => $development])
 
-        @livewire('landing-page.development.section-social-media')
+        @livewire('landing-page.development.section-social-media', ['development' => $development])
     </main>
 
-    @livewire('landing-page.development.section-footer')
+    @livewire('landing-page.development.section-footer', ['development' => $development])
 
     <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"

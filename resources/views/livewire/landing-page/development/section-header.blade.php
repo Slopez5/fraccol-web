@@ -11,8 +11,8 @@
         </div>
         <div class="carousel-inner">
             @foreach ($images as $image)
-                <div wire:key="{{ $image['id'] }}" class="carousel-item active">
-                    <img src="{{ $image['image'] }}" class="d-block image-carousel" alt="...">
+                <div wire:key="{{ $image->id }}" class="carousel-item active">
+                    <img src="{{ $image->image }}" class="d-block image-carousel" alt="...">
                 </div>
             @endforeach
         </div>

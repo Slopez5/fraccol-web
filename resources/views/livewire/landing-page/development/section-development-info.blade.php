@@ -2,16 +2,23 @@
  <section id="development-info" class="fraccionamiento-info">
      <h2>Información del Fraccionamiento</h2>
      <p>
-        {{ $welcome_info }}
+         {{ $welcome_info }}
      </p>
      <p>
          Características destacadas:
      </p>
-     <ul>
-        @foreach ($outstanding_features as $feature)
-        <li wire:key="{{ $feature["id"] }}">{{ $feature["name"] }}</li>
-        @endforeach
-     </ul>
+     <div class="card-container">
+         @foreach ($outstanding_features as $feature)
+             <div class="card" wire:key="{{ $feature->id }}">
+                 <img src="{{ $feature->image }}" class="card-img-top" alt="">
+                 <div class="card-body">
+                     <h5 class="card-title">{{ $feature->name }}</h5>
+                     <p class="card-text"> {{ $feature->description }}</p>
+                 </div>
+             </div>
+         @endforeach
+     </div>
+
      <p>
          {{ $footer_info }}
      </p>

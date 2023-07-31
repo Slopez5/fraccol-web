@@ -16,31 +16,30 @@
 
 .fraccionamiento-info {
     background-color: #f9f9f9;
-    /* Color de fondo para la sección */
     padding: 40px;
-    /* Espaciado interno para el contenido de la sección */
-    text-align: center;
-    /* Alineación del contenido al centro */
 }
 
 .fraccionamiento-info h2 {
+    text-align: center;
     margin-bottom: 20px;
     /* Espaciado inferior para el título */
-}
-
-.fraccionamiento-info ul {
-    text-align: left;
-    /* Alineación del texto de la lista al izquierdo */
-}
-
-.fraccionamiento-info ul li {
-    margin-bottom: 10px;
-    /* Espaciado inferior para los elementos de la lista */
 }
 
 .fraccionamiento-info p {
     margin-bottom: 20px;
     /* Espaciado inferior para los párrafos */
+}
+
+.card-container {
+    display: flex;
+    overflow-x: scroll;
+    margin: 20px;
+}
+
+.card {
+    word-wrap: normal;
+    min-width: 300px;
+    margin: 10px;
 }
 
 
