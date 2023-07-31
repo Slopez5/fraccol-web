@@ -15,8 +15,10 @@ class LandingPageDevelopmentController extends Controller
             "id" => 1,
             "name" => "Palmares",
             "header" => $this->getHeaderSection(),
-            "development_info" => $this->getDevelopmentInfoSection()
+            "development_info" => $this->getDevelopmentInfoSection(),
+            "gallery" => $this->getGallerySection()
         ]));
+        logger($development->gallery);
         return view('landing_page.development', ["development" => $development]);
     }
 
@@ -47,9 +49,7 @@ class LandingPageDevelopmentController extends Controller
 
     private function getDevelopmentInfoSection()
     {
-        $welcome_info = "Bienvenido a Palmares, un lugar paradisíaco rodeado de naturaleza y tranquilidad.
-    Nuestro fraccionamiento está ubicado en la hermosa ciudad de Colima, a solo 15 minutos del centro de Colima,
-    lo que te permitirá disfrutar de la serenidad del campo sin sacrificar la comodidad de la vida urbana.";
+        $welcome_info = "Bienvenido a Palmares, un lugar paradisíaco rodeado de naturaleza y tranquilidad. Nuestro fraccionamiento está ubicado en la hermosa ciudad de Colima, a solo 15 minutos del centro de Colima, lo que te permitirá disfrutar de la serenidad del campo sin sacrificar la comodidad de la vida urbana.";
 
         $outstanding_features = [
             [
@@ -78,14 +78,57 @@ class LandingPageDevelopmentController extends Controller
             ]
         ];
 
-        $footer_info = "Descubre la armonía entre la vida moderna y la naturaleza en Palmares. ¡Ven y sé
-    parte
-    de nuestra comunidad!";
+        $footer_info = "Descubre la armonía entre la vida moderna y la naturaleza en Palmares. ¡Ven y sé parte de nuestra comunidad!";
 
         return [
             "welcome_info" => $welcome_info,
             "outstanding_features" => $outstanding_features,
             "footer_info" => $footer_info
         ];
+    }
+
+    private function getGallerySection()
+    {
+        $photos = [
+            [
+                [
+                    "id" => 1,
+                    "photo" => Storage::url("/developments/Palmares/Foto_1.jpeg"),
+                ],
+                [
+                    "id" => 2,
+                    "photo" => Storage::url("/developments/Palmares/Foto_2.jpeg"),
+                ],
+                [
+                    "id" => 3,
+                    "photo" => Storage::url("/developments/Palmares/Foto_3.jpeg"),
+                ]
+            ],
+            [
+                [
+                    "id" => 4,
+                    "photo" => Storage::url("/developments/Palmares/Foto_4.jpeg"),
+                ],
+                [
+                    "id" => 5,
+                    "photo" => Storage::url("/developments/Palmares/Foto_5.jpeg"),
+                ],
+                [
+                    "id" => 6,
+                    "photo" => Storage::url("/developments/Palmares/Foto_6.jpeg"),
+                ]
+            ],
+            [
+                [
+                    "id" => 7,
+                    "photo" => Storage::url("/developments/Palmares/Foto_7.jpeg"),
+                ],
+                [
+                    "id" => 8,
+                    "photo" => Storage::url("/developments/Palmares/Foto_8.jpeg"),
+                ]
+            ]
+        ];
+        return $photos;
     }
 }

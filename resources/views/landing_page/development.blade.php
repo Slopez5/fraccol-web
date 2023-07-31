@@ -23,19 +23,17 @@
 
         @livewire('landing-page.development.section-development-info', ['developmentInfo' => $development->development_info])
 
-        @livewire('landing-page.development.section-amenities', ['development' => $development])
-
-        @livewire('landing-page.development.section-location', ['development' => $development])
-
         @livewire('landing-page.development.section-prices', ['development' => $development])
 
         @livewire('landing-page.development.section-financing-options', ['development' => $development])
 
         @livewire('landing-page.development.section-blueprint', ['development' => $development])
 
-        @livewire('landing-page.development.section-gallery', ['development' => $development])
+        @livewire('landing-page.development.section-gallery', ['gallery' => $development->gallery])
 
         @livewire('landing-page.development.section-reviews', ['development' => $development])
+
+        @livewire('landing-page.development.section-location', ['location' => $development])
 
         @livewire('landing-page.development.section-social-media', ['development' => $development])
     </main>
