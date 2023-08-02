@@ -108,7 +108,6 @@ class SubdomainController extends Controller
         }
         if (count($subdomainsNotFound) > 0) {
             if ($this->page < $this->pages) {
-                logger("entre");
                 $this->page++;
                 $subdomainsNotFound->push($this->getSubdomainsLocal($subdomainsNotFound));
             }

@@ -16,9 +16,9 @@ class LandingPageDevelopmentController extends Controller
             "name" => "Palmares",
             "header" => $this->getHeaderSection(),
             "development_info" => $this->getDevelopmentInfoSection(),
+            "prices" => $this->getPricesSection(),
             "gallery" => $this->getGallerySection()
         ]));
-        logger($development->gallery);
         return view('landing_page.development', ["development" => $development]);
     }
 
@@ -130,5 +130,50 @@ class LandingPageDevelopmentController extends Controller
             ]
         ];
         return $photos;
+    }
+
+    public function getPricesSection()
+    {
+        $price_info = "En palmares, ofrecemos una variedad de terrenos disponibles para la construcción de tu casa de campo, todos ellos con diferentes medidas y ubicaciones. Nuestros precios se basan en el precio por metro cuadrado (m2) y varían según las características de cada lote.";
+        $prices = [
+            [
+                "id" => 1,
+                "lot_type" => "Precio Base",
+                "price" => "$600 por m2",
+                "image" => Storage::url('planos/Palmares.png'),
+                "financings" => [
+                    [
+                        "id" => 1,
+                        "period" => "Finaciado a 1 año:",
+                        "price" => "$650 por m2"
+                    ],
+                    [
+                        "id" => 2,
+                        "period" => "Finaciado a 2 año:",
+                        "price" => "$700 por m2"
+                    ],
+                    [
+                        "id" => 3,
+                        "period" => "Finaciado a 3 año:",
+                        "price" => "$750 por m2"
+                    ],
+                    [
+                        "id" => 4,
+                        "period" => "Finaciado a 4 año:",
+                        "price" => "$800 por m2"
+                    ],
+                    [
+                        "id" => 5,
+                        "period" => "Finaciado a 5 año:",
+                        "price" => "$875 por m2"
+                    ]
+                ]
+            ],
+        ];
+
+        return [
+            "price_info" => $price_info,
+            "prices" => $prices
+        ];
     }
 }

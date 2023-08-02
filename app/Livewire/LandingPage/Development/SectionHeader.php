@@ -13,7 +13,6 @@ class SectionHeader extends Component
 
 
     public function mount($header) {
-        logger($header->development_name);
         $this->development_name = $header->development_name;
         $this->slogan = $header->slogan;
         $this->images = $header->images;

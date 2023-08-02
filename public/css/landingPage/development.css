@@ -1,5 +1,7 @@
 /* Estilos para la sección de encabezado (Header) */
 
+#header {}
+
 .carousel-item {
     height: 65vh;
     box-sizing: border-box;
@@ -14,9 +16,9 @@
 
 /* Estilos para la sección de información del fraccionamiento */
 
-.fraccionamiento-info {
+#development-info {
+    margin: 20px;
     background-color: #f9f9f9;
-    padding: 40px;
 }
 
 .fraccionamiento-info h2 {
@@ -33,68 +35,12 @@
 .card-container {
     display: flex;
     overflow-x: scroll;
-    margin: 20px;
 }
 
-.card {
+.card-development-info {
     word-wrap: normal;
     min-width: 300px;
     margin: 10px;
-}
-
-
-/* Estilos para la sección de amenidades */
-
-#amenities {
-    background-color: #f9f9f9;
-    /* Color de fondo de la sección */
-    padding: 40px;
-    /* Espaciado interno para el contenido de la sección */
-}
-
-#amenities h2 {
-    text-align: center;
-    /* Alineación del título al centro */
-}
-
-.amenidades-container {
-    display: flex;
-    /* Mostrar las amenidades en una fila */
-    flex-wrap: wrap;
-    /* Permitir que las amenidades se ajusten al ancho de la pantalla */
-    justify-content: space-between;
-    /* Distribuir las amenidades equitativamente en la fila */
-    max-width: 1000px;
-    /* Ancho máximo para las amenidades */
-    margin: 0 auto;
-    /* Centrar horizontalmente el contenedor de amenidades */
-}
-
-.amenidad {
-    width: 30%;
-    /* Ancho de cada amenidad */
-    padding: 20px;
-    /* Espaciado interno para cada amenidad */
-    margin-bottom: 20px;
-    /* Espaciado inferior entre amenidades */
-    background-color: #ffffff;
-    /* Color de fondo para cada amenidad */
-    border: 1px solid #ccc;
-    /* Borde para cada amenidad */
-    border-radius: 5px;
-    /* Borde redondeado */
-    text-align: center;
-    /* Alineación del contenido al centro */
-}
-
-.amenidad h3 {
-    margin-top: 10px;
-    /* Espaciado superior para el título de la amenidad */
-}
-
-.amenidad p {
-    margin-top: 10px;
-    /* Espaciado superior para el texto de la amenidad */
 }
 
 
@@ -147,58 +93,15 @@
 /* Estilos para la sección de precios */
 
 #price-info {
-    background-color: #f9f9f9;
-    /* Color de fondo de la sección */
-    padding: 40px;
-    /* Espaciado interno para el contenido de la sección */
+    margin: 20px;
 }
 
 #price-info h2 {
     text-align: center;
-    /* Alineación del título al centro */
 }
 
-.price-info {
-    margin-top: 20px;
-    /* Espaciado superior para la información de precios */
-}
-
-.price-info p {
-    margin: 10px 0;
-    /* Espaciado vertical entre párrafos */
-}
-
-.price-info ul {
-    margin: 0;
-    /* Eliminar el margen predeterminado de las listas no ordenadas */
-    padding-left: 20px;
-    /* Sangría para los elementos de la lista */
-}
-
-.price-info table {
-    width: 100%;
-    /* Ancho del 100% para que la tabla ocupe todo el contenedor */
-    border-collapse: collapse;
-    /* Elimina el espacio entre las celdas */
-    margin-top: 20px;
-    /* Espaciado superior para la tabla */
-}
-
-.price-info th,
-.price-info td {
-    padding: 10px;
-    /* Espaciado interno para las celdas */
-    text-align: center;
-    /* Alineación del texto al centro */
-    border: 1px solid #ccc;
-    /* Borde de la tabla */
-}
-
-.price-info th {
-    background-color: #f2f2f2;
-    /* Color de fondo para las celdas de encabezado */
-    font-weight: bold;
-    /* Texto en negrita para las celdas de encabezado */
+#price-info .row>* {
+    margin-bottom: 25px;
 }
 
 
