@@ -117,16 +117,6 @@ class LandingPageDevelopmentController extends Controller
                     "id" => 6,
                     "photo" => Storage::url("/developments/Palmares/Foto_6.jpeg"),
                 ]
-            ],
-            [
-                [
-                    "id" => 7,
-                    "photo" => Storage::url("/developments/Palmares/Foto_7.jpeg"),
-                ],
-                [
-                    "id" => 8,
-                    "photo" => Storage::url("/developments/Palmares/Foto_8.jpeg"),
-                ]
             ]
         ];
         return $photos;

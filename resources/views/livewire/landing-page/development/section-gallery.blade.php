@@ -2,9 +2,9 @@
 <section id="gallery">
     <h2>Galería</h2>
     <!-- Agrega aquí una galería de imágenes atractivas -->
-    <div class="gallery">
+    <div class="gallery justify-content-center">
         @foreach ($photos as $index => $item)
-            <div class="row" style="margin: 0">
+            <div class="row" style="">
                 @foreach ($photos[$index] as $photo)
                     <div class="col-md">
                         <img wire:key="{{ $photo->id }}" src="{{ $photo->photo }}" alt="" style="width:100%">
