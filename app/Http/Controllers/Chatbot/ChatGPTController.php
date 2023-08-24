@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Chatbot;
 
 use App\Helpers\CurlHelper;
 use App\Models\Setting;

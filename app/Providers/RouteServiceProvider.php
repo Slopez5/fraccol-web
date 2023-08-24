@@ -19,6 +19,10 @@ class RouteServiceProvider extends ServiceProvider
      */
     public const HOME = '/home';
 
+    public $namespaceAdmin = "\App\Http\Controllers\Admin";
+    public $namespaceRealStates = "\App\Http\Controllers\RealStates";
+    
+
     /**
      * Define your route model bindings, pattern filters, and other route configuration.
      */
@@ -37,8 +41,14 @@ class RouteServiceProvider extends ServiceProvider
                 ->group(base_path('routes/web.php'));
 
             Route::middleware('web')
-            ->prefix('admin')
-            ->group(\base_path('routes/admin.php'));
+                ->prefix('admin')
+                ->namespace($this->namespaceAdmin)
+                ->group(base_path('routes/admin.php'));
+
+            Route::middleware('web')
+                ->prefix('realState')
+                ->namespace($this->namespaceRealStates)
+                ->group(base_path('routes/realState.php'));
         });
     }
 }
