@@ -207,19 +207,25 @@
                         <li class="nav-item">
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
+                                <p>Propiedades</p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="pages/widgets.html" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
                                 <p>Ventas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
-                                <p>Vendedores</p>
+                                <p>Comisiones</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
-                                <p>Ranking de Vendedores</p>
+                                <p>Clientes</p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -231,19 +237,21 @@
                         <li class="nav-item">
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
-                                <p>Prospectos</p>
+                                <p>Tareas</p>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a href="pages/widgets.html" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
-                                <p>Gastos</p>
+                                <p>Calendario</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
-                                <i class="nav-icon fas fa-th"></i>
-                                <p>Chat</p>
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Documentos
+                                </p>
                             </a>
                         </li>
                         <li class="nav-item">
@@ -251,6 +259,14 @@
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Configuración
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-copy"></i>
+                                <p>
+                                    Cerrar Sesión
                                 </p>
                             </a>
                         </li>
