@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="{{ asset('css/landingPage/development.css') }}">
     @livewireStyles
 </head>
-
 <body>
     <header>
         <!-- Navbar -->
@@ -50,5 +49,4 @@
         defer></script>
     @livewireScripts
 </body>
-
 </html>

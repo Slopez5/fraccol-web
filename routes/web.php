@@ -19,16 +19,8 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::domain('{subdomain}.fraccionamientoscolima.com')->group(function () {
-    Route::get('/', [SubdomainController::class, 'index']);
-});
-Route::domain('{subdomain}.{subdomain2}.fraccionamientoscolima.com')->group(function () {
-    Route::get('/dashboard', [SubdomainController::class, 'dashboard']);
-});
-
 Route::get('/webhook', [WaController::class, 'webhook']);
 Route::post('/webhook', [WaController::class, 'recibe']);
 Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
-Route::get('/syncSubdomains', [SubdomainController::class, 'syncSubdomains']);
 
 Route::get('/', [LandingPageDevelopmentController::class,'index']);
