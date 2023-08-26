@@ -16,6 +16,8 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('development_id');
             $table->unsignedBigInteger('lot_type_id');
+            $table->string('name');
+            $table->string('description');
             $table->decimal('price_per_sqm', 8, 2);
             $table->integer('financing_months');
             $table->decimal('down_payment', 8, 2);

@@ -3,6 +3,8 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\RealStateBranch;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -17,6 +19,10 @@ class DatabaseSeeder extends Seeder
             RoleSeeder::class,
             UserSeeder::class,
             RealStateAgencySeeder::class,
+            StatesSeeder::class,
+            CitySeeder::class,
+            AddressSeeder::class,
+            RealStateBranchesSeeder::class,
             DevelopmentSeeder::class,
             DevelopmentImagesSedder::class,
             LotTypeSeeder::class,

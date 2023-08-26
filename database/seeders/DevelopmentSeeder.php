@@ -19,6 +19,7 @@ class DevelopmentSeeder extends Seeder
         $developments = [
             [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'El Rehilete',
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
@@ -32,6 +33,7 @@ class DevelopmentSeeder extends Seeder
             ],
             [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'Monte Verde II',
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
@@ -41,6 +43,7 @@ class DevelopmentSeeder extends Seeder
             ],
             [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'Monte Verde III',
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
@@ -50,6 +53,7 @@ class DevelopmentSeeder extends Seeder
             ],
             [
                 'real_state_id' => 2,
+                'real_state_branch_id' => 1,
                 'name' => 'Tierra Viva',
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
@@ -58,6 +62,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 2,
+                'real_state_branch_id' => 1,
                 'name' => 'Alta Vista',
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
@@ -66,6 +71,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 3,
+                'real_state_branch_id' => 1,
                 'name' => 'Puertas de Comala',
                 'location' => 'Comala',
                 'total_land_area' => 10000.00,
@@ -74,6 +80,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'Verde Ladera',
                 'location' => 'Colima',
                 'total_land_area' => 10000.00,
@@ -82,6 +89,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 2,
+                'real_state_branch_id' => 1,
                 'name' => 'Palmares',
                 'location' => 'Colima',
                 'total_land_area' => 10000.00,
@@ -90,6 +98,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'El pedregal',
                 'location' => 'Colima',
                 'total_land_area' => 10000.00,
@@ -98,6 +107,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'Los Olivos',
                 'location' => 'Villa de Alvares',
                 'total_land_area' => 10000.00,
@@ -106,6 +116,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'El encanto',
                 'location' => 'Cuahtemoc',
                 'total_land_area' => 10000.00,
@@ -114,6 +125,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'Real Hacienda',
                 'location' => 'Cuauhtemoc',
                 'total_land_area' => 10000.00,
@@ -122,6 +134,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'Buenavista II',
                 'location' => 'Cuauhtemoc',
                 'total_land_area' => 10000.00,
@@ -130,6 +143,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 1,
+                'real_state_branch_id' => 1,
                 'name' => 'Buenavista',
                 'location' => 'Cuauhtemoc',
                 'total_land_area' => 10000.00,
@@ -138,6 +152,7 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ], [
                 'real_state_id' => 2,
+                'real_state_branch_id' => 1,
                 'name' => 'Agua Dulce',
                 'location' => 'Cuahtemoc',
                 'total_land_area' => 10000.00,
@@ -147,6 +162,7 @@ class DevelopmentSeeder extends Seeder
 
             ], [
                 'real_state_id' => 2,
+                'real_state_branch_id' => 1,
                 'name' => 'Oasis',
                 'location' => 'Armeria',
                 'total_land_area' => 10000.00,
@@ -155,15 +171,6 @@ class DevelopmentSeeder extends Seeder
                 'sort_description' => ''
             ]
         ];
-        foreach ($developments as $key => $development) {
-            $_development = new Development($development);
-            $_development->save();
-            $subdomain = new Subdomain();
-            $subdomain->subdomain = str_replace(" ","",$_development->name);
-            $subdomain->notes = "";
-            $_development->subdomain()->save($subdomain);
-
-        }
-        //Development::insert($developments);
+        Development::insert($developments);
     }
 }

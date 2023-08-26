@@ -19,6 +19,10 @@ return new class extends Migration
             $table->unsignedBigInteger('lead_agent_id');
             $table->unsignedBigInteger('sale_closer_id');
             $table->unsignedBigInteger('activity_id')->nullable();
+            $table->unsignedBigInteger('development_id')->nullable();
+            $table->double('total_price');
+            $table->double('down_payment');
+            $table->double('remaining_balance');
             $table->date('sale_date');
             $table->string('status');
             $table->timestamps();
@@ -28,6 +32,7 @@ return new class extends Migration
             $table->foreign('lead_agent_id')->references('id')->on('users');
             $table->foreign('sale_closer_id')->references('id')->on('users');
             $table->foreign('activity_id')->references('id')->on('activities');
+            $table->foreign('development_id')->references('id')->on('developments');
         });
     }
 

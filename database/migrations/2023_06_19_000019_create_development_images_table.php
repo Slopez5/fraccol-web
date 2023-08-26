@@ -15,11 +15,12 @@ return new class extends Migration
     {
         Schema::create('development_images', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('development_id');
             $table->string('file_url');
             $table->integer('width');
             $table->integer('height');
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('development_id');
+            
             $table->timestamps();
 
             // Foreign key constraint

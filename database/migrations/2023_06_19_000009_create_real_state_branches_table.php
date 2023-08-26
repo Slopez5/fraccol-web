@@ -17,11 +17,14 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('real_state_agency_id');
             $table->string('name');
-            $table->string('address');
+            $table->string('email');
+            $table->string('phone');
+            $table->unsignedBigInteger('address_id');
             $table->timestamps();
 
             // Foreign key constraint
             $table->foreign('real_state_agency_id')->references('id')->on('real_state_agencies');
+            $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 

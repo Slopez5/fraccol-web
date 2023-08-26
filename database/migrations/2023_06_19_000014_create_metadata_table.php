@@ -15,14 +15,11 @@ return new class extends Migration
     {
         Schema::create('metadata', function (Blueprint $table) {
             $table->id();
-            $table->string('config_type');
-            $table->unsignedBigInteger('config_id');
+            $table->morphs('metada');
             $table->string('key');
             $table->string('value');
             $table->timestamps();
 
-            // Foreign key constraints
-            $table->foreign('config_id')->references('id')->on('configurations');
         });
     }
 

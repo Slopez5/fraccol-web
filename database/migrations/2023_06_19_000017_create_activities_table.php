@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('lead_id');
-            $table->date('activity_date');
-            $table->time('activity_time');
-            $table->text('notes')->nullable();
             $table->unsignedBigInteger('lead_agent_id');
             $table->unsignedBigInteger('activity_type_id');
+            $table->text('notes')->nullable();
+            $table->date('scheduled_at');
+            $table->date('completed_at');
             $table->timestamps();
 
             // Foreign key constraints

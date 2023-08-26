@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Chatbot;
 
 use App\Helpers\CurlHelper;
+use App\Http\Controllers\Controller;
 use App\Models\ApiMonitoringLog;
 use App\Models\Setting;
 use App\Models\WhatsappChat;

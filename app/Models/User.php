@@ -49,6 +49,10 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
+    public function isAdmin() {
+        return $this->role_id == 1;
+    }
+
     public function subdomain():MorphOne {
         return $this->morphOne(Subdomain::class,'subdomainable');
     }

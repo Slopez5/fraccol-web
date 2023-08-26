@@ -12,6 +12,10 @@ class RealStateAgency extends Model
 
     protected $table = 'real_state_agencies';
 
+    public function branches(): HasMany {
+        return $this->hasMany(RealStateBranch::class);
+    }
+
     public function developments(): HasMany {
         return $this->hasMany(Development::class);
     }
