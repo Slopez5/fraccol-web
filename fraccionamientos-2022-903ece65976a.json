@@ -1,0 +1,13 @@
+{
+  "type": "service_account",
+  "project_id": "fraccionamientos-2022",
+  "private_key_id": "903ece65976af8d2208f16bc8d5269308e047008",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCnmGuMSXjFlSoF\nWjb5ghzh2ZSrLczN7FSnJbnX54sUGHiaenX8Hq4vn9Oeg5i909W5rcpRJ+a3D1V/\n6d3ENqajh2qiHlfne3DuChrEsgAZQPHMUpraN3/JBAECsldzFNJS9cfmY28UsfAu\nNFT7vU9BvWmSKQFkKb4uLHfRLZjj6t0Aw/oB70vXKYilFWSmpT93Bto0LDFHJMzE\njIgC0yHzz3sPNBMj6XrXMO8IS+P7ymwmu7Or+yYFLvQGppNrwosYJATyPoP3JdaF\naKnQ9eWPgpjwjW4PWcxxWmZvRJ6WaakKJS99kLYYTeXw5aJQXvWRDF5lEgAF9gSI\nnd0GHZhHAgMBAAECggEAFIaf4WIcNwKyT06BviQ32ldWFHL7CttfcMs3jCBREch/\neNf3vEWbqryF4/uVCOa5XdDRnwfmg1QO8igX35Cb7xpGLo3N0U12gsjdB2sPhQhF\ntPMHASPb9CgX4ZcrC66opb1xWp+h+qRiWJ5TLDO+0bvbgqmgAH72Slxq3kUZ3Qvz\nOgSbN5e3kc0D5uZHgbOQoyZiDcD8+s7p/YAwk8DvNoODvsOuFx9M7BPKZiVZKFNP\ntwYIwxoXq50fVFONkBFbPx6I4IbmWp1WUckO71t5EJjE5Q+fpELoq/yU1S6lYz8x\n7apxAsSZW+JIsRSTeMdumMjeAQVWPQnr7hEaizsAcQKBgQDmCeW+TzHWb/PIC9Qy\nRMRiow6+RxjfoyhSRwxa0/bbl4Bmx7fQ1Bla80RnK9LC4mt9hJa1Bi4kWPWeogtt\nPMcGZs4CnABarS0ruuERXd7BYqyMsjQyqQcb5Va182apVwEoYSuYvrTBENxDSiEH\nOtSt3Oc3FaSpfHAjbG49yuWKEQKBgQC6gnWEPE1wwxAgYU5jW1JhNu/LSvSEeIBu\njGvnuA26ZNVYnrPvbLZ20oC6gvAV5g3GlE9z82NxiR1pcLKgfpfm+da8HpgjmGjP\nTmaYAXg/AxNlmdpVehyhfwJnRyV2gMHRLollFFENnsMXU0anQacyP3Hh1P1hbt7B\nAkE9duhk1wKBgBvNnG/5AGwLkepey6Hbv+SwEosa6r206Z2wKqUbs11tHT7O6r+Z\nswrUFjNmD44wcY91JAXzHkaUXfNzYHAuhVuXt1SHaF+NSMVdS/CeaNr0wygqLbbl\nyQ8tE+Lf7UuQUXqA7BUFD7G6CPU1E3LdQHFXHrcArasyeBc/9r8PM9kRAoGAe6Zs\nNMwp5z1bXqxEZPixaAQc/GFoNL8THrd3/nr2lwGstAEbd/tSCPrMH1sZwtrvfRzs\nhAnzft0Ro8r0khT7rkUrCTMbWFX9/pqSx+oJh3UJkg1rQ8oeWy8yL7hqbOM2G/HH\nYz0R836zBq7OI6sSJu0LGlaz2bnAcqOFDzPbJKcCgYEAoP+DtkvLG5MlVz2i/35K\nFXSvlqxynzEpW+8lUN72LTklf86wFA7c2hwL/NpV/eODmUpV37GGifGg3obPDt4i\n99fYz6xBx6YTh8wzb84j3hn8A8KDiym9MFh1NSTie1QIHie5AzSqQRoT60GPsOOS\n1fkcOPhMhd6BNnpBWKUbL6Q=\n-----END PRIVATE KEY-----\n",
+  "client_email": "fraccionamientoscolima@fraccionamientos-2022.iam.gserviceaccount.com",
+  "client_id": "103624291651602790415",
+  "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+  "token_uri": "https://oauth2.googleapis.com/token",
+  "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+  "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/fraccionamientoscolima%40fraccionamientos-2022.iam.gserviceaccount.com",
+  "universe_domain": "googleapis.com"
+}

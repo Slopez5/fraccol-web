@@ -18,23 +18,30 @@ class AuthController extends Controller
         return view('admin.auth.login');
     }
 
-    function authLogin(Request $request) {
+    function authLogin(Request $request)
+    {
         $credentials = $request->validate([
             'email' => ['required', 'email'],
             'password' => ['required'],
         ]);
-        if (Auth::attemptWhen($credentials, function(User $user) {
+        if (Auth::attemptWhen($credentials, function (User $user) {
             return $user->isAdmin();
-        })){
+        })) {
             return redirect()->route('admin.dashboard');
         } else {
             return redirect()->route('admin.login');
         }
-        
     }
 
     function register()
     {
         return view('admin.auth.register');
+    }
+
+    function logout(Request $request)
+    {
+        Auth::logout();
+        $request->session()->invalidate();
+        return redirect()->route('admin.login');
     }
 }

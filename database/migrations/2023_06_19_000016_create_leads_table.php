@@ -26,6 +26,7 @@ return new class extends Migration
             $table->string('country');
             $table->string('source');
             $table->string('status');
+            $table->string('ine_file')->nullable();
             $table->unsignedBigInteger('lead_agent_id');
             $table->text('notes')->nullable();
             $table->timestamps();

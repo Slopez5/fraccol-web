@@ -15,10 +15,12 @@ class CurlHelper
         }
 
         if (!empty($data)) {
+            logger(json_encode($data));
             curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
         }
 
         if (!empty($headers)) {
+            logger($headers);
             curl_setopt($curl, CURLOPT_HTTPHEADER, $headers);
         }
 

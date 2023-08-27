@@ -7,13 +7,17 @@ use App\Http\Controllers\Admin\RealStatesController;
 use Illuminate\Support\Facades\Route;
 
 
-Route::get('/login', [AuthController::class, 'login'])->name('admin.login');
-Route::post('/authLogin', [AuthController::class, 'authLogin'])->name('admin.store.login');
 
-Route::get('/register', [AuthController::class, 'register']);
+Route::middleware(['guest'])->group(function () {
+    Route::get('/login', [AuthController::class, 'login'])->name('admin.login');
+    Route::post('/authLogin', [AuthController::class, 'authLogin'])->name('admin.store.login');
 
+    Route::get('/register', [AuthController::class, 'register']);
+});
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth.admin'])->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('admin.logout');
+
     Route::get('/home', [DashboardController::class, 'dashboard'])->name('admin.dashboard');
 
     Route::get('/real_states', [RealStatesController::class, 'index'])->name('admin.real_states.index');

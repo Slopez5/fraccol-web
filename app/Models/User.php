@@ -53,6 +53,10 @@ class User extends Authenticatable
         return $this->role_id == 1;
     }
 
+    public function isRealState() {
+        return $this->role_id == 2;
+    }
+
     public function subdomain():MorphOne {
         return $this->morphOne(Subdomain::class,'subdomainable');
     }
