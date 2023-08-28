@@ -19,7 +19,7 @@ class ChatGPTController extends Controller
             'messages' => [
                 [
                     'role' => 'system',
-                    'content' => 'Extrae el Nombre completo de un texto que te proporcionare',
+                    'content' => 'Extrae el Nombre completo de un texto que te proporcionare, deberas imprimir el puro nombre completo',
                 ],
                 [
                     'role' => 'user',
@@ -27,17 +27,12 @@ class ChatGPTController extends Controller
                 ]
             ]
         ];
-
-        $data = json_encode($data);
-        logger($data);
         $headers = [
             "Content-Type: application/json",
             "Authorization: Bearer " . $token
         ];
         $response = CurlHelper::call("https://api.openai.com/v1/chat/completions", 'POST', $data, $headers);
-        logger($response);
         $response = json_decode($response["response"]);
-        logger($response->choices[0]->message->content);
         $messageContent = $response->choices[0]->message->content;
         return $messageContent;
     }
