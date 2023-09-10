@@ -92,7 +92,7 @@
         <div class="card">
             <div class="card-body login-card-body">
                 <p class="login-box-msg">Iniciar sesión</p>
-                <form action="{{ route('realState.store.login') }}" method="POST">
+                <form action="{{ route('realEstate.store.login') }}" method="POST">
                     @csrf
                     @method('POST')
                     <div class="input-group mb-3">

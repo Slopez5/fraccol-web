@@ -17,9 +17,9 @@ class Development extends Model
         return $this->morphOne(Subdomain::class,'subdomainable');
     }
 
-    public function realStateAgency(): BelongsTo
+    public function realEstatesAgency(): BelongsTo
     {
-        return $this->belongsTo(RealStateAgency::class, 'real_state_id', 'id');
+        return $this->belongsTo(RealEstateAgency::class, 'real_estate_id', 'id');
     }
 
     public function lotTypes(): BelongsToMany

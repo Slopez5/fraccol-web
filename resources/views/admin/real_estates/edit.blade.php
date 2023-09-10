@@ -4,7 +4,7 @@
     <section class="content-header">
         <h1>
             Inmobiliaria
-            <small>Agregar Inmobiliara</small>
+            <small>Editar Inmobiliara</small>
         </h1>
     </section>
 
@@ -12,27 +12,27 @@
         <div class="col-md-6">
             <div class="card">
                 <div class="card-header">
-                    <h3 class="card-title">Agregar Inmobiliaria</h3>
+                    <h3 class="card-title">Editar Inmobiliaria</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('admin.real_state.store') }}" method="POST">
+                    <form action="{{ route('admin.real_estate.update', $real_estates->id) }}" method="POST">
                         @csrf
-                        @method('POST')
+                        @method('PUT')
                         <div class="form-group">
-                            <label for="name">Nombre</label>
-                            <input type="text" name="name" class="form-control" value="">
+                            <label for="nombre">Nombre</label>
+                            <input type="text" name="nombre" class="form-control" value="{{ $real_estates->name }}">
                         </div>
                         <div class="form-group">
-                            <label for="email">Correo Electrónico</label>
-                            <input type="email" name="email" class="form-control" value="">
+                            <label for="correo">Correo Electrónico</label>
+                            <input type="email" name="correo" class="form-control" value="{{ $real_estates->email }}">
                         </div>
                         <div class="form-group">
                             <label for="phone">Teléfono</label>
-                            <input type="phone" name="phone" class="form-control" value="">
+                            <input type="phone" name="phone" class="form-control" value="{{ $real_estates->phone }}">
                         </div>
                         <div class="form-group">
                             <label for="website">Sitio Web</label>
-                            <input type="text" name="website" class="form-control" value="">
+                            <input type="text" name="website" class="form-control" value="{{ $real_estates->website }}">
                         </div>
                         <button type="submit" class="btn btn-primary">Guardar Cambios</button>
                     </form>

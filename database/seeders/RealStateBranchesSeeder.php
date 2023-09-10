@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\RealEstateBranch;
 use App\Models\RealStateBranch;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -14,9 +15,9 @@ class RealStateBranchesSeeder extends Seeder
     public function run(): void
     {
         //
-        RealStateBranch::insert([
+        RealEstateBranch::insert([
             [
-                "real_state_agency_id" => 1,
+                "real_estate_agency_id" => 1,
                 "name" => "Sucursal 1",
                 "email" => "sucursal1@deloa.com",
                 "phone" => "312",

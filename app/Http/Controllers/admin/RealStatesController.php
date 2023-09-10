@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Models\RealStateAgency;
+use App\Models\RealEstateAgency;
 use Illuminate\Http\Request;
 
 class RealStatesController extends Controller
@@ -13,31 +13,31 @@ class RealStatesController extends Controller
     function index()
     {
 
-        $real_states = RealStateAgency::all();
-        return view('admin.real_states.index', ["real_states" => $real_states]);
+        $real_estates = RealEstateAgency::all();
+        return view('admin.real_estates.index', ["real_estates" => $real_estates]);
     }
 
     function create()
     {
 
-        return view('admin.real_states.create');
+        return view('admin.real_estates.create');
     }
 
     function store(Request $request)
     {
-        $real_state = new RealStateAgency();
-        $real_state->name = $request->name;
-        $real_state->email = $request->name;
-        $real_state->name = $request->name;
-        $real_state->name = $request->name;
+        $real_estates = new RealEstateAgency();
+        $real_estates->name = $request->name;
+        $real_estates->email = $request->name;
+        $real_estates->name = $request->name;
+        $real_estates->name = $request->name;
         return $request;
     }
 
     function edit($id)
     {
-        $real_state = RealStateAgency::find($id);
+        $real_estates = RealEstateAgency::find($id);
 
-        return view('admin.real_states.edit',["real_state"=>$real_state]);
+        return view('admin.real_estates.edit',["real_estates"=>$real_estates]);
     }
 
     function update($id)

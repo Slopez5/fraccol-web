@@ -15,7 +15,7 @@
                     <h3 class="card-title">Agregar Sucursal</h3>
                 </div>
                 <div class="card-body">
-                    <form action="{{ route('branch.store',$real_state_id) }}" method="POST">
+                    <form action="{{ route('branch.store',$real_estates_id) }}" method="POST">
                         @csrf
                         @method('POST')
                         <div class="form-group">

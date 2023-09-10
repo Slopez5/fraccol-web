@@ -6,11 +6,11 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class RealStateAgency extends Model
+class RealEstateAgency extends Model
 {
     use HasFactory;
 
-    protected $table = 'real_state_agencies';
+    protected $table = 'real_estate_agencies';
 
     public function branches(): HasMany {
         return $this->hasMany(RealStateBranch::class);

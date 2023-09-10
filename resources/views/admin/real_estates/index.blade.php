@@ -13,7 +13,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Listado de Inmobiliarias</h3>
                     <div class="card-tools">
-                        <a href="{{ route('admin.real_state.create') }}" class="btn btn-primary btn-sm">
+                        <a href="{{ route('admin.real_estate.create') }}" class="btn btn-primary btn-sm">
                             <span class="fa fa-plus"></span>
                         </a>
                     </div>
@@ -32,17 +32,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($real_states as $real_state)
+                            @foreach ($real_estates as $real_estates)
                                 <tr>
-                                    <td>{{ $real_state->id }}</td>
-                                    <td>{{ $real_state->name }}</td>
-                                    <td>{{ $real_state->email }}</td>
-                                    <td>{{ $real_state->phone }}</td>
-                                    <td>{{ $real_state->website }}</td>
+                                    <td>{{ $real_estates->id }}</td>
+                                    <td>{{ $real_estates->name }}</td>
+                                    <td>{{ $real_estates->email }}</td>
+                                    <td>{{ $real_estates->phone }}</td>
+                                    <td>{{ $real_estates->website }}</td>
                                     <td>
-                                        <a href="{{ route('admin.real_state.edit', $real_state->id) }}"
+                                        <a href="{{ route('admin.real_estate.edit', $real_estates->id) }}"
                                             class="btn btn-info btn-sm">Editar</a>
-                                        <form action="{{ route('admin.real_state.destroy', $real_state->id) }}" method="POST"
+                                        <form action="{{ route('admin.real_estate.destroy', $real_estates->id) }}" method="POST"
                                             style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')

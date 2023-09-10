@@ -1,4 +1,4 @@
-@extends('layouts.real_state')
+@extends('layouts.real_estates')
 
 @section('content')
 <div class="row">

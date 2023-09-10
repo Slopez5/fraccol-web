@@ -202,7 +202,7 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="{{ route('admin.real_states.index') }}" class="nav-link">
+                            <a href="{{ route('admin.real_estates.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Inmobiliarias

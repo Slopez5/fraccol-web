@@ -13,7 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('real_state_agencies', function (Blueprint $table) {
+        Schema::create('real_estate_agencies', function (Blueprint $table) {
             $table->id();
             $table->string('name');
             $table->string('email');
@@ -30,6 +30,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('real_state_agencies');
+        Schema::dropIfExists('real_estate_agencies');
     }
 };

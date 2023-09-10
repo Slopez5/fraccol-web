@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Http\Controllers\RealStates;
+namespace App\Http\Controllers\RealEstates;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-class AuthRealStateController extends Controller
+class AuthRealEstateController extends Controller
 {
     //
 
     function login() {
-        return view('real_state.auth.login');
+        return view('real_estates.auth.login');
     }
 
     function authLogin(Request $request) {
@@ -23,9 +23,9 @@ class AuthRealStateController extends Controller
         if (Auth::attemptWhen($credentials, function(User $user) {
             return $user->isRealState();
         })){
-            return redirect()->route('realState.dashboard');
+            return redirect()->route('realEstate.dashboard');
         } else {
-            return redirect()->route('realState.login');
+            return redirect()->route('realEstate.login');
         }
     }
 

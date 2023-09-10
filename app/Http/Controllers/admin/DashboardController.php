@@ -12,7 +12,7 @@ class DashboardController extends Controller
 {
     //
     function dashboard(){
-        $developments = Development::with('realStateAgency')->get();
+        $developments = Development::with('realEstatesAgency')->get();
         
         return view('admin.home',[
             "developments" => $developments,

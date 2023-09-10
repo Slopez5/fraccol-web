@@ -2,7 +2,7 @@
 
 namespace Database\Seeders;
 
-use App\Models\RealStateAgency;
+use App\Models\RealEstateAgency;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -14,7 +14,7 @@ class RealStateAgencySeeder extends Seeder
     public function run(): void
     {
         //
-        RealStateAgency::insert([
+        RealEstateAgency::insert([
             [
                 'name' => 'DE LOA',
                 'email' => 'email@DELOA.com',

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Symfony\Component\HttpFoundation\Response;
 
-class AuthenticateRealState
+class AuthenticateRealEstate
 {
     /**
      * Handle an incoming request.
@@ -19,7 +19,7 @@ class AuthenticateRealState
         if (Auth::check() && Auth::user()->role_id == 2) {
             return $next($request);
         }
-        return redirect()->route('realState.login');
+        return redirect()->route('realEstate.login');
        
     }
 }

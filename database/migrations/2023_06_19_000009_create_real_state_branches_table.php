@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('real_state_branches', function (Blueprint $table) {
+        Schema::create('real_estate_branches', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('real_state_agency_id');
+            $table->unsignedBigInteger('real_estate_agency_id');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
@@ -23,7 +23,7 @@ return new class extends Migration
             $table->timestamps();
 
             // Foreign key constraint
-            $table->foreign('real_state_agency_id')->references('id')->on('real_state_agencies');
+            $table->foreign('real_estate_agency_id')->references('id')->on('real_estate_agencies');
             $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
@@ -35,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('real_state_branches');
+        Schema::dropIfExists('real_estate_branches');
     }
 };

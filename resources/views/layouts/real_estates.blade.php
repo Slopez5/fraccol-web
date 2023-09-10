@@ -193,13 +193,13 @@
                     <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
                         data-accordion="false">
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="{{ route('realEstate.dashboard') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>Dashboard</p>
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="pages/widgets.html" class="nav-link">
+                            <a href="{{ route('realEstate.developments.index') }}" class="nav-link">
                                 <i class="nav-icon fas fa-th"></i>
                                 <p>Fraccionamientos</p>
                             </a>
@@ -263,12 +263,16 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a href="#" class="nav-link">
+                            <a href="#" class="nav-link" onclick="event.preventDefault(); document.getElementById('logout').submit();">
                                 <i class="nav-icon fas fa-copy"></i>
                                 <p>
                                     Cerrar Sesión
                                 </p>
                             </a>
+                            <form id="logout" action="{{ route('realEstate.logout') }}" method="POST" style="display: none;">
+                                @csrf
+                            </form>
+                            
                         </li>
                     </ul>
                 </nav>

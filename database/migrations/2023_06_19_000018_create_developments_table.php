@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('developments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('real_state_id');
-            $table->unsignedBigInteger('real_state_branch_id');
+            $table->unsignedBigInteger('real_estate_id');
+            $table->unsignedBigInteger('real_estate_branch_id');
             $table->string('name');
             $table->string('logo')->nullable();
             $table->string('blueprint')->nullable();
@@ -33,8 +33,8 @@ return new class extends Migration
             $table->timestamps();
 
 
-            $table->foreign('real_state_id')->references('id')->on('real_state_agencies');
-            $table->foreign('real_state_branch_id')->references('id')->on('real_state_branches');
+            $table->foreign('real_estate_id')->references('id')->on('real_estate_agencies');
+            $table->foreign('real_estate_branch_id')->references('id')->on('real_estate_branches');
         });
     }
 

@@ -26,7 +26,7 @@ class RedirectIfAuthenticated
                 if ($user->role->id == 1) {
                     return redirect()->route('admin.dashboard');
                 } else if ($user->role->id == 2) {
-                    return redirect()->route('realState.dashboard');
+                    return redirect()->route('realEstate.dashboard');
                 }
                 
             }

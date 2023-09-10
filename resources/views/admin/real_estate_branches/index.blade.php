@@ -13,7 +13,7 @@
                 <div class="card-header">
                     <h3 class="card-title">Listado de Sucursales</h3>
                     <div class="card-tools">
-                        <a href="{{ route('branch.create',$real_state_id) }}" class="btn btn-primary btn-sm">
+                        <a href="{{ route('branch.create',$real_estates_id) }}" class="btn btn-primary btn-sm">
                             <span class="fa fa-plus"></span>
                         </a>
                     </div>
@@ -32,7 +32,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($real_states_branches as $branch)
+                            @foreach ($real_estates_branches as $branch)
                                 <tr>
                                     <td>{{ $branch->id }}</td>
                                     <td>{{ $branch->name }}</td>
@@ -40,9 +40,9 @@
                                     <td>{{ $branch->phone }}</td>
                                     <td>{{ $branch->website }}</td>
                                     <td>
-                                        <a href="{{ route('branch.edit',[$real_state_id, $branch->id]) }}"
+                                        <a href="{{ route('branch.edit',[$real_estates_id, $branch->id]) }}"
                                             class="btn btn-info btn-sm">Editar</a>
-                                        <form action="{{ route('branch.destroy',[$real_state_id, $branch->id]) }}" method="POST"
+                                        <form action="{{ route('branch.destroy',[$real_estates_id, $branch->id]) }}" method="POST"
                                             style="display: inline-block;">
                                             @csrf
                                             @method('DELETE')

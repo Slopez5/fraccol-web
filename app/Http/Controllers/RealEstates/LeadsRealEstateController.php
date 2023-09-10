@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Controllers\RealStates;
+namespace App\Http\Controllers\RealEstates;
 
 use App\Http\Controllers\Chatbot\ChatGPTController;
 use App\Http\Controllers\Controller;
@@ -9,7 +9,7 @@ use Illuminate\Support\Facades\Storage;
 use thiagoalessio\TesseractOCR\TesseractOCR;
 
 
-class LeadsRealStateController extends Controller
+class LeadsRealEstateController extends Controller
 {
     //
 
@@ -31,12 +31,7 @@ class LeadsRealStateController extends Controller
 
     function update(Request $request)
     {
-        $path = Storage::disk('public')->putFile('image', $request->file('image'));
-        $ocr = new TesseractOCR(public_path('storage/' . $path));
-        $ocr->allowlist(range('A', 'Z')," ");
-        $text = $ocr->run();
         
-        return ChatGPTController::getResponseGPT(trim($text));
     }
 
     function destroy($id)

@@ -7,11 +7,11 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-class RealStateBranch extends Model
+class RealEstateBranch extends Model
 {
     use HasFactory;
 
-    protected $table = 'real_state_branches';
+    protected $table = 'real_estate_branches';
 
     protected $fillable = ['name','email','phone','address_id'];
 
