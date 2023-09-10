@@ -17,6 +17,6 @@ class RealEstateAgency extends Model
     }
 
     public function developments(): HasMany {
-        return $this->hasMany(Development::class);
+        return $this->hasMany(Development::class,'real_estate_id');
     }
 }

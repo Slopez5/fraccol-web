@@ -23,20 +23,27 @@ class UserSeeder extends Seeder
                 "last_name" => "lopez ceballos",
                 "phone" => "3122250707",
                 "email" => "slopez@gmail.com",
-                "password" => "$2a$12$9gz/msT4sP5APbflLOL/NuG.ymOm0YPHpr9WdUqmn.tZ2STbtH3xm",
+                "password" => bcrypt("Colima2023"),
             ],
             [
                 "role_id" => 2,
-                "username" => "deloa",
-                "first_name" => "DE LOA",
-                "last_name" => "",
+                "username" => "DELOA",
+                "first_name" => "FRANCISCO",
+                "last_name" => "DE LOA",
                 "phone" => "3122250707",
                 "email" => "admin@deloa.com",
-                "password" => "$2a$12$9gz/msT4sP5APbflLOL/NuG.ymOm0YPHpr9WdUqmn.tZ2STbtH3xm",
-            ],
+                "password" => bcrypt("Colima2023"),
+            ], [
+                "role_id" => 2,
+                "username" => "INFACE",
+                "first_name" => "FRANCISCO",
+                "last_name" => "LEON",
+                "phone" => "3122250707",
+                "email" => "admin@INFACE.com",
+                "password" => bcrypt("Colima2023"),
+            ]
         ];
 
         User::insert($users);
-
     }
 }

@@ -1,4 +1,4 @@
-@extends('layouts.real_estates')
+@extends('layouts.real_estate.real_estates')
 
 @section('content')
     <section class="content-header">
@@ -24,7 +24,6 @@
                     <table class="table table-bordered table-hover">
                         <thead>
                             <tr>
-                                <th>id</th>
                                 <th>Nombre</th>
                                 <th>Ubicación</th>
                                 <th>Area total</th>
@@ -36,40 +35,45 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Verde Ladera</td>
-                                <td>
-                                    <a href="https://goo.gl/maps/YQaUMF6bhef5nv1y5">
-                                        A un costado de Altozano
-                                    </a>
-                                </td>
-                                <td>32,979.78m<sup>2</sup></td>
-                                <td>79</td>
-                                <td>15</td>
-                                <td>
-                                    ¡Descubre Verde Ladera, tu oasis campestre en Colima! 🌳🌄
-                                </td>
-                                <td>
-                                    N/A
-                                    
-                                </td>
-                                <td>
-                                    <a href="">
-                                        <i class="fas fa-solid fa-eye"></i>
-                                    </a>
-                                    <a href="">
-                                        <i class="fas fa-solid fa-pen"></i>
-                                    </a>
-                                    <a href="" onclick="event.preventDefault(); document.getElementById('deleteDevelopment').submit();">
-                                        <i class="fas fa-solid fa-trash"></i>
-                                    </a>
-                                    <form id="deleteDevelopment" action="{{ route('realEstate.development.destroy',1) }}" method="POST" style="display: none;">
-                                        @csrf
-                                        @method('DELETE')
-                                    </form>
-                                </td>
-                            </tr>
+                            @foreach ($developments as $index => $development)
+                                <tr>
+                                    <td>{{$development->name}}</td>
+                                    <td>
+                                        <a href="https://goo.gl/maps/YQaUMF6bhef5nv1y5">
+                                            {{$development->location}}
+                                        </a>
+                                    </td>
+                                    <td>{{$development->total_land_area}}m<sup>2</sup></td>
+                                    <td>{{$development->total_lots}}</td>
+                                    <td>{{$development->available_lots}}</td>
+                                    <td>
+                                        {{$development->sort_description}}
+                                    </td>
+                                    <td>
+                                        N/A
+
+                                    </td>
+                                    <td>
+                                        <a href="">
+                                            <i class="fas fa-solid fa-eye"></i>
+                                        </a>
+                                        <a href="">
+                                            <i class="fas fa-solid fa-pen"></i>
+                                        </a>
+                                        <a href=""
+                                            onclick="event.preventDefault(); document.getElementById('deleteDevelopment').submit();">
+                                            <i class="fas fa-solid fa-trash"></i>
+                                        </a>
+                                        <form id="deleteDevelopment"
+                                            action="{{ route('realEstate.development.destroy', $development->id) }}" method="POST"
+                                            style="display: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
+                                    </td>
+                                </tr>
+                            @endforeach
+
                         </tbody>
                     </table>
                 </div>

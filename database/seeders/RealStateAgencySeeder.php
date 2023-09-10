@@ -19,16 +19,13 @@ class RealStateAgencySeeder extends Seeder
                 'name' => 'DE LOA',
                 'email' => 'email@DELOA.com',
                 'phone' => '3120000000',
+                'admin_id' => 2
             ],
             [
                 'name' => 'INFACE',
                 'email' => 'email@INFACE.com',
                 'phone' => '3120000001',
-            ],
-            [
-                'name' => 'Nava Asesores',
-                'email' => 'email@NavaAsesores.com',
-                'phone' => '3120000002',
+                'admin_id' => 3
             ]
         ]);
     }

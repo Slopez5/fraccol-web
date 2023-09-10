@@ -15,11 +15,14 @@ return new class extends Migration
     {
         Schema::create('real_estate_agencies', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('admin_id');
             $table->string('name');
             $table->string('email');
             $table->string('phone');
             $table->string('website')->nullable();
             $table->timestamps();
+
+            $table->foreign('admin_id')->references('id')->on('users');
         });
     }
 

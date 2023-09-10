@@ -2,19 +2,15 @@
 
 namespace App\Http\Controllers\RealEstates;
 
-use App\Http\Controllers\Chatbot\ChatGPTController;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Storage;
-use thiagoalessio\TesseractOCR\TesseractOCR;
 
-
-class LeadsRealEstateController extends Controller
+class DevelopmentManagerRealEstateController extends Controller
 {
     //
-
     function index()
     {
+        return view('real_estates.developmentManager.index');
     }
 
     function create()
@@ -23,6 +19,7 @@ class LeadsRealEstateController extends Controller
 
     function store(Request $request)
     {
+        logger($request);
     }
 
     function edit($id)

@@ -70,15 +70,6 @@ class DevelopmentSeeder extends Seeder
                 'total_lots' => 200,
                 'sort_description' => ''
             ], [
-                'real_estate_id' => 3,
-                'real_estate_branch_id' => 1,
-                'name' => 'Puertas de Comala',
-                'location' => 'Comala',
-                'total_land_area' => 10000.00,
-                'available_lots' => 100,
-                'total_lots' => 200,
-                'sort_description' => ''
-            ], [
                 'real_estate_id' => 1,
                 'real_estate_branch_id' => 1,
                 'name' => 'Verde Ladera',
