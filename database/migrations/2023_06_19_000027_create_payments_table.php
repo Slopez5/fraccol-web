@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('balance', 8, 2);
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('sale_id')->references('id')->on('sales');

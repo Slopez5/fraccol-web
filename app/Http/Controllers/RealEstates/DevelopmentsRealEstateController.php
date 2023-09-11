@@ -13,7 +13,7 @@ class DevelopmentsRealEstateController extends Controller
     function index()
     {
         $developments = Auth::user()->realEstates[0]->developments;
-        return view('real_estates.developments.index',["developments"=>$developments]);
+        return view('real_estates.developments.index', ["developments" => $developments]);
     }
 
     function create()
@@ -30,7 +30,7 @@ class DevelopmentsRealEstateController extends Controller
             "total_lots" => $request->totalLots,
             "available_lots" => $request->availableLots,
             "sort_description" => $request->description,
-            "full_description"=>$request->fullDescription
+            "full_description" => $request->fullDescription
         ]);
         $development->save();
         $name = "development_" . $development->id;
@@ -39,11 +39,26 @@ class DevelopmentsRealEstateController extends Controller
 
     function edit($id)
     {
-        return view('real_estates.developments.edit');
+        $development = Development::find($id);
+        return view('real_estates.developments.edit', ["development" => $development]);
     }
 
     function update($id, Request $request)
     {
+        $development = Development::find($id);
+        $development->name = $request->name;
+        $development->location = $request->location;
+        $development->total_land_area = $request->totalLand;
+        $development->total_lots = $request->totalLots;
+        $development->available_lots = $request->availableLots;
+        $development->sort_description = $request->description;
+        $development->full_description = $request->fullDescription;
+        if ($request->hasFile('blueprint')) {
+            $name = "development_" . $development->id;
+            $request->file('blueprint')->storeAs('planos/', $name . '.pdf', 'public');
+        }
+        $development->save();
+        logger($request);
     }
 
     function destroy($id)

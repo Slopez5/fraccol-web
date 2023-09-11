@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('client_id');
             $table->unsignedBigInteger('secretary_id');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('payment_plan_id')->references('id')->on('payment_plans');

@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->unsignedBigInteger('address_id');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('real_estate_agency_id')->references('id')->on('real_estate_agencies');

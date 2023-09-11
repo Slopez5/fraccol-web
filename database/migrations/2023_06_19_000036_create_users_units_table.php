@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('unit_id');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('user_id')->references('id')->on('users');

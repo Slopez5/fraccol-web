@@ -57,7 +57,7 @@
                                         <a href="">
                                             <i class="fas fa-solid fa-eye"></i>
                                         </a>
-                                        <a href="">
+                                        <a href="{{route('realEstate.development.edit',$development->id)}}">
                                             <i class="fas fa-solid fa-pen"></i>
                                         </a>
                                         <a href=""

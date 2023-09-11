@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('key');
             $table->text('value');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('language_id')->references('id')->on('languages');

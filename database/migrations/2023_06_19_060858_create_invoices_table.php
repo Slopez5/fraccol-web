@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('status_id');
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('client_id')->references('id')->on('clients');

@@ -42,7 +42,7 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::delete('/branches/{id}',[BranchesRealEstateController::class,'destroy'])->name('realEstate.branch.destroy');
 
 
-    Route::get('/developmentManager',[DevelopmentManagerRealEstateController::class,'index'])->name('realEstate.developmentManagers.index');
+    Route::get('/developmentManagers',[DevelopmentManagerRealEstateController::class,'index'])->name('realEstate.developmentManagers.index');
     Route::get('/developmentManager/create',[DevelopmentManagerRealEstateController::class,'create'])->name('realEstate.developmentManager.create');
     Route::post('/developmentManager',[DevelopmentManagerRealEstateController::class,'store'])->name('realEstate.developmentManager.store');
     Route::get('/developmentManager/{id}/edit',[DevelopmentManagerRealEstateController::class,'edit'])->name('realEstate.developmentManager.edit');
@@ -50,7 +50,7 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::delete('/developmentManager/{id}',[DevelopmentManagerRealEstateController::class,'destroy'])->name('realEstate.developmentManager.destroy');
 
 
-    Route::get('/realEstateAgent',[RealEstateAgentsRealEstateController::class,'index'])->name('realEstate.realEstateAgents.index');
+    Route::get('/realEstateAgents',[RealEstateAgentsRealEstateController::class,'index'])->name('realEstate.realEstateAgents.index');
     Route::get('/realEstateAgent/create',[RealEstateAgentsRealEstateController::class,'create'])->name('realEstate.realEstateAgent.create');
     Route::post('/realEstateAgent',[RealEstateAgentsRealEstateController::class,'store'])->name('realEstate.realEstateAgent.store');
     Route::get('/realEstateAgent/{id}/edit',[RealEstateAgentsRealEstateController::class,'edit'])->name('realEstate.realEstateAgent.edit');
@@ -59,8 +59,18 @@ Route::middleware(['auth.realEstate'])->group(function () {
 
 
     Route::get('/sales',[SalesRealEstateController::class,'index'])->name('realEstate.sales.index');
+    Route::get('/sale/create',[SalesRealEstateController::class,'create'])->name('realEstate.sale.create');
+    Route::post('/sale',[SalesRealEstateController::class,'store'])->name('realEstate.sale.store');
+    Route::get('/sale/{id}/edit',[SalesRealEstateController::class,'edit'])->name('realEstate.sale.edit');
+    Route::put('/sale/{id}',[SalesRealEstateController::class,'update'])->name('realEstate.sale.update');
+    Route::delete('/sale/{id}',[SalesRealEstateController::class,'destroy'])->name('realEstate.sale.destroy');
 
 
     Route::get('/secretaries',[SecretariesRealEstateController::class,'index'])->name('realEstate.secretaries.index');
+    Route::get('/secretary/create',[SecretariesRealEstateController::class,'create'])->name('realEstate.secretary.create');
+    Route::post('/secretary',[SecretariesRealEstateController::class,'store'])->name('realEstate.secretary.store');
+    Route::get('/secretary/{id}/edit',[SecretariesRealEstateController::class,'edit'])->name('realEstate.secretary.edit');
+    Route::put('/secretary/{id}',[SecretariesRealEstateController::class,'update'])->name('realEstate.secretary.update');
+    Route::delete('/secretary/{id}',[SecretariesRealEstateController::class,'destroy'])->name('realEstate.secretary.destroy');
    
 });

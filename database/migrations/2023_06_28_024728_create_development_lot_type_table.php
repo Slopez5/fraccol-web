@@ -15,6 +15,7 @@ return new class extends Migration
             $table->unsignedBigInteger("development_id");
             $table->unsignedBigInteger("lot_type_id");
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('development_id')->references('id')->on('developments');
             $table->foreign('lot_type_id')->references('id')->on('lot_types');

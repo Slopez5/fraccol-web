@@ -20,8 +20,8 @@ return new class extends Migration
             $table->integer('width');
             $table->integer('height');
             $table->text('description')->nullable();
-            
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('development_id')->references('id')->on('developments');

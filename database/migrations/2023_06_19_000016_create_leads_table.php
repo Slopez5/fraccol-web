@@ -30,6 +30,7 @@ return new class extends Migration
             $table->unsignedBigInteger('lead_agent_id');
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('lead_agent_id')->references('id')->on('users');

@@ -24,6 +24,7 @@ return new class extends Migration
             $table->unsignedBigInteger('sale_closer_agent_id');
             $table->unsignedBigInteger('lead_agent_id');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('sale_closer_agent_id')->references('id')->on('users');

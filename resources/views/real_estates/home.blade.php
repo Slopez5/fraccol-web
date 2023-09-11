@@ -1,165 +1,19 @@
 @extends('layouts.real_estate.real_estates')
 
 @section('content')
-<div class="row">
-    <div class="col-lg-3 col-6">
-        <!-- Tarjeta para Número de Desarrollos Inmobiliarios -->
-        <div class="small-box bg-info">
-            <div class="inner">
-                <h3>20</h3>
-                <p>Desarrollos Inmobiliarios</p>
-            </div>
-            <div class="icon">
-                <i class="fa fa-building"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-6">
-        <!-- Tarjeta para Cantidad de Propiedades -->
-        <div class="small-box bg-success">
-            <div class="inner">
-                <h3>3</h3>
-                <p>Propiedades en Administración</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-ios-home"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-6">
-        <!-- Tarjeta para Total de Agentes Inmobiliarios -->
-        <div class="small-box bg-warning">
-            <div class="inner">
-                <h3>150</h3>
-                <p>Agentes Inmobiliarios Activos</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-person-stalker"></i>
-            </div>
-        </div>
-    </div>
-    <div class="col-lg-3 col-6">
-        <!-- Tarjeta para Total de Clientes -->
-        <div class="small-box bg-danger">
-            <div class="inner">
-                <h3>500</h3>
-                <p>Clientes Registrados</p>
-            </div>
-            <div class="icon">
-                <i class="ion ion-ios-people"></i>
-            </div>
-        </div>
-    </div>
-</div>
+@livewire('panel.real-estates.dashboard.section-top-indicators')
+
 
 
 <div class="row">
     <div class="col-md-8">
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Últimos Desarrollos Creados</h3>
-            </div>
-            <div class="card-body">
-                <ul class="list-unstyled">
-                   
-                        <li>
-                            <strong>El encanto</strong>
-                            <span class="text-muted">12-12-2023</span>
-                        </li>
-                    
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Desarrollos con Más Propiedades</h3>
-            </div>
-            <div class="card-body">
-                <ul class="list-unstyled">
-                   
-                        <li>
-                            <strong>Tierra Viva</strong>
-                            <span class="text-muted">90 Propiedades</span>
-                        </li>
-                    
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Agentes Destacados</h3>
-            </div>
-            <div class="card-body">
-                <ul class="list-unstyled">
-                   
-                        <li>
-                            <strong>Agente 1</strong>
-                            <span class="text-muted">email2@email.com</span>
-                        </li>
-                   
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Propiedades Vendidas por Agente</h3>
-            </div>
-            <div class="card-body">
-                <ul class="list-unstyled">
-                    
-                        <li>
-                            <strong>Agente 1</strong>
-                            <span class="text-muted">150 Propiedades Vendidas</span>
-                        </li>
-                    
-                </ul>
-            </div>
-        </div>
-
-
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Clientes Recientes</h3>
-            </div>
-            <div class="card-body">
-                <ul class="list-unstyled">
-                    
-                        <li>
-                            <strong>cliente1</strong>
-                            <span class="text-muted">email@email.com</span>
-                        </li>
-                   
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Clientes con Compras Recientes</h3>
-            </div>
-            <div class="card-body">
-                <ul class="list-unstyled">
-                    
-                        <li>
-                            <strong>Cliente 1</strong>
-                            <span class="text-muted">Compra reciente: 01-09-2023</span>
-                        </li>
-                   
-                </ul>
-            </div>
-        </div>
-
-        <div class="card">
-            <div class="card-header">
-                <h3 class="card-title">Total de Ventas</h3>
-            </div>
-            <div class="card-body">
-                <h2>$500,000</h2>
-            </div>
-        </div>
+        @livewire('panel.real-estates.dashboard.card-last-development')
+        @livewire('panel.real-estates.dashboard.card-development-grater-properties')
+        @livewire('panel.real-estates.dashboard.card-best-development-agents')
+        @livewire('panel.real-estates.dashboard.card-property-sold-by-agent')
+        @livewire('panel.real-estates.dashboard.card-lastest-clients')
+        @livewire('panel.real-estates.dashboard.card-clients-recent-purchases')
+        @livewire('panel.real-estates.dashboard.card-sales')
 
         <div class="card">
             <div class="card-header">

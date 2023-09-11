@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('commission', 8, 2);
             $table->boolean('paid')->default(false);
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('lead_agent_id')->references('id')->on('users');

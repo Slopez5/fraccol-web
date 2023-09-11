@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('development_id');
             $table->unsignedBigInteger('lot_id')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('development_id')->references('id')->on('developments');

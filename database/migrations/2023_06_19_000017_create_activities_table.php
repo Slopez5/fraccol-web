@@ -22,6 +22,7 @@ return new class extends Migration
             $table->date('scheduled_at');
             $table->date('completed_at');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('lead_id')->references('id')->on('leads');

@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('answer');
             $table->string('value');
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('whatsapp_question_id')->references('id')->on('whatsapp_questions');
             $table->foreign('whatsapp_next_question_id')->references('id')->on('whatsapp_questions');

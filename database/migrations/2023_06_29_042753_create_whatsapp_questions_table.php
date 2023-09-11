@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text("question");
             $table->boolean('is_first_question');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

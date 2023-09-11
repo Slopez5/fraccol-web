@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('state_id');
             $table->string('zip_code');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('city_id')->references('id')->on('cities');

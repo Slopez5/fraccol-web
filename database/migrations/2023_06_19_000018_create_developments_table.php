@@ -31,6 +31,7 @@ return new class extends Migration
             $table->string('status')->nullable();
             $table->string('image')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
 
             $table->foreign('real_estate_id')->references('id')->on('real_estate_agencies');

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->unsignedBigInteger('unit_id');
             $table->unsignedBigInteger('lot_id');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('unit_id')->references('id')->on('units');

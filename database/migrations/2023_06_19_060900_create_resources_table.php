@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('description')->nullable();
             $table->unsignedBigInteger('resource_type_id');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('resource_type_id')->references('id')->on('resource_types');

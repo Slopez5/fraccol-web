@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->string('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('unit_id')->references('id')->on('units');

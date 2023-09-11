@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('title')->nullable();
             $table->text('description')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('lot_id')->references('id')->on('lots');

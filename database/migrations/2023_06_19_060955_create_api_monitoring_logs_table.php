@@ -21,6 +21,7 @@ return new class extends Migration
             $table->integer('response_code');
             $table->text('response_payload')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

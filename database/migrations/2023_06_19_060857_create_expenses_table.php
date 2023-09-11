@@ -23,6 +23,7 @@ return new class extends Migration
             $table->unsignedBigInteger('category_id');
             $table->text('notes')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('category_id')->references('id')->on('expense_categories');

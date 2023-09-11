@@ -17,6 +17,7 @@ return new class extends Migration
             $table->text('notes');
             $table->morphs('subdomainable');
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

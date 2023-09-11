@@ -26,6 +26,7 @@ return new class extends Migration
             $table->date('sale_date');
             $table->string('status');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('lead_id')->references('id')->on('leads');

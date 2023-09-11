@@ -22,6 +22,7 @@ return new class extends Migration
             $table->integer('financing_months');
             $table->decimal('down_payment', 8, 2);
             $table->timestamps();
+            $table->softDeletes();
 
             // Composite primary key
 

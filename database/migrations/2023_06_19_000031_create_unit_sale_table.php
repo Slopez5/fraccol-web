@@ -21,6 +21,7 @@ return new class extends Migration
             $table->decimal('monthly_payment', 8, 2);
             $table->decimal('down_payment', 8, 2);
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraints
             $table->foreign('unit_id')->references('id')->on('units');

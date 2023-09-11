@@ -18,6 +18,7 @@ return new class extends Migration
             $table->unsignedBigInteger('state_id');
             $table->string('name');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('state_id')->references('id')->on('states');

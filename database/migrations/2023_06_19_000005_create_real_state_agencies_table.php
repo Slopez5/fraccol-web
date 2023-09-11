@@ -21,6 +21,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('website')->nullable();
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('admin_id')->references('id')->on('users');
         });

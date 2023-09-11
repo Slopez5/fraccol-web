@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('action');
             $table->text('description');
             $table->timestamps();
+            $table->softDeletes();
 
             // Foreign key constraint
             $table->foreign('user_id')->references('id')->on('users');
