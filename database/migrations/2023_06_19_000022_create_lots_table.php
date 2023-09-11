@@ -18,10 +18,10 @@ return new class extends Migration
             $table->unsignedBigInteger('development_id');
             $table->unsignedBigInteger('lot_type_id');
             $table->string('lot_number');
+            $table->string('block_number');
             $table->string('lot_size');
-            $table->decimal('price', 8, 2);
-            $table->string('status');
-            $table->string('location');
+            $table->string('status')->nullable();
+            $table->string('location')->nullable();
             $table->text('description')->nullable();
             $table->string('image_url')->nullable();
             $table->timestamps();

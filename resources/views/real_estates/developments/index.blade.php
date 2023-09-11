@@ -50,11 +50,12 @@
                                         {{$development->sort_description}}
                                     </td>
                                     <td>
-                                        N/A
-
+                                        <a href="{{$development->blueprint}}">
+                                            <i class="fas fa-solid fa-file-pdf"></i>
+                                        </a>
                                     </td>
                                     <td>
-                                        <a href="">
+                                        <a href="{{ route('realEstate.development.show',$development->id) }}">
                                             <i class="fas fa-solid fa-eye"></i>
                                         </a>
                                         <a href="{{route('realEstate.development.edit',$development->id)}}">

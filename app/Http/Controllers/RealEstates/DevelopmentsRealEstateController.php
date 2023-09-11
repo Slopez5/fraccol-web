@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Development;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Storage;
 
 class DevelopmentsRealEstateController extends Controller
 {
@@ -21,6 +22,12 @@ class DevelopmentsRealEstateController extends Controller
         return view('real_estates.developments.create');
     }
 
+    function show($id)
+    {
+        $development = Development::find($id);
+        return view('real_estates.developments.show',["development"=>$development]);
+    }
+
     function store(Request $request)
     {
         $development = new Development([
@@ -34,7 +41,9 @@ class DevelopmentsRealEstateController extends Controller
         ]);
         $development->save();
         $name = "development_" . $development->id;
-        $request->file('blueprint')->storeAs('planos/', $name . '.pdf', 'public');
+        $path = $request->file('blueprint')->storeAs('planos', $name . '.pdf', 'public');
+        $development->blueprint = Storage::url($path);
+        $development->save();
     }
 
     function edit($id)
@@ -55,14 +64,16 @@ class DevelopmentsRealEstateController extends Controller
         $development->full_description = $request->fullDescription;
         if ($request->hasFile('blueprint')) {
             $name = "development_" . $development->id;
-            $request->file('blueprint')->storeAs('planos/', $name . '.pdf', 'public');
+            $path = $request->file('blueprint')->storeAs('planos', $name . '.pdf', 'public');
+            $development->blueprint = Storage::url($path);
         }
         $development->save();
-        logger($request);
+        return redirect()->route('realEstate.developments.index');
     }
 
     function destroy($id)
     {
+        Development::find($id)->delete();
         return redirect()->route('realEstate.developments.index');
     }
 }

@@ -14,11 +14,5 @@ class LotImagesSeeder extends Seeder
     public function run(): void
     {
         //
-        LotImage::insert([
-            "lot_id"=>1,
-            "image_url"=>"",
-            "title"=>"",
-            "description"=>""
-        ]);
     }
 }

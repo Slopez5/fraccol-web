@@ -14,18 +14,6 @@ class LotSeeder extends Seeder
     public function run(): void
     {
         //
-        Lot::insert([
-            [
-                "development_id"=>1,
-                "lot_type_id"=>1,
-                "lot_number"=>"",
-                "lot_size"=>385,
-                "price"=>800,
-                "status"=>"",
-                "location"=>"",
-                "description"=>"",
-                "image_url"=>""
-            ]
-        ]);
+
     }
 }

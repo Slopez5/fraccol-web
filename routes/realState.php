@@ -7,6 +7,7 @@ use App\Http\Controllers\RealEstates\DashboardRealEstateController;
 use App\Http\Controllers\RealEstates\DevelopmentManagerRealEstateController;
 use App\Http\Controllers\RealEstates\DevelopmentsRealEstateController;
 use App\Http\Controllers\RealEstates\LeadsRealEstateController;
+use App\Http\Controllers\RealEstates\LotsRealEstateController;
 use App\Http\Controllers\RealEstates\RealEstateAgentsRealEstateController;
 use App\Http\Controllers\RealEstates\SalesRealEstateController;
 use App\Http\Controllers\RealEstates\SecretariesRealEstateController;
@@ -29,10 +30,18 @@ Route::middleware(['auth.realEstate'])->group(function () {
 
     Route::get('/developments', [DevelopmentsRealEstateController::class, 'index'])->name('realEstate.developments.index');
     Route::get('/development/create', [DevelopmentsRealEstateController::class, 'create'])->name('realEstate.development.create');
+    Route::get('/developmnet/{id}', [DevelopmentsRealEstateController::class,'show'])->name('realEstate.development.show');;
     Route::post('/development',[DevelopmentsRealEstateController::class,'store'])->name('realEstate.development.store');
     Route::get('/development/{id}/edit',[DevelopmentsRealEstateController::class,'edit'])->name('realEstate.development.edit');
     Route::put('/development/{id}',[DevelopmentsRealEstateController::class,'update'])->name('realEstate.development.update');
     Route::delete('/development/{id}', [DevelopmentsRealEstateController::class, 'destroy'])->name('realEstate.development.destroy');
+
+    Route::get('/development/{id}/lots', [LotsRealEstateController::class, 'index'])->name('realEstate.development.lots.index');
+    Route::get('/development/{id}/lot/create', [LotsRealEstateController::class, 'create'])->name('realEstate.development.lot.create');
+    Route::post('/development/{id}/lot', [LotsRealEstateController::class, 'store'])->name('realEstate.development.lot.store');
+    Route::get('/development/{id}/lot/{lot_id}/edit', [LotsRealEstateController::class, 'edit'])->name('realEstate.development.lot.edit');
+    Route::put('/development/{id}/lot/{lot_id}', [LotsRealEstateController::class, 'update'])->name('realEstate.development.lot.update');
+    Route::delete('/development/{id}/lot/{lot_id}', [LotsRealEstateController::class, 'destroy'])->name('realEstate.development.lot.destroy');
 
     Route::get('/branches',[BranchesRealEstateController::class,'index'])->name('realEstate.branches.index');
     Route::get('/branches/create',[BranchesRealEstateController::class,'create'])->name('realEstate.branch.create');
