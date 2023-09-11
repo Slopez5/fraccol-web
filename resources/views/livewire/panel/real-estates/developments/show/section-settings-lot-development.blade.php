@@ -28,7 +28,7 @@
             <h4>Lotes</h4>
         </div>
         <div class="col">
-            <a href="{{route('realEstate.development.lot.index',$development_id)}}">
+            <a href="{{route('realEstate.development.lots.index',$development_id)}}">
                 Configurar
             </a>
             
