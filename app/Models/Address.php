@@ -18,4 +18,12 @@ class Address extends Model
     public function branch(): HasOne {
         return $this->hasOne(RealStateBranch::class);
     }
+
+    public function city(): BelongsTo {
+        return $this->belongsTo(City::class);
+    }
+
+    public function state(): BelongsTo {
+        return $this->belongsTo(State::class);
+    }
 }

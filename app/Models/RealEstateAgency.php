@@ -13,7 +13,7 @@ class RealEstateAgency extends Model
     protected $table = 'real_estate_agencies';
 
     public function branches(): HasMany {
-        return $this->hasMany(RealStateBranch::class);
+        return $this->hasMany(RealEstateBranch::class,'real_estate_agency_id');
     }
 
     public function developments(): HasMany {
