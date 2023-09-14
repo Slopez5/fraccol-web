@@ -10,7 +10,7 @@
 
     <div class="row">
         <div class="col-md-12">
-        <livewire:panel.real-estates.developments.table-developments :developments="$developments" />
+            <livewire:panel.real-estates.developments.table-developments :developments="$developments" />
         </div>
     </div>
 @endsection
