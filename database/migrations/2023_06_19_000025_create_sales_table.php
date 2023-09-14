@@ -15,9 +15,9 @@ return new class extends Migration
     {
         Schema::create('sales', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lead_id');
-            $table->unsignedBigInteger('lead_agent_id');
-            $table->unsignedBigInteger('sale_closer_id');
+            $table->unsignedBigInteger('lead_id')->nullable();//Cliente
+            $table->unsignedBigInteger('lead_agent_id')->nullable();//A quien le dare la comisión
+            $table->unsignedBigInteger('sale_closer_id')->nullable();//Regularmente sera el encargado de Fraccionamiento
             $table->unsignedBigInteger('activity_id')->nullable();
             $table->unsignedBigInteger('development_id')->nullable();
             $table->double('total_price');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\RealEstates;
 
 use App\Http\Controllers\Controller;
+use App\Models\Sale;
 use Illuminate\Http\Request;
 
 class SalesRealEstateController extends Controller
@@ -10,11 +11,13 @@ class SalesRealEstateController extends Controller
     //
     function index()
     {
-        return view('real_estates.sales.index');
+        $sales = Sale::all();
+        return view('real_estates.sales.index',["sales"=>$sales]);
     }
 
     function create()
     {
+        return view('real_estates.sales.create');
     }
 
     function store(Request $request)

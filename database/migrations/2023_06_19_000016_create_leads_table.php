@@ -17,13 +17,15 @@ return new class extends Migration
             $table->id();
             $table->string('first_name');
             $table->string('last_name');
+            $table->string('birthDay');
+            $table->string('birthPlace');
+            $table->string('maritalStatus');
+            $table->string('occupation');
+            $table->string('unofficialManager');
+            $table->string('beneficiary');
             $table->string('email');
             $table->string('phone');
-            $table->string('address');
-            $table->string('city');
-            $table->string('state');
-            $table->string('zip_code');
-            $table->string('country');
+            $table->unsignedBigInteger('address_id');
             $table->string('source');
             $table->string('status');
             $table->string('ine_file')->nullable();
@@ -34,6 +36,7 @@ return new class extends Migration
 
             // Foreign key constraint
             $table->foreign('lead_agent_id')->references('id')->on('users');
+            $table->foreign('address_id')->references('id')->on('addresses');
         });
     }
 
