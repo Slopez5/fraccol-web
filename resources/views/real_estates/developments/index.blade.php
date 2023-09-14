@@ -1,13 +1,24 @@
 @extends('layouts.real_estate.real_estates')
 
-@section('content')
-    <section class="content-header">
-        <h1>
-            Desarrollos inmobiliarios
-            <small>Listado de Desarrollos inmobiliarios registradas</small>
-        </h1>
-    </section>
+@section('header')
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0">Fraccionamientos</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="{{ route('realEstate.dashboard') }}">Home</a></li>
+                        <li class="breadcrumb-item active">Fraccionamientos</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+@endsection
 
+@section('content')
     <div class="row">
         <div class="col-md-12">
             <livewire:panel.real-estates.developments.table-developments :developments="$developments" />

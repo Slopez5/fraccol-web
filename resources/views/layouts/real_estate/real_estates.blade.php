@@ -175,12 +175,17 @@
         
 
         <div class="content-wrapper">
+
+            @yield('header')
+
             <section class="content">
                 <div class="container-fluid">
                     @yield('content')
                 </div>
             </section>
         </div>
+
+        
         <footer class="main-footer">
             <strong>Copyright &copy; 20023-20024 <a
                     href="https://fraccionamientoscolima.com">FraccionamientosColima</a>.</strong>
