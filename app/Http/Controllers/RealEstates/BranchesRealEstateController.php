@@ -20,6 +20,7 @@ class BranchesRealEstateController extends Controller
 
     function create()
     {
+        
         $states = State::all();
         return view('real_estates.branches.create', ["states" => $states]);
     }

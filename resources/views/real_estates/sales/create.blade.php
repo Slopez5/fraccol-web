@@ -24,3 +24,11 @@
         @livewire('panel.real-estates.sales.modal.add-client')
     </div>
 @endsection
+
+@section('extra-scripts')
+    <script>
+        Livewire.on('save-lead',  ({user}) => {
+                $('#addNewLead').modal('hide');
+            })
+    </script>
+@endsection

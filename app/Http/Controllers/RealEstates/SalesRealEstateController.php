@@ -11,6 +11,7 @@ class SalesRealEstateController extends Controller
     //
     function index()
     {
+        //Todo validar ventas de la inmobiliaria
         $sales = Sale::all();
         return view('real_estates.sales.index',["sales"=>$sales]);
     }

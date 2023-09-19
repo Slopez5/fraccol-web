@@ -2,44 +2,27 @@
 
 namespace App\Livewire\Panel\RealEstates\Sales\Modal;
 
-use Livewire\Attributes\Rule;
+use App\Models\Lead;
+use App\Models\User;
 use Livewire\Component;
 
 class AddClient extends Component
 {
-    #[Rule('required')]
-    public $firstName;
-    #[Rule('required')]
-    public $lastName;
-    public $birthDate;
-    public $birthPlace;
-    public $maritalStatus;
-    public $occupation;
-    public $unofficialManager;
-    public $beneficiary;
-    public $email;
-    public $phone;
-    public $country;
-    public $state;
-    public $city;
-    public $street;
-    public $zipCode;
+    public $leads;
+    public $leadSelected;
 
-
-    public function mount()
-    {
-    }
-
-    public function save()
-    {
-        $this->validate();
-        $this->firstName = "Hola mundo";
-        $this->js("document.getElementById('addNewLead').modal('hide')"); 
-        logger("test");
+    public function mount() {
+        //Todo validar leads de la inmobiliaria
+        $this->leads = Lead::all();
     }
 
     public function render()
     {
         return view('livewire.panel.real-estates.sales.modal.add-client');
+    }
+
+    public function selectLead($id) {
+        $this->leadSelected = Lead::find($id);
+        $this->dispatch('save-lead', lead: $this->leadSelected); 
     }
 }

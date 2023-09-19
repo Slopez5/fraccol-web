@@ -79,6 +79,7 @@ class SubdomainController extends Controller
 
     public function syncSubdomains()
     {
+        //Todo validar subdominios de la inmobiliaria
         $subdomains = Subdomain::all();
         $subdomainsLocal = $this->getSubdomainsLocal($subdomains);
         if ($subdomainsLocal) {

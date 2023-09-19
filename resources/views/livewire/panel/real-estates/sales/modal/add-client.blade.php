@@ -8,11 +8,28 @@
                 </button>
             </div>
             <div class="modal-body">
-                
-            </div>
-            <div class="modal-footer justify-content-between">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" wire:click="save">Save changes</button>
+                <table class="table table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <th>Nombre</th>
+                            <th>Apellidos</th>
+                            <th>Teléfono</th>
+                            <th>Corréo</th>
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach ($leads as $index => $lead)
+                        <tr wire:key='{{$lead->id}}' wire:click='selectLead({{$lead->id}})'>
+                            <td>{{$lead->first_name}}</td>
+                            <td>{{$lead->last_name}}</td>
+                            <td>{{$lead->phone}}</td>
+                            <td>{{$lead->email}}</td>
+                        </tr>
+                        @endforeach
+                        
+                    </tbody>
+                </table>
             </div>
         </div>
         <!-- /.modal-content -->

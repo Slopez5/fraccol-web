@@ -12,7 +12,6 @@ class RealStatesController extends Controller
 
     function index()
     {
-
         $real_estates = RealEstateAgency::all();
         return view('admin.real_estates.index', ["real_estates" => $real_estates]);
     }
