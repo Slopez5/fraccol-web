@@ -4,12 +4,12 @@
         <div class="container-fluid">
             <div class="row mb-2">
                 <div class="col-sm-6">
-                    <h1 class="m-0">Encargados de Fraccionamiento</h1>
+                    <h1 class="m-0">Ventas</h1>
                 </div><!-- /.col -->
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('realEstate.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">encargados de fraccionamiento</li>
+                        <li class="breadcrumb-item active">Ventas</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->
@@ -17,5 +17,10 @@
     </div>
 @endsection
 @section('content')
-@livewire('panel.real-estates.sales.form-create-sale')
+    <div class="row">
+        <div class="col-md-12">
+            @livewire('panel.real-estates.sales.form-create-sale')
+        </div>
+        @livewire('panel.real-estates.sales.modal.add-client')
+    </div>
 @endsection

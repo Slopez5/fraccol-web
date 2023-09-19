@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('development_lot_type', function (Blueprint $table) {
             $table->unsignedBigInteger("development_id");
             $table->unsignedBigInteger("lot_type_id");
+            $table->decimal('price',8,2);
             $table->timestamps();
             $table->softDeletes();
 

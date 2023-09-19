@@ -30,8 +30,8 @@ class SectionSettingsLotDevelopment extends Component
        
     }
 
-    public function selectLotType() {
-
+    public function selectLotType($lotType) {
+        logger($lotType);
     }
 
     public function selectPaymentPlan() {

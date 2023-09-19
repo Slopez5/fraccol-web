@@ -10,7 +10,8 @@
                 <div class="col-sm-6">
                     <ol class="breadcrumb float-sm-right">
                         <li class="breadcrumb-item"><a href="{{ route('realEstate.dashboard') }}">Home</a></li>
-                        <li class="breadcrumb-item active">encargados de fraccionamiento</li>
+                        <li class="breadcrumb-item"><a href="{{ route('realEstate.developmentMangers.index') }}">Vendedores</a></li>
+                        <li class="breadcrumb-item active">crear</li>
                     </ol>
                 </div><!-- /.col -->
             </div><!-- /.row -->

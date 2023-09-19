@@ -15,7 +15,7 @@
     <div class="btn-group btn-group-toggle" data-toggle="buttons">
         @foreach ($lot_types as $index => $lotType)
             <label wire:key="{{ $index }}" class="btn btn-default text-center active">
-                <input type="radio" name="color_option" id="color_option_a1" autocomplete="off" checked>
+                <input type="radio" name="loteType_option" wire:click="selectLotType({{ $lotType }})" autocomplete="off" checked>
                 {{ $lotType->name }}
             </label>
         @endforeach
