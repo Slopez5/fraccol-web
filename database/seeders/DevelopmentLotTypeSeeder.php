@@ -15,6 +15,6 @@ class DevelopmentLotTypeSeeder extends Seeder
     {
         //
         $development = Development::find(1);
-        $development->lotTypes()->attach([1,2,3]);
+        $development->lotTypes()->attach([1 => ['price' => 850], 2  => ['price' => 870], 3  => ['price' => 890]]);
     }
 }

@@ -14,6 +14,8 @@ class Development extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $fillable = ['name','real_estate_id','real_estate_branch_id', 'location','total_land_area','total_lots','available_lots'];
+
     public function subdomain():MorphOne {
         return $this->morphOne(Subdomain::class,'subdomainable');
     }

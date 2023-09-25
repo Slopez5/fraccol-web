@@ -1,119 +1,43 @@
 <div class="card">
     <div class="card-header">
         <h3 class="card-title">Agregar Venta</h3>
+        <div class="card-tools">
+            <button class="btn btn-primary" wire:click='clearForm'>
+                <i class="fas fa-solid fa-eraser"></i>
+            </button>
+
+        </div>
     </div>
     <div class="card-body">
-        <div class="option-lead">
-            <x-panel.real-estates.sales.manual-lead />
+
+        <ul class="nav nav-tabs" id="myTab" role="tablist">
+            <li class="nav-item" role="presentation" wire:ignore>
+                <button class="nav-link active" id="leads-tab" data-toggle="tab" data-target="#leads" type="button"
+                    role="tab" aria-controls="leads" aria-selected="true">Prospecto</button>
+            </li>
+            <li class="nav-item" role="presentation" wire:ignore>
+                <button class="nav-link" id="developments-tab" data-toggle="tab" data-target="#developments"
+                    type="button" role="tab" aria-controls="developments" aria-selected="false">Terrenos</button>
+            </li>
+            <li class="nav-item" role="presentation" wire:ignore>
+                <button class="nav-link disabled" id="sales-tab" data-toggle="tab" data-target="#sales" type="button"
+                    role="tab" aria-controls="sales" aria-selected="false">Confirmar Venta</button>
+            </li>
+        </ul>
+
+        <div class="tab-content">
+            <div class="tab-pane active" id="leads" role="tabpanel" aria-labelledby="leads-tab" wire:ignore.self>
+                @livewire('panel.real-estates.sales.create.leads-tab')
+            </div>
+            <div class="tab-pane" id="developments" role="tabpanel" aria-labelledby="developments-tab"
+                wire:ignore.self>
+                @livewire('panel.real-estates.sales.create.developments-tab')
+            </div>
+            <div class="tab-pane" id="sales" role="tabpanel" aria-labelledby="sales-tab" wire:ignore.self>
+                @livewire('panel.real-estates.sales.create.sales-tab')
+            </div>
         </div>
-        <form wire:submit='save'>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="firstName">Nombres</label>
-                        <input type="text" class="form-control" wire:model='lead.first_name' value="{{$lead->first_name}}">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="lastName">Apellidos</label>
-                        <input type="text" class="form-control" wire:model='lead.last_name' value="{{$lead->last_name}}">
-                    </div>
-                </div>
-            </div>
 
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="birthDay">Fecha de nacimiento</label>
-                        <input type="date" class="form-control" wire:model='lead.birthDay'   value="{{$lead->birthDay}}">
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="birthPlace">Lugar de nacimiento</label>
-                        <input type="text" class="form-control" wire:model='lead.birthPlace' value="{{$lead->birthPlace}}">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="maritalStatus">Estado Civil</label>
-                        <input type="text" class="form-control" wire:model='lead.maritalStatus' value="{{$lead->maritalStatus}}">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="client">Ocupación</label>
-                        <input type="text" class="form-control" wire:model='lead.occupation' value="{{$lead->occupation}}">
-                    </div>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="client">Gestor Oficioso</label>
-                        <input type="text" class="form-control" wire:model='lead.unofficialManager' value="{{$lead->unofficialManager}}">
-                    </div>
-                </div>
-                <div class="col">
-
-                    <div class="form-group">
-                        <label for="client">Beneficiario</label>
-                        <input type="text" class="form-control" wire:model='lead.beneficiary' value="{{$lead->beneficiary}}">
-
-                    </div>
-
-                </div>
-            </div>
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="client">Teléfono</label>
-                        <input type="text" class="form-control" wire:model='lead.phone' value="{{$lead->phone}}">
-
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="client">Correo electronico</label>
-                        <input type="text" class="form-control" wire:model='lead.email' value="{{$lead->email}}">
-                    </div>
-                </div>
-            </div>
-            ` <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="client">INE</label>
-                        <input type="file" class="form-control" wire:model='lead.ine_file' value="{{$lead->ine_file}}">
-                    </div>
-                </div>
-            </div>
-
-            <div class="row">
-                <div class="col">
-                    <div class="form-group">
-                        <label for="developmentAgent">Vendedor</label>
-                        <select name="developmentAgent" id="selectDevelopmentAgent" class="form-control">
-                        </select>
-                    </div>
-                </div>
-                <div class="col">
-                    <div class="form-group">
-                        <label for="saleCloser">Cerrador</label>
-                        <select name="saleCloser" id="selectSaleCloser" class="form-control">
-                        </select>
-                    </div>
-                </div>
-            </div>
-
-            <button type="submit" class="btn btn-primary">Guardar Cambios</button>
-        </form>
     </div>
+</div>
 </div>

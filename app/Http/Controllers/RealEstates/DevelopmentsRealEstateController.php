@@ -37,7 +37,9 @@ class DevelopmentsRealEstateController extends Controller
             "total_lots" => $request->totalLots,
             "available_lots" => $request->availableLots,
             "sort_description" => $request->description,
-            "full_description" => $request->fullDescription
+            "full_description" => $request->fullDescription,
+            "real_estate_id" => Auth()->user()->realEstates[0]->id,
+            "real_estate_branch_id" => 1
         ]);
         $development->save();
         $name = "development_" . $development->id;

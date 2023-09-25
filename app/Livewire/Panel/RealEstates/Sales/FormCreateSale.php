@@ -12,25 +12,54 @@ class FormCreateSale extends Component
 {
     use WithFileUploads;
 
-    public LeadForm $leadSelected;
-    public LeadForm $lead;
+    
+    public $currentTab = 1;
 
     public function render()
     {
         return view('livewire.panel.real-estates.sales.form-create-sale');
     }
 
-    public function save() {
-        if ($this->leadSelected->toJSON() != $this->lead->toJSON()) {
-            logger("usare lead");
+    public function save()
+    {
+        /*if (empty($this->leadSelected)) {
+            logger('crear');
+            $this->lead->store();
+            $this->dispatch('update-leads');
+            $this->clearForm();
+            
         } else {
-            logger("usare leadSelected");
-        }
+            logger('editar');
+            $this->leadSelected = $this->lead;
+            $this->leadSelected->update();
+            $this->dispatch('update-leads');
+            $this->clearForm();
+            
+        }*/
     }
 
-    #[On('save-lead')]
-    public function saveLead($lead) {
-        $this->leadSelected->setLead($lead);
-        $this->lead->setLead($lead);
+    public function back() {
+        if ($this->currentTab == 3) {
+            $this->dispatch('back-developments-tab');
+        } else {
+            $this->dispatch('back-leads-tab');
+        }
+        $this->currentTab--;
+    }
+
+    public function next() {
+
+        if ($this->currentTab == 1) {
+            $this->dispatch('next-developments-tab');
+        } else {
+            $this->dispatch('next-sales-tab');
+        }
+        $this->currentTab++;
+    }
+
+    public function clearForm()
+    {
+        $this->leadSelected->clear();
+        $this->lead->clear();
     }
 }
