@@ -27,7 +27,7 @@ class Development extends Model
 
     public function lotTypes(): BelongsToMany
     {
-        return $this->belongsToMany(LotType::class, 'development_lot_type', 'development_id', 'lot_type_id');
+        return $this->belongsToMany(LotType::class, 'development_lot_type', 'development_id', 'lot_type_id')->withPivot('price');
     }
 
     public function lotes(): HasMany {
@@ -36,6 +36,10 @@ class Development extends Model
 
     public function images(): HasMany {
         return $this->hasMany(DevelopmentImage::class,'development_id');
+    }
+
+    public function paymentPlans(): HasMany {
+        return $this->hasMany(PaymentPlan::class,'development_id');
     }
 
 }

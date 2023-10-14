@@ -61,8 +61,7 @@ class DevelopmentsTab extends Component
 
     public function updated($name, $value)
     {
-        logger($name);
-        logger($value);
+        
     }
 
     public function mount()

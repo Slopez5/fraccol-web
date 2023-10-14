@@ -14,7 +14,10 @@ class SectionImages extends Component
     public function mount($development){
         $this->development_name = $development->name;
         $this->images = $development->images;
-        $this->imageSelected = $this->images[0]->file_url;
+        if (empty($this->images)) {
+            $this->imageSelected = $this->images[0]->file_url;
+        }
+        
     }
 
     public function render()
