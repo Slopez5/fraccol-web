@@ -2,7 +2,6 @@
 
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\LandingPage\LandingPageDevelopmentController;
-use App\Http\Controllers\SalesPerson\LandingPageController;
 use App\Http\Controllers\SubdomainController;
 use App\Http\Controllers\WaController;
 use Illuminate\Support\Facades\Route;
@@ -24,3 +23,4 @@ Route::post('/webhook', [WaController::class, 'recibe']);
 Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
 
 Route::get('/', [LandingPageDevelopmentController::class,'index']);
+Route::get('/{development}', [LandingPageDevelopmentController::class,'developmentDetails'])->name('developmentDetails');

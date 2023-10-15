@@ -396,7 +396,7 @@
             <div class="portfolio right-slider">
                 <div class="owl-carousel home5-right-slider">
                     <div class="inner-box">
-                        <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                        <a href="{{route('developmentDetails',1)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                             <div class="recent-img16 img-fluid img-center"
                                 style="background-image: url({{{asset('landingPage/images/interior/p-1.png')}}});"></div>
                             <div class="recent-content"></div>
@@ -407,7 +407,7 @@
                             <div class="view-proper">Ver detalless</div>
                         </a>
                     </div>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',2)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('images/developments/el_rehilete/Foto1.jpeg')}}});"></div>
                         <div class="recent-content"></div>
@@ -417,7 +417,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',3)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('landingPage/images/interior/p-1.png')}}});"></div>
                         <div class="recent-content"></div>
@@ -427,7 +427,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',4)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('landingPage/images/interior/p-1.png')}}});"></div>
                         <div class="recent-content"></div>
@@ -437,7 +437,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',5)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('landingPage/images/interior/p-1.png')}}});"></div>
                         <div class="recent-content"></div>
@@ -447,7 +447,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',6)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('landingPage/images/interior/p-1.png')}}});"></div>
                         <div class="recent-content"></div>
@@ -457,7 +457,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',7)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('images/developments/palmares/Foto2.jpg')}}});"></div>
                         <div class="recent-content"></div>
@@ -467,7 +467,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',8)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('landingPage/images/interior/p-1.png')}}});"></div>
                         <div class="recent-content"></div>
@@ -477,7 +477,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',9)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('images/developments/el_encanto_2/Foto2.jpeg')}}});"></div>
                         <div class="recent-content"></div>
@@ -487,7 +487,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',10)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('landingPage/images/interior/p-1.png')}}});"></div>
                         <div class="recent-content"></div>
@@ -497,7 +497,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',11)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('landingPage/images/interior/p-1.png')}}});"></div>
                         <div class="recent-content"></div>
@@ -507,7 +507,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',12)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('landingPage/images/interior/p-1.png')}}});"></div>
                         <div class="recent-content"></div>
@@ -517,7 +517,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',13)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('images/developments/agua_dulce/Foto2.jpeg')}}});"></div>
                         <div class="recent-content"></div>
@@ -527,7 +527,7 @@
                         </div>
                         <div class="view-proper">Ver detalless</div>
                     </a>
-                    <a href="single-property-1.html" class="recent-16" data-aos="fade-up" data-aos-delay="150">
+                    <a href="{{route('developmentDetails',14)}}" class="recent-16" data-aos="fade-up" data-aos-delay="150">
                         <div class="recent-img16 img-fluid img-center"
                             style="background-image: url({{{asset('images/developments/olivos/Foto3.jpeg')}}});"></div>
                         <div class="recent-content"></div>
