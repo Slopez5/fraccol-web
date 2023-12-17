@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class ContractStatus extends Model
 {
     use HasFactory;
+
+    protected $table = 'contract_status';
+    protected $fillable = ["status_name","description"];
 }

@@ -14,6 +14,7 @@ class Development extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $table = 'developments';
     protected $fillable = ['name','real_estate_id','real_estate_branch_id', 'location','total_land_area','total_lots','available_lots'];
 
     public function subdomain():MorphOne {
@@ -40,6 +41,10 @@ class Development extends Model
 
     public function paymentPlans(): HasMany {
         return $this->hasMany(PaymentPlan::class,'development_id');
+    }
+
+    public function contracts(): HasMany {
+        return $this->hasMany(Contract::class,'development_id');
     }
 
 }

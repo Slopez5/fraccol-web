@@ -10,6 +10,9 @@ class LotType extends Model
 {
     use HasFactory;
 
+    protected $table = 'lot_types';
+    protected $fillable = ['name','description'];
+
     public function developments(): BelongsToMany
     {
         return $this->belongsToMany(Development::class, 'development_lot_type','lot_type_id','development_id');

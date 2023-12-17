@@ -13,9 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('metadata', function (Blueprint $table) {
+        Schema::create('metadatas', function (Blueprint $table) {
             $table->id();
-            $table->morphs('metada');
+            $table->morphs('metadatable');
             $table->string('key');
             $table->string('value');
             $table->timestamps();

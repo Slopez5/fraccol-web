@@ -10,6 +10,7 @@ class WhatsappAnswer extends Model
 {
     use HasFactory;
     protected $table = "whatsapp_answers";
+     protected $fillable = ['whatsapp_question_id','whatsapp_next_question_id','answer','value'];
 
     function question() : BelongsTo {
         return $this->belongsTo(WhatsappQuestion::class,'whatsapp_next_question_id');

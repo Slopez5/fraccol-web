@@ -13,7 +13,7 @@ class Address extends Model
 
     protected $table = 'addresses';
 
-    protected $fillable = ['street','state_id','city_id','zip_code'];
+    protected $fillable = ['street','country_id','state_id','city_id','zip_code'];
 
     public function branch(): HasOne {
         return $this->hasOne(RealStateBranch::class);

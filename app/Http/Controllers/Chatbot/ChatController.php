@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Chatbot;
 
+use App\Http\Controllers\Controller;
 use App\Models\WhatsappAnswer;
 use App\Models\WhatsappChat;
 use App\Models\WhatsappQuestion;

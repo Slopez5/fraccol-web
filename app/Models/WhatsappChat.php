@@ -9,5 +9,6 @@ class WhatsappChat extends Model
 {
     use HasFactory;
 
-    protected $table = "whatsapp_chats";
+    protected $table = 'whatsapp_chats';
+     protected $fillable = ['phoneID','whatsapp_question_id','whatsapp_business_id','phone','profile_name','value','is_answer'];
 }

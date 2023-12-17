@@ -12,7 +12,6 @@ class RealEstateBranch extends Model
     use HasFactory;
 
     protected $table = 'real_estate_branches';
-
     protected $fillable = ['name','email','phone','address_id'];
 
     public function address() : BelongsTo {

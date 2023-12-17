@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\ConfigurationsController;
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\LandingPage\LandingPageDevelopmentController;
 use App\Http\Controllers\SubdomainController;
@@ -20,7 +22,7 @@ use Illuminate\Support\Facades\Storage;
 
 Route::get('/webhook', [WaController::class, 'webhook']);
 Route::post('/webhook', [WaController::class, 'recibe']);
-Route::get('/privacy_policy', [EnterpriseController::class, 'privacyPolicy']);
 
-Route::get('/', [LandingPageDevelopmentController::class,'index']);
-Route::get('/{development}', [LandingPageDevelopmentController::class,'developmentDetails'])->name('developmentDetails');
+Route::get('/', [Controller::class,'index']);
+
+Route::get('/test',[ConfigurationsController::class,'test']);

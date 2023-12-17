@@ -10,6 +10,9 @@ class Subdomain extends Model
 {
     use HasFactory;
 
+    protected $table = 'subdomains';
+    protected $fillable = ['subdomain','notes','subdomainable_type','subdomainable_id'];
+
     public function subdomainable(): MorphTo {
         return $this->morphTo();
     }

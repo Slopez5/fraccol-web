@@ -14,22 +14,11 @@ return new class extends Migration
     {
         Schema::create('payment_plans', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('development_id');
-            $table->unsignedBigInteger('lot_type_id');
             $table->string('name');
             $table->string('description');
-            $table->decimal('price_per_sqm', 8, 2);
             $table->integer('financing_months');
-            $table->decimal('down_payment', 8, 2);
             $table->timestamps();
             $table->softDeletes();
-
-            // Composite primary key
-
-
-            // Foreign key constraints
-            $table->foreign('development_id')->references('id')->on('developments');
-            $table->foreign('lot_type_id')->references('id')->on('lot_types');
         });
     }
 

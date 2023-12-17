@@ -8,4 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class LanguageString extends Model
 {
     use HasFactory;
+
+    protected $table = 'language_strings';
+    protected $fillable = ['language_id','key','value'];
 }

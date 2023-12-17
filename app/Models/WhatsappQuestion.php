@@ -11,6 +11,8 @@ class WhatsappQuestion extends Model
     use HasFactory;
 
     protected $table = "whatsapp_questions";
+     protected $fillable = ['phoneID','title','question','is_first_question'];
+    
 
     public function answers(): HasMany {
         return $this->hasMany(WhatsappAnswer::class,'whatsapp_question_id','id');
