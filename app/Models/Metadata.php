@@ -10,8 +10,8 @@ class Metadata extends Model
 {
     use HasFactory;
 
-    protected $table = 'metadata';
-    protected $fillable = ['metadatable_type','metadatable_id','key','value'];
+    protected $table = 'metadatas';
+    protected $fillable = ['key','value'];
 
     public function metadatable(): MorphTo {
         return $this->morphTo();

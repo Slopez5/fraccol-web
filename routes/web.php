@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Controllers\Chatbot\WaController as ChatbotWaController;
 use App\Http\Controllers\ConfigurationsController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DevelopmentController;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\LandingPage\LandingPageDevelopmentController;
 use App\Http\Controllers\SubdomainController;
@@ -20,9 +22,11 @@ use Illuminate\Support\Facades\Storage;
 |
 */
 
-Route::get('/webhook', [WaController::class, 'webhook']);
-Route::post('/webhook', [WaController::class, 'recibe']);
+Route::get('/webhook', [ChatbotWaController::class, 'webhook']);
+Route::post('/webhook', [ChatbotWaController::class, 'recibe']);
 
-Route::get('/', [Controller::class,'index']);
+Route::get('/test', [ConfigurationsController::class,'test'])->name('test');
 
-Route::get('/test',[ConfigurationsController::class,'test']);
+Route::get('/developments',[DevelopmentController::class,'index'])->name('developments');
+Route::get('/development/{id}',[DevelopmentController::class,'show'])->name('show.development');
+Route::get('/development/{id}/configurations',[DevelopmentController::class,'developmentConfiguration'])->name('configuration.development');

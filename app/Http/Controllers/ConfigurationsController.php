@@ -3,11 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\Clauses;
 use App\Models\Contract;
 use App\Models\ContractStatus;
 use App\Models\Country;
 use App\Models\Declarations;
 use App\Models\Development;
+use App\Models\Lead;
+use App\Models\Metadata;
 use App\Models\Parties;
 use App\Models\State;
 use Illuminate\Http\Request;
@@ -16,7 +19,7 @@ class ConfigurationsController extends Controller
 {
     public function test()
     {
-        return $this->saveDeclarationByContract();
+        return redirect()->route('developments');
     }
 
 
@@ -343,6 +346,36 @@ class ConfigurationsController extends Controller
      */
     public function saveClauseByContract()
     {
+        $contract = Contract::find(1);
+        $contract->clauses()->saveMany([
+            new Clauses(["part_id" => 1, "number" => "Primera", "description" => 'El "PROMITENTE VENDEDOR" promete vender al "PROMITENTE COMPRADOR", quien a su vez promete adquirir el que será el lote número @numero_lote de la manzana @numero_manzana, con una extensión superficial de @area_lote metros cuadrados, de lo cual servirá de base el plano georreferenciado anexo al presente instrumento, una vez que se constituya el “FRACCIONAMIENTO EL ENCANTO 2", conforme al uso de suelo que en su momento autorice el H. Ayuntamiento. Mismo lote que contará con las siguientes medidas y linderos:
+                AL NORTE.- @medidas_linderos_norte.
+                AL SUR.- @medidas_linderos_sur.
+                AL OESTE.- @medias_linderos_oeste.
+                AL ESTE.- @medidas_linderos_este.
+                ' ]),
+            new Clauses(["part_id" => 3, "number" => "Segunda", "description" => '"LAS PARTES" pactan que el precio del inmueble descrito en la cláusula anterior es por la cantidad de $@precio (@precio_letra M.N.); cantidad que será pagada por el "PROMITENTE COMPRADOR" al "PROMITENTE VENDEDOR" de la siguiente manera:
+            a) A la firma del presente contrato el "PROMITENTE COMPRADOR" entregara al “PROMITENTE VENDEDOR" la cantidad de $@enganche (@enganche_letra M.N.) como anticipo o enganche, sirviendo el presente como el recibo más eficaz que en derecho proceda.
+            b) La cantidad restante de $@resto (@resto_letra M.N.) el "PROMITENTE COMPRADOR" se obliga a pagar al "PROMITENTE VENDEDOR" en 72 mensualidades continuas y cada una de ellas por la cantidad de $@mensualidad (@mensualidad_letra M.N.) hasta que se cubra en su totalidad la cantidad restante, los días @dia_pago de cada mes.
+            Los atrasos en las mensualidades correspondientes generan un 3% tres por ciento de intereses moratorios, hasta su entera regularización.
+            En caso de incumplimiento por parte del "PROMITENTE COMPRADOR" y a falta de pago de 4 o más mensualidades, "LAS PARTES" pactan que "EL PROMITENTE VENDEDOR" rescindirá el presente contrato de forma unilateral, y el "PROMITENTE COMPRADOR" perderá el derecho de reembolso de las cantidades que haya entregado, renunciando a cualquier acción y prestación que le corresponda con motivo de este contrato.
+            ' ]),
+            new Clauses(["part_id" => 3, "number" => "Tercera", "description" => '"LAS PARTES" pactan que el inmueble descrito en la cláusula primera será entregado de manera formal a el "PROMITENTE COMPRADOR" a partir de quinto año de la firma del presente contrato, una vez que dicho inmueble cuente con los servicios de calles empedradas, electricidad, drenaje y toma de agua. Los contratos de agua y luz correrán por cuenta del "PROMITENTE COMPRADOR"
+            Manifiesta el “PROMITENTE VENDEDOR” que el inmueble objeto del presente contrato, entregara la posesión física a la “PROMITENTE COMPRADOR”, después de los seis meses de firmado el presente contrato, manifestando las limitaciones de uso.' ]),
+            new Clauses(["part_id" => 2, "number" => "Cuarta", "description" => 'El "PROMITENTE COMPRADOR" acepta que está estrictamente prohibido cualquier otro uso de suelo que no esté autorizado por el H. Ayuntamiento de la Ciudad. ' ]),
+            new Clauses(["part_id" => 3, "number" => "Quinta", "description" => '"LAS PARTES" pactan que el presente contrato se formalizará mediante escritura pública, posterior al quinto año de la firma del presente instrumento y que se obtenga la autorización por el H. Ayuntamiento para esos fines.
+            "LAS PARTES" pactan que el "PROMITENTE COMPRADOR" se obliga a cubrir por su cuenta los gastos de escrituración que en su momento se generen para la formalización mediante escritura pública a partir del quinto año de la firma del presente contrato.
+            ' ]),
+            new Clauses(["part_id" => 1, "number" => "Sexta", "description" => 'EI "PROMITENTE VENDEDOR" se compromete a entregar al "PROMITENTE COMPRADOR" al corriente de todos los impuestos, derechos y contribuciones posterior al quinto año de la firma del presente instrumento. ' ]),
+            new Clauses(["part_id" => 2, "number" => "Septima", "description" => 'El "PROMITENTE COMPRADOR" se obliga a pagar las cantidades señaladas en la cláusula segunda de este contrato en el domicilio que el "PROMITENTE VENDEDOR" señale, sin que sea necesario que este último le requiera de pago, pues la sola llegada del plazo hará las veces de requerimiento. ' ]),
+            new Clauses(["part_id" => 3, "number" => "Octava", "description" => 'El incumplimiento de cualquiera de “LAS PARTES" respecto de las obligaciones derivadas del presente contrato, dará lugar a la rescisión o al cumplimiento forzoso del presente contrato. La parte culpable del incumplimiento pagará a la parte inocente la cantidad correspondiente al 15% quince por ciento de la cantidad total señalada en la cláusula segunda, por concepto de daños y perjuicios, más los gastos judiciales y extrajudiciales que se originen por tal motivo. Se exceptúa de lo aquí pactado el caso fortuito o de fuerza mayor. ' ]),
+            new Clauses(["part_id" => 3, "number" => "Novena", "description" => '"LAS PARTES" están de acuerdo que el precio pactado al inmueble es el justo, por lo que ninguna de las partes sufre empobrecimiento, ni se enriquece en detrimento de la otra, además que no existe error, dolo, violencia, mala fe, ni enriquecimiento ilegítimo; por lo que "LAS PARTES" renuncian a cualquier acción tendiente a la nulidad del presente contrato, por alguna de dichas causas, renunciando de igual forma a cualquier acción penal que se derive del presente contrato. ' ]),
+            new Clauses(["part_id" => 3, "number" => "Decima", "description" => 'Para el caso de controversia con el presente contrato, desde este momento "LAS PARTES" se obligan a someterse en primera instancia a los Métodos Alternos de Solución de Controversias, con la finalidad de llegar a un acuerdo justo para "LAS PARTES" ' ]),
+            new Clauses(["part_id" => 3, "number" => "Decima primera", "description" => 'De no conciliarse por medio de los Métodos Alternos de Solución de Controversias, "LAS PARTES" se someten a la jurisdicción de los tribunales de la ciudad de Colima, Colima, renunciando a cualquier fuero que por su domicilio futuro les pudiera corresponder. ' ]),
+            new Clauses(["part_id" => 3, "number" => "Decima Segunda", "description" => '"LAS PARTES" convienen en dejar obligados a sus herederos a que den cumplimiento a lo estipulado en el presente contrato, por si alguno falleciere, y en caso de ser necesario se sujetan expresamente a los Tribunales de Colima, Colima, para su cumplimiento.
+En virtud de lo anterior la "PROMITENTE COMPRADORA" deja como beneficiario o heredero tanto de sus derechos como de las obligaciones pactadas en este contrato a @beneficiario_cliente.' ]),
+        ]);
+        $contract->save();
     }
 
     /**
@@ -367,6 +400,38 @@ class ConfigurationsController extends Controller
      */
     public function deleteClause()
     {
+    }
+
+    /**
+     * 
+     * 
+     */
+    public function saveLead(){
+        $lead = new Lead();
+        $lead->first_name = "";
+        $lead->last_name = "";
+        $lead->birthDay = "";
+        $lead->birthPlace = "";
+        $lead->maritalStatus = "";
+        $lead->occupation = "";
+        $lead->unofficialManager = "";
+        $lead->beneficiary = "";
+        $lead->email = "";
+        $lead->phone = "";
+        $lead->address_id = "";
+
+        $lead->save();
+    }
+
+    public function saveMetadata() {
+        $development = Development::find(1);
+        $development->metadata()->save(new Metadata(["key" => "ejemplo","value"=>"valor"]));
+        $development->save();
+        
+    }
+
+    public function showContract() {
+        
     }
 
     //ExpanseCategories

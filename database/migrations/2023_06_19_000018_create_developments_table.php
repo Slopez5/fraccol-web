@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('developments', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('real_estate_id');
-            $table->unsignedBigInteger('real_estate_branch_id');
+            $table->unsignedBigInteger('real_estate_id')->nullable();
+            $table->unsignedBigInteger('real_estate_branch_id')->nullable();
             $table->string('name');
             $table->string('logo')->nullable();
             $table->string('blueprint')->nullable();

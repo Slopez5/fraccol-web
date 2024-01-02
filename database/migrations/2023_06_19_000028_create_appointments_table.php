@@ -21,8 +21,9 @@ return new class extends Migration
             $table->date('appointment_date');
             $table->string('status');
             $table->text('notes')->nullable();
-            $table->unsignedBigInteger('sale_closer_agent_id');
-            $table->unsignedBigInteger('lead_agent_id');
+            $table->unsignedBigInteger('development_id')->nullable();
+            $table->unsignedBigInteger('sale_closer_agent_id')->nullable();
+            $table->unsignedBigInteger('lead_agent_id')->nullable();
             $table->timestamps();
             $table->softDeletes();
 

@@ -1,19 +1,21 @@
 <?php
 
-namespace App\View\Components\panel\realEstates\sales;
+namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class ManualLead extends Component
+class PaymentPlanTable extends Component
 {
+    public $paymentPlans;
     /**
      * Create a new component instance.
      */
-    public function __construct()
+    public function __construct($paymentPlans)
     {
         //
+        $this->paymentPlans = $paymentPlans;
     }
 
     /**
@@ -21,6 +23,6 @@ class ManualLead extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.panel.real-estates.sales.manual-lead');
+        return view('components.payment-plan-table');
     }
 }

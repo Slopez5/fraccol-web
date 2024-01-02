@@ -11,6 +11,7 @@ class Clauses extends Model
     use HasFactory;
 
     protected $table = 'clauses';
+    protected $fillable = ['part_id','number','description'];
 
     public function party(): BelongsTo {
         return $this->belongsTo(Parties::class,'party_id');

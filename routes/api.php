@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V1\DevelopmentApiController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -13,7 +14,16 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
+Route::post('/v1/development',[DevelopmentApiController::class,'createDevelopment']);
+Route::get('/v1/developments',[DevelopmentApiController::class,'getAllDevelopments']);
+Route::get('/v1/development/{id}',[DevelopmentApiController::class,'getDevelopmentDetails']);
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
-});
+Route::post('/v1/development/{id}/appointment',[DevelopmentApiController::class,'createAppointment']);
+Route::get('/v1/development/{id}/appointments',[DevelopmentApiController::class,'getAppointments']);
+Route::get('/v1/appointment/{id}',[DevelopmentApiController::class,'getAppointmentDetails']);
+
+Route::post('/v1/development/{developmentId}/lote',[DevelopmentApiController::class,'createLote']);
+Route::get('/v1/development/{developmentId}/lotes',[DevelopmentApiController::class,'getLotes']);
+Route::get('/v1/lote/{id}',[DevelopmentApiController::class,'getLoteDetails']);
+Route::get('/v1/lote/{id}/price',[DevelopmentApiController::class,'getPriceByLote']);
+

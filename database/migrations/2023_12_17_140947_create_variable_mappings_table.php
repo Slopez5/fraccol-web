@@ -13,6 +13,10 @@ return new class extends Migration
     {
         Schema::create('variable_mappings', function (Blueprint $table) {
             $table->id();
+            $table->string('variable_name');
+            $table->string('table_name');
+            $table->string('field_name');
+            $table->string('description');
             $table->timestamps();
         });
     }
