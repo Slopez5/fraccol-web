@@ -22,6 +22,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::post('/v1/login',[AuthApiController::class,'login']);
+
 Route::post('/v1/create_country',[CountryApiController::class,'createCountry']);
 Route::post('/v1/country/{id}/create_state',[CountryApiController::class,'createState']);
 Route::post('/v1/state/{id}/create_city',[CountryApiController::class,'createCity']);

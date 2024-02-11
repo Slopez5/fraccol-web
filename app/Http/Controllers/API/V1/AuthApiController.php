@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Role;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
 
 class AuthApiController extends Controller
 {
@@ -27,15 +28,28 @@ class AuthApiController extends Controller
         return response()->success(["admin" => $admin], ["code" => 200, "Text" => "Administrador agregado correctamente"]);
     }
 
-    public function login() {
+    public function login(Request $request)
+    {
+        $email = $request["email"];
+        $password = $request["password"];
+        $user = User::where('email', $email)->get()->first();
+        if ($user) {
+            if (Hash::check($password, $user->password)) {
+                $token = $user->createToken('Bearer')->accessToken;
+                $user["token"] = $token;
+                return $user;
+            }
+            return $user->password;
+        }
 
+        return $user;
     }
 
-    public function register() {
-
+    public function register()
+    {
     }
 
-    public function forgetPassword() {
-        
+    public function forgetPassword()
+    {
     }
 }

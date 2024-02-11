@@ -74,10 +74,10 @@ class DevelopmentApiController extends Controller
 
     public function addPaymentPlanToDevelopment($developmentId, $loteTypeId, Request $reuqest)
     {
-        $development = Development::with(['paymentPlans'])->where('id',$developmentId)->get()->first();
+        $development = Development::with(['paymentPlans'])->where('id', $developmentId)->get()->first();
         $paymentPlan = PaymentPlan::find($reuqest["payment_plan_id"]);
         $development->paymentPlans()->attach($paymentPlan, ['lot_type_id' => $loteTypeId, 'price_per_sqm' => $reuqest["price_per_sqm"], 'down_payment' => $reuqest["down_payment"]]);
-        
+
         return response()->success(["development" => $development], ["code" => 200, "Text" => "Financiamiento asignado a fraccionamiento correctamente"]);
     }
 
@@ -176,38 +176,59 @@ class DevelopmentApiController extends Controller
     {
         $lote = Lot::find($id);
         if ($lote) {
-
             if ($reuqest->query("payment_plan")) {
                 $reuqest->query("payment_plan");
                 $paymentSelected = $lote->development->lotTypes->where("id", "=", $lote->lot_type_id)->first()->paymentPlans->where('id', '=', $reuqest->query("payment_plan"))->first();
+
+                if ($reuqest->query("down_payment")) {
+                    $downPayment = $reuqest->query("down_payment") >= $paymentSelected->pivot->down_payment ? $reuqest->query("down_payment") : $paymentSelected->pivot->down_payment;
+                    $total_financing = ($paymentSelected->pivot->price_per_sqm * $lote->lot_size) - $downPayment;
+                    $total_price = ($paymentSelected->pivot->price_per_sqm * $lote->lot_size);
+                    $lot_size =  $lote->lot_size;
+                    $price_per_sqm = $paymentSelected->pivot->price_per_sqm;
+                }
+                $mensualidades = $total_financing / $paymentSelected->financing_months;
+                $anualidad = 0;
+                if ($reuqest->query("annuity")) {
+                    $reuqest->query("annuity");
+                    $mensualidades = $mensualidades - ($reuqest->query("annuity") / 12);
+                    $anualidad = $reuqest->query("annuity");
+                } else if ($reuqest->query("mensualidad")) {
+                    $anualidad = ($mensualidades - $reuqest->query("mensualidad")) * 12;
+                    $mensualidades = $reuqest->query("mensualidad");
+                }
+                $priceInfo["down_payment"] = $downPayment;
+                $priceInfo["payment_plan"] = $paymentSelected->description;
+                $priceInfo["total_financing"] = "$" . number_format($total_financing, 2, '.', ',');
+                $priceInfo["mensualidades"] = "$" . number_format($mensualidades, 2, '.', ',');
+                $priceInfo["anualidad"] = "$" . number_format($anualidad, 2, '.', ',');
+                $priceInfo["price_per_sqm"] = "$" . number_format($price_per_sqm, 2, '.', ',');
+                $priceInfo["total_price"] = "$" . number_format($total_price, 2, '.', ',');
+                $priceInfo["lot_size"] = $lot_size . "m2";
+                $anualidadText = $anualidad > 0 ? "anualidades de {$priceInfo["anualidad"]}" : "sin anualidades adicionales";
+
+                $priceInfo["postText"] = "¡Hola! Gracias por tu interés en nuestro lote disponible. El precio total del terreno es de {$priceInfo["total_price"]}. Para ayudarte con la financiación, ofrecemos un pago inicial de {$priceInfo["down_payment"]} y un plan de {$priceInfo["payment_plan"]}. Esto significa que el total a financiar es de {$priceInfo["total_financing"]}, con mensualidades de {$priceInfo["mensualidades"]} y {$anualidadText}. El precio por metro cuadrado es de {$priceInfo["price_per_sqm"]} y el tamaño del lote es de {$priceInfo["lot_size"]}. ¡No dudes en contactarnos si necesitas más información o deseas proceder con la compra!";
+            } else {
+                $price_per_sqm = $lote->development->lotTypes->where("id", "=", $lote->lot_type_id)->first()->pivot->price;
+                $lot_size = $lote->lot_size;
+                $total_price = $price_per_sqm * $lot_size;
+
+                $priceInfo["price_per_sqm"] = "$" . number_format($price_per_sqm, 2, '.', ',');
+                $priceInfo["total_price"] = "$" . number_format($total_price, 2, '.', ',');
+                $priceInfo["lot_size"] = $lot_size . "m2";
+
+                $priceInfo["postText"] = "¡Hola! Gracias por tu interés en nuestro lote disponible. El precio total del terreno es de {$priceInfo["total_price"]}. El precio por metro cuadrado es de {$priceInfo["price_per_sqm"]} y el tamaño del lote es de {$priceInfo["lot_size"]}. ¡No dudes en contactarnos si necesitas más información o deseas proceder con la compra!";
             }
-            if ($reuqest->query("down_payment")) {
-                $downPayment = $reuqest->query("down_payment") >= $paymentSelected->pivot->down_payment ? $reuqest->query("down_payment") : $paymentSelected->pivot->down_payment;
-                $total_financing = ($paymentSelected->pivot->price_per_sqm * $lote->lot_size) - $downPayment;
-            }
-            $mensualidades = $total_financing / $paymentSelected->financing_months;
-            $anualidad = 0;
-            if ($reuqest->query("annuity")) {
-                $reuqest->query("annuity");
-                $mensualidades = $mensualidades - ($reuqest->query("annuity") / 12);
-                $anualidad = $reuqest->query("annuity");
-            } else if ($reuqest->query("mensualidad")) {
-                $anualidad = ($mensualidades - $reuqest->query("mensualidad")) * 12;
-                $mensualidades = $reuqest->query("mensualidad");
-            }
-            $priceInfo["down_payment"] = $downPayment;
-            $priceInfo["payment_plan"] = $paymentSelected->description;
-            $priceInfo["total_financing"] = $total_financing;
-            $priceInfo["mensualidades"] = $mensualidades;
-            $priceInfo["anualidad"] = $anualidad;
+
             return response()->success(["price_info" => $priceInfo], 200);
         }
         return response()->failure("Lote no encontrado", 1000);
     }
 
-    public function addLoteMetadata($loteId,Request $request) {
+    public function addLoteMetadata($loteId, Request $request)
+    {
         $development = Lot::find($loteId);
-        $development->metadata()->save(new Metadata(["key" => $request["key"],"value"=>$request["value"]]));
+        $development->metadata()->save(new Metadata(["key" => $request["key"], "value" => $request["value"]]));
         $development->save();
         return response()->success(['metadata' => $development->metadata], ["code" => 200, "message" => "metadato agregado correctamente"]);
     }
