@@ -14,6 +14,8 @@ return new class extends Migration
     public function up()
     {
         Schema::create('payments', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('payment_status_id');
             $table->unsignedBigInteger('sale_id');
             $table->date('payment_date');
             $table->decimal('payment_amount', 8, 2);
@@ -24,6 +26,7 @@ return new class extends Migration
 
             // Foreign key constraint
             $table->foreign('sale_id')->references('id')->on('sales');
+            $table->foreign('payment_status_id')->references('id')->on('payment_status');
         });
     }
 

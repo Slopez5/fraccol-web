@@ -16,7 +16,7 @@ class Address extends Model
     protected $fillable = ['street','country_id','state_id','city_id','zip_code'];
 
     public function branch(): HasOne {
-        return $this->hasOne(RealStateBranch::class);
+        return $this->hasOne(RealEstateBranch::class);
     }
 
     public function city(): BelongsTo {
