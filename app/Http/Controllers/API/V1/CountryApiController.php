@@ -18,7 +18,7 @@ class CountryApiController extends Controller
             "code" => $request["code"],
         ]);
         $country->save();
-        return response()->success(["country" => $country], ["code" => 1000, "message" => "Pais agregado correctamente"]);
+        return response()->success(["country" => $country], ["code" => 200, "message" => "Pais agregado correctamente"]);
     }
 
     public function createState($countryId, Request $request)
@@ -29,7 +29,7 @@ class CountryApiController extends Controller
             "abbreviation" => $request["abbreviation"],
         ]);
         $state->save();
-        return response()->success(["state" => $state], ["code" => 1000, "message" => "Estado agregado correctamente"]);
+        return response()->success(["state" => $state], ["code" => 200, "message" => "Estado agregado correctamente"]);
     }
 
     public function createCity($stateId, Request $request)
@@ -39,6 +39,6 @@ class CountryApiController extends Controller
             "name" => $request["name"]
         ]);
         $city->save();
-        return response()->success(["city" => $city], ["code" => 1000, "message" => "Ciudad agregada correctamente"]);
+        return response()->success(["city" => $city], ["code" => 200, "message" => "Ciudad agregada correctamente"]);
     }
 }

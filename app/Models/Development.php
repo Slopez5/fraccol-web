@@ -31,7 +31,7 @@ class Development extends Model
 
     public function lotTypes(): BelongsToMany
     {
-        return $this->belongsToMany(LotType::class, 'development_lot_type', 'development_id', 'lot_type_id')->withPivot('price');
+        return $this->belongsToMany(LotType::class, 'development_lot_type', 'development_id', 'lot_type_id')->withPivot('price')->withTimestamps();
     }
 
     public function lotes(): HasMany
@@ -46,7 +46,7 @@ class Development extends Model
 
     public function paymentPlans(): belongsToMany
     {
-        return $this->belongsToMany(PaymentPlan::class, 'development_lot_type_payment_plan')->using(DevelopmentPaymentPlan::class);
+        return $this->belongsToMany(PaymentPlan::class, 'development_lot_type_payment_plan')->withPivot(['lot_type_id','price_per_sqm','down_payment'])->using(DevelopmentPaymentPlan::class)->withTimestamps();
     }
 
     public function contracts(): HasMany

@@ -20,6 +20,10 @@ class Lot extends Model
    public function development(): BelongsTo {
     return $this->belongsTo(Development::class,'development_id');
    }
+
+   public function loteType(): BelongsTo {
+    return $this->belongsTo(LotType::class,'lot_type_id');
+   }
    
     public function metadata(): MorphMany
     {

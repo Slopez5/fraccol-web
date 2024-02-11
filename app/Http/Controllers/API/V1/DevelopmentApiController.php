@@ -6,6 +6,9 @@ use App\Http\Controllers\Controller;
 use App\Models\Appointment;
 use App\Models\Development;
 use App\Models\Lot;
+use App\Models\LotType;
+use App\Models\Metadata;
+use App\Models\PaymentPlan;
 use Illuminate\Http\Request;
 
 class DevelopmentApiController extends Controller
@@ -60,16 +63,22 @@ class DevelopmentApiController extends Controller
         return response()->success(["development" => $development], ["code" => 200, "Text" => "Fraccionamiento agregado correctamente"]);
     }
 
-    public function addLoteTypeToDevelopment(Request $reuqest)
+    public function addLoteTypeToDevelopment($developmentId, Request $reuqest)
     {
+        $development = Development::find($developmentId);
+        $loteType = LotType::find($reuqest["lote_type_id"]);
+        $development->lotTypes()->attach($loteType, ["price" => $reuqest["price"]]);
+
+        return response()->success(["development" => $development], ["code" => 200, "Text" => "Tipo de lote asignado a fraccionamiento correctamente"]);
     }
 
-    public function addPaymentPlanToDevelopment(Request $reuqest)
+    public function addPaymentPlanToDevelopment($developmentId, $loteTypeId, Request $reuqest)
     {
-    }
-
-    public function addLotesToDevelopment(Request $reuqest)
-    {
+        $development = Development::with(['paymentPlans'])->where('id',$developmentId)->get()->first();
+        $paymentPlan = PaymentPlan::find($reuqest["payment_plan_id"]);
+        $development->paymentPlans()->attach($paymentPlan, ['lot_type_id' => $loteTypeId, 'price_per_sqm' => $reuqest["price_per_sqm"], 'down_payment' => $reuqest["down_payment"]]);
+        
+        return response()->success(["development" => $development], ["code" => 200, "Text" => "Financiamiento asignado a fraccionamiento correctamente"]);
     }
 
     public function getAllDevelopments()
@@ -122,10 +131,39 @@ class DevelopmentApiController extends Controller
 
     public function createLote($developmentId, Request $reuqest)
     {
+        $development = Development::find($developmentId);
+        $loteType = LotType::find($reuqest["lote_type_id"]);
+
+        if ($reuqest["isMultiLote"] == 1) {
+            $lotes = [];
+            $loteNumbers = explode(',', $reuqest["lot_number"]);
+            foreach ($loteNumbers as $key => $loteNumber) {
+                $lote = new Lot();
+                $lote->development()->associate($development);
+                $lote->loteType()->associate($loteType);
+                $lote->lot_number = $loteNumber;
+                $lote->block_number = $reuqest["block_number"];
+                $lote->lot_size = $reuqest["lot_size"];
+                $lote->save();
+                $lotes[] = $lote;
+            }
+            return response()->success(['lotes' => $lotes], ["code" => 200, "message" => "Lotes agregados correctamente"]);
+        } else {
+            $lote = new Lot();
+            $lote->development()->associate($development);
+            $lote->loteType()->associate($loteType);
+            $lote->lot_number = $reuqest["lot_number"];
+            $lote->block_number = $reuqest["block_number"];
+            $lote->lot_size = $reuqest["lot_size"];
+            $lote->save();
+            return response()->success(['lote' => $lote], ["code" => 200, "message" => "Lote agregado correctamente"]);
+        }
     }
 
     public function getLotes($developmentId)
     {
+        $lotes = Development::find($developmentId)->lotes;
+        return response()->success(['lotes' => $lotes], ["code" => 200, "message" => "Listado de lotes"]);
     }
 
     public function getLoteDetails($id)
@@ -165,5 +203,12 @@ class DevelopmentApiController extends Controller
             return response()->success(["price_info" => $priceInfo], 200);
         }
         return response()->failure("Lote no encontrado", 1000);
+    }
+
+    public function addLoteMetadata($loteId,Request $request) {
+        $development = Lot::find($loteId);
+        $development->metadata()->save(new Metadata(["key" => $request["key"],"value"=>$request["value"]]));
+        $development->save();
+        return response()->success(['metadata' => $development->metadata], ["code" => 200, "message" => "metadato agregado correctamente"]);
     }
 }
