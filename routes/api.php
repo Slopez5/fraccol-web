@@ -1,14 +1,12 @@
 <?php
 
-use App\Http\Controllers\API\V1\AdminApiController;
 use App\Http\Controllers\API\V1\AuthApiController;
 use App\Http\Controllers\API\V1\CountryApiController;
 use App\Http\Controllers\API\V1\DevelopmentApiController;
 use App\Http\Controllers\API\V1\LoteApiController;
 use App\Http\Controllers\API\V1\PaymentPlansApiController;
-use App\Http\Controllers\Api\V1\RealEstateApiController;
+use App\Http\Controllers\API\V1\RealEstateApiController;
 use App\Http\Controllers\API\V1\RolesApiController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -32,7 +30,7 @@ Route::post('/v1/create_payment_plan',[PaymentPlansApiController::class,'createP
 
 Route::post('/v1/role', [RolesApiController::class, 'addRole']);
 Route::post('/v1/create_user', [AuthApiController::class, 'createUser']);
-Route::post('/v1/create_real_estate',[RealEstateApiController::class,'addRealEstate']);
+Route::post('/v1/create_real_estate', [RealEstateApiController::class, 'addRealEstate']);
 Route::post('/v1/real_estate/{id}/create_real_estate_branch',[RealEstateApiController::class,'addRealEstateAgency']);
 
 
