@@ -17,7 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('customer_name');
             $table->string('customer_phone');
-            $table->string('customer_email');
+            $table->string('customer_email')->nullable();
             $table->date('appointment_date');
             $table->string('status');
             $table->text('notes')->nullable();
