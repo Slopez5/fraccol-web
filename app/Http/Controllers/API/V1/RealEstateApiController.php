@@ -38,6 +38,7 @@ class RealEstateApiController extends Controller
         $real_estate_branch->realEstate()->associate($real_estate_agency);
         $address = new Address([
             "street" => $request["address"]["street"],
+            "neighborhood" => $request["address"]["neighborhood"],
             "country_id" => $request["address"]["country_id"],
             "state_id" => $request["address"]["state_id"],
             "city_id" => $request["address"]["city_id"],
