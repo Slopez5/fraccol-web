@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/v1/login',[AuthApiController::class,'login']);
+Route::post('/v1/login',[AuthApiController::class,'createUser']);
 
 Route::post('/v1/create_country',[CountryApiController::class,'createCountry']);
 Route::post('/v1/country/{id}/create_state',[CountryApiController::class,'createState']);
