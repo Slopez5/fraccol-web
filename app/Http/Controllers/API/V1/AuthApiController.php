@@ -36,13 +36,12 @@ class AuthApiController extends Controller
         if ($user) {
             if (Hash::check($password, $user->password)) {
                 $token = $user->createToken('Bearer')->accessToken;
-                $user["token"] = $token;
-                return $user;
+                return response()->success(["user" => $user, "tokeb" => $token], ["code" => 200, "Text" => "Administrador agregado correctamente"]);
             }
-            return $user->password;
+            return response()->failure(["error"=>"Ocurrio un error al iniciar sesion"]);
         }
 
-        return $user;
+        return response()->failure(["error"=>"Ocurrio un error al iniciar sesion"]);
     }
 
     public function register()

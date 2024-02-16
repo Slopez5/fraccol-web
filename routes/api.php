@@ -20,24 +20,24 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/v1/login',[AuthApiController::class,'login']);
+Route::post('/v1/login', [AuthApiController::class, 'login']);
 
-Route::post('/v1/create_country',[CountryApiController::class,'createCountry']);
-Route::post('/v1/country/{id}/create_state',[CountryApiController::class,'createState']);
-Route::post('/v1/state/{id}/create_city',[CountryApiController::class,'createCity']);
-Route::post('/v1/create_lote_type',[LoteApiController::class,'addLoteType']);
-Route::post('/v1/create_payment_plan',[PaymentPlansApiController::class,'createPaymentPlan']);
+Route::post('/v1/create_country', [CountryApiController::class, 'createCountry']);
+Route::post('/v1/country/{id}/create_state', [CountryApiController::class, 'createState']);
+Route::post('/v1/state/{id}/create_city', [CountryApiController::class, 'createCity']);
+Route::post('/v1/create_lote_type', [LoteApiController::class, 'addLoteType']);
+Route::post('/v1/create_payment_plan', [PaymentPlansApiController::class, 'createPaymentPlan']);
 
 Route::post('/v1/role', [RolesApiController::class, 'addRole']);
 Route::post('/v1/create_user', [AuthApiController::class, 'createUser']);
 Route::post('/v1/create_real_estate', [RealEstateApiController::class, 'addRealEstate']);
-Route::post('/v1/real_estate/{id}/create_real_estate_branch',[RealEstateApiController::class,'addRealEstateAgency']);
+Route::post('/v1/real_estate/{id}/create_real_estate_branch', [RealEstateApiController::class, 'addRealEstateAgency']);
 
 
 
 Route::post('/v1/development', [DevelopmentApiController::class, 'createDevelopment']);
-Route::post('/v1/development/{id}/assign_lote_type',[DevelopmentApiController::class,'addLoteTypeToDevelopment']);
-Route::post('/v1/development/{development_id}/lote_type/{lote_type_id}/assign_payment_plan',[DevelopmentApiController::class,'addPaymentPlanToDevelopment']);
+Route::post('/v1/development/{id}/assign_lote_type', [DevelopmentApiController::class, 'addLoteTypeToDevelopment']);
+Route::post('/v1/development/{development_id}/lote_type/{lote_type_id}/assign_payment_plan', [DevelopmentApiController::class, 'addPaymentPlanToDevelopment']);
 Route::get('/v1/developments', [DevelopmentApiController::class, 'getAllDevelopments']);
 Route::get('/v1/development/{id}', [DevelopmentApiController::class, 'getDevelopmentDetails']);
 
@@ -48,5 +48,5 @@ Route::get('/v1/appointment/{id}', [DevelopmentApiController::class, 'getAppoint
 Route::post('/v1/development/{developmentId}/lote', [DevelopmentApiController::class, 'createLote']);
 Route::get('/v1/development/{developmentId}/lotes', [DevelopmentApiController::class, 'getLotes']);
 Route::get('/v1/lote/{id}', [DevelopmentApiController::class, 'getLoteDetails']);
-Route::post('/v1/lote/{id}/metadata',[DevelopmentApiController::class,'addLoteMetadata']);
+Route::post('/v1/lote/{id}/metadata', [DevelopmentApiController::class, 'addLoteMetadata']);
 Route::get('/v1/lote/{id}/price', [DevelopmentApiController::class, 'getPriceByLote']);
