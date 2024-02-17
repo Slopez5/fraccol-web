@@ -16,14 +16,14 @@ return new class extends Migration
         Schema::create('leads', function (Blueprint $table) {
             $table->id();
             $table->string('first_name');
-            $table->string('last_name');
-            $table->string('birthDay');
-            $table->string('birthPlace');
-            $table->string('maritalStatus');
-            $table->string('occupation');
+            $table->string('last_name')->nullable();
+            $table->string('birthDay')->nullable();
+            $table->string('birthPlace')->nullable();
+            $table->string('maritalStatus')->nullable();
+            $table->string('occupation')->nullable();
             $table->string('unofficialManager')->nullable();
             $table->string('beneficiary')->nullable();
-            $table->string('email');
+            $table->string('email')->nullable();
             $table->string('phone');
             $table->unsignedBigInteger('address_id')->nullable();
             $table->string('source')->nullable();

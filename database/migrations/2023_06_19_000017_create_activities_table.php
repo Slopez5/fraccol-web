@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('activities', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('lead_id');
+            $table->unsignedBigInteger('lead_id')->nullable();
             $table->unsignedBigInteger('lead_agent_id');
             $table->unsignedBigInteger('activity_type_id');
             $table->text('notes')->nullable();

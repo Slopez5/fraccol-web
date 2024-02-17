@@ -14,7 +14,7 @@ class RealEstateApiController extends Controller
     //
     public function addRealEstate(Request $request)
     {
-        $user = User::find($request["id"]);
+        $user = User::find($request["admin_id"]);
         if ($user->role->id == 2) {
             $real_estate_agency = new RealEstateAgency();
             $real_estate_agency->admin()->associate($user);
@@ -29,7 +29,7 @@ class RealEstateApiController extends Controller
         }
     }
 
-    public function addRealEstateAgency($real_estate_id,Request $request) {
+    public function addRealEstateAgency($real_estate_id, Request $request) {
         $real_estate_agency = RealEstateAgency::find($real_estate_id);
         $real_estate_branch = new RealEstateBranch();
         $real_estate_branch->name = $request["name"];
