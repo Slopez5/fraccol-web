@@ -17,7 +17,8 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('description')->nullable();
-            $table->unsignedBigInteger('development_id');
+            $table->unsignedBigInteger('address_id')->nullable();
+            $table->unsignedBigInteger('development_id')->nullable();
             $table->unsignedBigInteger('lot_id')->nullable();
             $table->timestamps();
             $table->softDeletes();

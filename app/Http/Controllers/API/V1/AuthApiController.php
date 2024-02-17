@@ -38,10 +38,10 @@ class AuthApiController extends Controller
                 $token = $user->createToken('Bearer')->accessToken;
                 return response()->success(["user" => $user, "token" => $token], ["code" => 200, "Text" => "Login correctamente"]);
             }
-            return response()->failure(["error"=>"Ocurrio un error al iniciar sesion"]);
+            return response()->failure(["error"=>"Ocurrio un error al iniciar sesion"],["code"=>1000]);
         }
 
-        return response()->failure(["error"=>"Ocurrio un error al iniciar sesion"]);
+        return response()->failure(["error"=>"Ocurrio un error al iniciar sesion"],["code"=>1000]);
     }
 
     public function register()
