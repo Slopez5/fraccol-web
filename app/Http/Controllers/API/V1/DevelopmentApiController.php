@@ -83,7 +83,7 @@ class DevelopmentApiController extends Controller
 
     public function getAllDevelopments()
     {
-        $developments = Development::all(['id', 'name', 'total_land_area', 'total_lots', 'available_lots']);
+        $developments = Development::all(['id', 'name', 'location', 'total_land_area', 'total_lots', 'available_lots']);
 
         return response()->success(["developments" => $developments], 200);
     }
