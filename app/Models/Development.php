@@ -16,7 +16,7 @@ class Development extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'developments';
-    protected $fillable = ['name', 'real_estate_id', 'real_estate_branch_id', 'location', 'total_land_area', 'total_lots', 'available_lots'];
+    protected $fillable = ['name', 'real_estate_id', 'real_estate_branch_id', 'location', 'total_land_area', 'total_lots', 'available_lots','logo','blueprint','start_date','end_date','sort_description','full_description','status','image'];
     protected $hidden = ['created_at','updated_at','deleted_at'];
 
     public function subdomain(): MorphOne
