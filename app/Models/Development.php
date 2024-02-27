@@ -29,6 +29,11 @@ class Development extends Model
         return $this->belongsTo(RealEstateAgency::class, 'real_estate_id', 'id');
     }
 
+    public function realEstatesBranch(): BelongsTo
+    {
+        return $this->belongsTo(RealEstateBranch::class, 'real_estate_branch_id', 'id');
+    }
+
     public function lotTypes(): BelongsToMany
     {
         return $this->belongsToMany(LotType::class, 'development_lot_type', 'development_id', 'lot_type_id')->withPivot('price')->withTimestamps();

@@ -14,49 +14,49 @@ use Illuminate\Http\Request;
 class DevelopmentApiController extends Controller
 {
 
-    public function createDevelopment(Request $reuqest)
+    public function createDevelopment(Request $request)
     {
         $development = new Development();
-        $development->real_estate_id = $reuqest['real_estate_id'];
-        $development->real_estate_branch_id = $reuqest['real_estate_branch_id'];
-        $development->name = $reuqest["name"];
-        if ($reuqest['logo']) {
-            $development->logo = $reuqest['logo'];
+        $development->real_estate_id = $request['real_estate_id'];
+        $development->real_estate_branch_id = $request['real_estate_branch_id'];
+        $development->name = $request["name"];
+        if ($request['logo']) {
+            $development->logo = $request['logo'];
         }
-        if ($reuqest['blueprint']) {
-            $development->blueprint = $reuqest['blueprint'];
+        if ($request['blueprint']) {
+            $development->blueprint = $request['blueprint'];
         }
-        if ($reuqest['location']) {
-            $development->location = $reuqest['location'];
+        if ($request['location']) {
+            $development->location = $request['location'];
         }
-        if ($reuqest['total_land_area']) {
-            $development->total_land_area = $reuqest['total_land_area'];
+        if ($request['total_land_area']) {
+            $development->total_land_area = $request['total_land_area'];
         }
-        $development->total_lots = $reuqest['total_lots'];
-        $development->available_lots = $reuqest['available_lots'];
-        if ($reuqest['start_date']) {
+        $development->total_lots = $request['total_lots'];
+        $development->available_lots = $request['available_lots'];
+        if ($request['start_date']) {
 
-            $development->start_date = $reuqest['start_date'];
+            $development->start_date = $request['start_date'];
         }
-        if ($reuqest['end_date']) {
+        if ($request['end_date']) {
 
-            $development->end_date = $reuqest['end_date'];
+            $development->end_date = $request['end_date'];
         }
-        if ($reuqest['sort_description']) {
+        if ($request['sort_description']) {
 
-            $development->sort_description = $reuqest['sort_description'];
+            $development->sort_description = $request['sort_description'];
         }
-        if ($reuqest['full_description']) {
+        if ($request['full_description']) {
 
-            $development->full_description = $reuqest['full_description'];
+            $development->full_description = $request['full_description'];
         }
-        if ($reuqest['status']) {
+        if ($request['status']) {
 
-            $development->status = $reuqest['status'];
+            $development->status = $request['status'];
         }
-        if ($reuqest['image']) {
+        if ($request['image']) {
 
-            $development->image = $reuqest['image'];
+            $development->image = $request['image'];
         }
         $development->save();
 
@@ -90,7 +90,54 @@ class DevelopmentApiController extends Controller
 
     public function getDevelopmentDetails($id)
     {
+        $development = Development::with(['realEstatesAgency','realEstatesBranch'])->where('id',$id)->get()->first();
+
+        return response()->success(["development" => $development], 200);
+    }
+
+    public function updateDevelopment($id, Request $request)
+    {
         $development = Development::find($id);
+        $development->name = $request["name"];
+        if ($request['logo']) {
+            $development->logo = $request['logo'];
+        }
+        if ($request['blueprint']) {
+            $development->blueprint = $request['blueprint'];
+        }
+        if ($request['location']) {
+            $development->location = $request['location'];
+        }
+        if ($request['total_land_area']) {
+            $development->total_land_area = $request['total_land_area'];
+        }
+        $development->total_lots = $request['total_lots'];
+        $development->available_lots = $request['available_lots'];
+        if ($request['start_date']) {
+
+            $development->start_date = $request['start_date'];
+        }
+        if ($request['end_date']) {
+
+            $development->end_date = $request['end_date'];
+        }
+        if ($request['sort_description']) {
+
+            $development->sort_description = $request['sort_description'];
+        }
+        if ($request['full_description']) {
+
+            $development->full_description = $request['full_description'];
+        }
+        if ($request['status']) {
+
+            $development->status = $request['status'];
+        }
+        if ($request['image']) {
+
+            $development->image = $request['image'];
+        }
+        $development->save();
 
         return response()->success(["development" => $development], 200);
     }
