@@ -54,7 +54,7 @@ class RealEstateApiController extends Controller
 
     public function getRealEstates()
     {
-        $real_estate_agencies = RealEstateAgency::all();
+        $real_estate_agencies = RealEstateAgency::with(['branches'])->get();
         return response()->success(["real_estate_agencies" => $real_estate_agencies], ["code" => 200, "Text" => ""]);
     }
 
