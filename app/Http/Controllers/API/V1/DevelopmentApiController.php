@@ -10,6 +10,7 @@ use App\Models\LotType;
 use App\Models\Metadata;
 use App\Models\PaymentPlan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DevelopmentApiController extends Controller
 {
@@ -84,7 +85,7 @@ class DevelopmentApiController extends Controller
     public function getAllDevelopments()
     {
         $developments = Development::all();
-
+        print(Auth::user());
         return response()->success(["developments" => $developments], 200);
     }
 
