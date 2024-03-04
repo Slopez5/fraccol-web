@@ -85,7 +85,7 @@ class DevelopmentApiController extends Controller
     public function getAllDevelopments()
     {
         $developments = Development::all();
-        print(Auth::user());
+        logger(Auth::user());
         return response()->success(["developments" => $developments], 200);
     }
 
