@@ -27,7 +27,7 @@ Route::post('/v1/login', [AuthApiController::class, 'login']);
 Route::post('/v1/register', [AuthApiController::class, 'register']);
 Route::post('/v1/forget_password', [AuthApiController::class, 'forgetPassword']);
 
-Route::middleware(['middleware_name'])->group(function () {
+Route::middleware(['auth:api'])->group(function () {
     Route::post('/v1/create_user', [AuthApiController::class, 'createUser']);
 
     /**
@@ -65,7 +65,7 @@ Route::middleware(['middleware_name'])->group(function () {
      * Real Estates Branches Apis
      */
     Route::get('/v1/real_estate/{id}/real_estate_branches', [RealEstateApiController::class, 'getRealEstateBranches']);
-    Route::post('/v1/real_estate/{id}/create_real_estate_branch', [RealEstateApiController::class, 'addRealEstateAgency']);
+    Route::post('/v1/real_estate/{id}/create_real_estate_branch', [RealEstateApiController::class, 'addRealEstateBranch']);
     Route::get('/v1/real_estate_branch/{id}', [RealEstateApiController::class, 'realEstateBranchDetails']);
     Route::post('/v1/real_estate_branch/{id}/update', [RealEstateApiController::class, 'updateRealEstateBranch']);
     Route::delete('/v1/real_estate_branch/{id}/delete', [RealEstateApiController::class, 'deleteRealEstateBranch']);

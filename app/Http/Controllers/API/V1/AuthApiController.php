@@ -46,6 +46,7 @@ class AuthApiController extends Controller
 
     public function register()
     {
+        return "";
     }
 
     public function forgetPassword()

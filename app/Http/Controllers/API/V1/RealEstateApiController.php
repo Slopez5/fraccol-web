@@ -8,13 +8,14 @@ use App\Models\RealEstateAgency;
 use App\Models\RealEstateBranch;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RealEstateApiController extends Controller
 {
     //
     public function addRealEstate(Request $request)
     {
-        $user = User::find($request["admin_id"]);
+        $user = Auth::user();
         if ($user->role->id == 2) {
             $real_estate_agency = new RealEstateAgency();
             $real_estate_agency->admin()->associate($user);
@@ -29,7 +30,7 @@ class RealEstateApiController extends Controller
         }
     }
 
-    public function addRealEstateAgency($real_estate_id, Request $request)
+    public function addRealEstateBranch($real_estate_id, Request $request)
     {
         $real_estate_agency = RealEstateAgency::find($real_estate_id);
         $real_estate_branch = new RealEstateBranch();
