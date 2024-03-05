@@ -91,7 +91,7 @@ class DevelopmentApiController extends Controller
 
     public function getDevelopmentDetails($id)
     {
-        $development = Development::with(['realEstatesAgency','realEstatesBranch'])->where('id',$id)->get()->first();
+        $development = Development::with(['realEstatesAgency', 'realEstatesBranch'])->where('id', $id)->get()->first();
 
         return response()->success(["development" => $development], 200);
     }
@@ -104,7 +104,13 @@ class DevelopmentApiController extends Controller
             $development->logo = $request['logo'];
         }
         if ($request['blueprint']) {
-            $development->blueprint = $request['blueprint'];
+            $path = null;
+            if ($request->file('blueprint')->isValid()) {
+                $path = $request->file('blueprint')->store('uploads');
+                return response()->json(['path' => $path], 200);
+            }
+
+            $development->blueprint = $path;
         }
         if ($request['location']) {
             $development->location = $request['location'];
