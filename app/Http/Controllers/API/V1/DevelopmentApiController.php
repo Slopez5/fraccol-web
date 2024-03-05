@@ -106,7 +106,7 @@ class DevelopmentApiController extends Controller
         if ($request['blueprint']) {
             $path = null;
             if ($request->file('blueprint')->isValid()) {
-                $path = $request->file('blueprint')->store('uploads');
+                $path = $request->file('blueprint')->store('public/planos');
                 return response()->json(['path' => $path], 200);
             }
 
