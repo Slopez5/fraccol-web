@@ -13,6 +13,7 @@ class RealEstateBranch extends Model
 
     protected $table = 'real_estate_branches';
     protected $fillable = ['name','email','phone','address_id','real_estate_agency_id'];
+    protected $hidden = ['created_at','updated_at','deleted_at'];
 
 
     public function realEstate() : BelongsTo {

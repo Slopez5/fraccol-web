@@ -14,6 +14,7 @@ class RealEstateAgency extends Model
 
     protected $table = 'real_estate_agencies';
     protected $fillable = ['admin_id', 'name', 'email', 'phone'];
+    protected $hidden = ['created_at','updated_at','deleted_at'];
 
     public function admin(): BelongsTo {
         return $this->BelongsTo(User::class,'admin_id');

@@ -13,6 +13,7 @@ class LotType extends Model
 
     protected $table = 'lot_types';
     protected $fillable = ['name', 'description'];
+    protected $hidden = ['created_at','updated_at','deleted_at'];
 
     public function developments(): BelongsToMany
     {

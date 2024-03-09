@@ -85,13 +85,24 @@ class DevelopmentApiController extends Controller
     public function getAllDevelopments()
     {
         $developments = Development::all();
-        logger(Auth::user());
         return response()->success(["developments" => $developments], 200);
     }
 
     public function getDevelopmentDetails($id)
     {
-        $development = Development::with(['realEstatesAgency', 'realEstatesBranch','lotTypes','paymentPlans','lotes'])->where('id', $id)->get()->first();
+        $development = Development::with(['realEstatesAgency', 'realEstatesBranch', 'lotTypes', 'paymentPlans', 'lotes'])->where('id', $id)->get()->first();
+        $development->lotTypes->map(function ($lotType) {
+            $lotType->price = $lotType->pivot->price;
+            unset($lotType->pivot);
+            return $lotType;
+        });
+
+        $development->paymentPlans->map(function ($paymentPlan) {
+            $paymentPlan->price = $paymentPlan->pivot->price_per_sqm;
+            $paymentPlan->down_payment = $paymentPlan->pivot->down_payment;
+            unset($paymentPlan->pivot);
+            return $paymentPlan;
+        });
 
         return response()->success(["development" => $development], 200);
     }
@@ -106,9 +117,8 @@ class DevelopmentApiController extends Controller
         if ($request['blueprint']) {
             $path = null;
             if ($request->file('blueprint')->isValid()) {
-                $path = $request->file('blueprint')->storeAs('public/planos',$request["name"]);
+                $path = $request->file('blueprint')->storeAs('public/planos', $request["name"]);
                 $path = str_replace('public/', 'storage/', $path);
-                //return response()->json(['path' => $path], 200);
             }
 
             $development->blueprint = $path;
