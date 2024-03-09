@@ -91,7 +91,7 @@ class DevelopmentApiController extends Controller
 
     public function getDevelopmentDetails($id)
     {
-        $development = Development::with(['realEstatesAgency', 'realEstatesBranch'])->where('id', $id)->get()->first();
+        $development = Development::with(['realEstatesAgency', 'realEstatesBranch','lotTypes','paymentPlans','lotes'])->where('id', $id)->get()->first();
 
         return response()->success(["development" => $development], 200);
     }
