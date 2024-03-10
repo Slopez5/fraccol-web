@@ -152,8 +152,13 @@ class DevelopmentApiController extends Controller
             $development->status = $request['status'];
         }
         if ($request['image']) {
+            $path = null;
+            if ($request->file('blueprint')->isValid()) {
+                $path = $request->file('image')->storeAs('public/developments/' . $request["name"], "banner");
+                $path = str_replace('public/', 'storage/', $path);
+            }
 
-            $development->image = $request['image'];
+            $development->image = $path;
         }
         $development->save();
 
