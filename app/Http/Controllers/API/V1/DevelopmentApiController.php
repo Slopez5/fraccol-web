@@ -11,6 +11,7 @@ use App\Models\Metadata;
 use App\Models\PaymentPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Redis;
 
 class DevelopmentApiController extends Controller
 {
@@ -80,6 +81,12 @@ class DevelopmentApiController extends Controller
         $development->paymentPlans()->attach($paymentPlan, ['lot_type_id' => $loteTypeId, 'price_per_sqm' => $reuqest["price_per_sqm"], 'down_payment' => $reuqest["down_payment"]]);
 
         return response()->success(["development" => $development], ["code" => 200, "Text" => "Financiamiento asignado a fraccionamiento correctamente"]);
+    }
+
+    public function testRedis() {
+        Redis::set('test_key', 'Hello, Redis!');
+        $value = Redis::get('test_key');
+        return $value;
     }
 
     public function getAllDevelopments()
@@ -158,7 +165,7 @@ class DevelopmentApiController extends Controller
                 $path = str_replace('public/', 'storage/', $path);
             }
 
-            $development->image = $path;
+            $development->image = "https://fraccionamientoscolima.com/" . $path;
         }
         $development->save();
 
