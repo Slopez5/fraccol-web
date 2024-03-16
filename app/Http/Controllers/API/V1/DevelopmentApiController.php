@@ -311,7 +311,9 @@ class DevelopmentApiController extends Controller
         return response()->success(['lote_types' => $lote_types], ["code" => 200, "message" => "Listado de tipos de lote de un fraccionamiento "]);
     }
 
-    public function getPaymentPlans
+    public function getPaymentPlansByDevelopment() {
+        
+    }
 
 
 }
