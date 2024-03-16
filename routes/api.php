@@ -97,6 +97,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/v1/development/{id}', [DevelopmentApiController::class, 'getDevelopmentDetails']);
     Route::post('/v1/development/{id}/edit', [DevelopmentApiController::class, 'updateDevelopment']);
     Route::post('/v1/development/{id}/assign_lote_type', [DevelopmentApiController::class, 'addLoteTypeToDevelopment']);
+    Route::get('/v1/development/{id}/lote_types', [DevelopmentApiController::class, 'getLoteTypeByDevelopment']);
     Route::post('/v1/development/{development_id}/lote_type/{lote_type_id}/assign_payment_plan', [DevelopmentApiController::class, 'addPaymentPlanToDevelopment']);
     Route::get('/v1/development/{developmentId}/lotes', [DevelopmentApiController::class, 'getLotes']);
     Route::post('/v1/development/{developmentId}/lote', [DevelopmentApiController::class, 'createLote']);

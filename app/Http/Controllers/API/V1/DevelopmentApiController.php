@@ -12,6 +12,7 @@ use App\Models\PaymentPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redis;
+use PhpParser\Builder\Function_;
 
 class DevelopmentApiController extends Controller
 {
@@ -304,4 +305,13 @@ class DevelopmentApiController extends Controller
         $development->save();
         return response()->success(['metadata' => $development->metadata], ["code" => 200, "message" => "metadato agregado correctamente"]);
     }
+
+    public function getLoteTypeByDevelopment($developmentId) {
+        $lote_types = Development::find($developmentId);
+        return response()->success(['lote_types' => $lote_types], ["code" => 200, "message" => "Listado de tipos de lote de un fraccionamiento "]);
+    }
+
+    public function getPaymentPlans
+
+
 }
