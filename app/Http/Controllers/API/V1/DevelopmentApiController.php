@@ -307,7 +307,7 @@ class DevelopmentApiController extends Controller
     }
 
     public function getLoteTypeByDevelopment($developmentId) {
-        $lote_types = Development::find($developmentId)->lote_types;
+        $lote_types = Development::find($developmentId)->lotTypes;
         return response()->success(['lote_types' => $lote_types], ["code" => 200, "message" => "Listado de tipos de lote de un fraccionamiento "]);
     }
 
