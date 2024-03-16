@@ -306,14 +306,17 @@ class DevelopmentApiController extends Controller
         return response()->success(['metadata' => $development->metadata], ["code" => 200, "message" => "metadato agregado correctamente"]);
     }
 
-    public function getLoteTypeByDevelopment($developmentId) {
-        $lote_types = Development::find($developmentId)->lotTypes;
+    public function getLoteTypeByDevelopment($developmentId)
+    {
+        $lote_types = Development::find($developmentId)->lotTypes->map(function ($loteType) {
+            $loteType->price = $loteType->pivot->price;
+            unset($loteType->pivot);
+            return $loteType;
+        });
         return response()->success(['lote_types' => $lote_types], ["code" => 200, "message" => "Listado de tipos de lote de un fraccionamiento "]);
     }
 
-    public function getPaymentPlansByDevelopment() {
-
+    public function getPaymentPlansByDevelopment()
+    {
     }
-
-
 }
