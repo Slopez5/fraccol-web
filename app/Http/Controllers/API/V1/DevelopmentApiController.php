@@ -83,12 +83,6 @@ class DevelopmentApiController extends Controller
         return response()->success(["development" => $development], ["code" => 200, "Text" => "Financiamiento asignado a fraccionamiento correctamente"]);
     }
 
-    public function testRedis() {
-        Redis::set('test_key', 'Hello, Redis!');
-        $value = Redis::get('test_key');
-        return $value;
-    }
-
     public function getAllDevelopments()
     {
         $developments = Development::all();
@@ -204,6 +198,7 @@ class DevelopmentApiController extends Controller
             $appointment->lead_agent_id = $reuqest["lead_agent_id"];
         }
         $appointment->save();
+        return response()->success(['appointment' => $appointment], 200);
     }
 
     public function createLote($developmentId, Request $reuqest)
