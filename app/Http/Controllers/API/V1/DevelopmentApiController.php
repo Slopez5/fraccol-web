@@ -316,7 +316,18 @@ class DevelopmentApiController extends Controller
         return response()->success(['lote_types' => $lote_types], ["code" => 200, "message" => "Listado de tipos de lote de un fraccionamiento "]);
     }
 
-    public function getPaymentPlansByDevelopment()
+    public function getPaymentPlansByDevelopment($developmentId)
     {
+        $payment_plans = Development::find($developmentId)->lotTypes->map(function ($development) {
+            return $development->paymentPlans->map(function ($paymentPlan) {
+                $paymentPlan->price = $paymentPlan->pivot->price_per_sqm;
+                $paymentPlan->down_payment = $paymentPlan->pivot->down_payment;
+                unset($paymentPlan->pivot);
+                return $paymentPlan;
+            });
+        })->first();
+
+
+        return response()->success(['payment_plans' => $payment_plans], ["code" => 200, "message" => "Listado de financiamientos de un fraccionamiento "]);
     }
 }
