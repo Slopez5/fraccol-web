@@ -237,8 +237,8 @@ class DevelopmentApiController extends Controller
     {
         $lotes = Development::find($developmentId)->lotes->map(function($lote) {
             $loteType= $lote->loteType->name;
-            // unset($lote->loteType);
-            // $lote->lote_type = $loteType;
+             unset($lote->loteType);
+             $lote->lote_type = $loteType;
             return $lote;
         });
         return response()->success(['lotes' => $lotes], ["code" => 200, "message" => "Listado de lotes"]);
