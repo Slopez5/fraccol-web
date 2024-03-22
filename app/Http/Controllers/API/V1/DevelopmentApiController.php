@@ -235,7 +235,12 @@ class DevelopmentApiController extends Controller
 
     public function getLotes($developmentId)
     {
-        $lotes = Development::find($developmentId)->lotes;
+        $lotes = Development::find($developmentId)->lotes->map(function($lote) {
+            $loteType= $lote->loteType->name;
+            unset($lote->loteType);
+            $lote->lote_type = $loteType;
+            return $lote;
+        });
         return response()->success(['lotes' => $lotes], ["code" => 200, "message" => "Listado de lotes"]);
     }
 
@@ -245,16 +250,16 @@ class DevelopmentApiController extends Controller
         return response()->success(["Lote" => $lote], 200);
     }
 
-    public function getPriceByLote($id, Request $reuqest)
+    public function getPriceByLote(Request $request)
     {
-        $lote = Lot::find($id);
+        $lote = Lot::find($request->query("lote"));
         if ($lote) {
-            if ($reuqest->query("payment_plan")) {
-                $reuqest->query("payment_plan");
-                $paymentSelected = $lote->development->lotTypes->where("id", "=", $lote->lot_type_id)->first()->paymentPlans->where('id', '=', $reuqest->query("payment_plan"))->first();
+            if ($request->query("payment_plan")) {
+                $request->query("payment_plan");
+                $paymentSelected = $lote->development->lotTypes->where("id", "=", $lote->lot_type_id)->first()->paymentPlans->where('id', '=', $request->query("payment_plan"))->first();
 
-                if ($reuqest->query("down_payment")) {
-                    $downPayment = $reuqest->query("down_payment") >= $paymentSelected->pivot->down_payment ? $reuqest->query("down_payment") : $paymentSelected->pivot->down_payment;
+                if ($request->query("down_payment")) {
+                    $downPayment = $request->query("down_payment") >= $paymentSelected->pivot->down_payment ? $request->query("down_payment") : $paymentSelected->pivot->down_payment;
                     $total_financing = ($paymentSelected->pivot->price_per_sqm * $lote->lot_size) - $downPayment;
                     $total_price = ($paymentSelected->pivot->price_per_sqm * $lote->lot_size);
                     $lot_size =  $lote->lot_size;
@@ -262,13 +267,13 @@ class DevelopmentApiController extends Controller
                 }
                 $mensualidades = $total_financing / $paymentSelected->financing_months;
                 $anualidad = 0;
-                if ($reuqest->query("annuity")) {
-                    $reuqest->query("annuity");
-                    $mensualidades = $mensualidades - ($reuqest->query("annuity") / 12);
-                    $anualidad = $reuqest->query("annuity");
-                } else if ($reuqest->query("mensualidad")) {
-                    $anualidad = ($mensualidades - $reuqest->query("mensualidad")) * 12;
-                    $mensualidades = $reuqest->query("mensualidad");
+                if ($request->query("annuity")) {
+                    $request->query("annuity");
+                    $mensualidades = $mensualidades - ($request->query("annuity") / 12);
+                    $anualidad = $request->query("annuity");
+                } else if ($request->query("mensualidad")) {
+                    $anualidad = ($mensualidades - $request->query("mensualidad")) * 12;
+                    $mensualidades = $request->query("mensualidad");
                 }
                 $priceInfo["down_payment"] = $downPayment;
                 $priceInfo["payment_plan"] = $paymentSelected->description;

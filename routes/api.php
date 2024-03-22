@@ -93,19 +93,24 @@ Route::middleware(['auth:api'])->group(function () {
      * Developments Apis
      */
     Route::get('/v1/developments', [DevelopmentApiController::class, 'getAllDevelopments']);
-    Route::post('/v1/development', [DevelopmentApiController::class, 'createDevelopment']);
     Route::get('/v1/development/{id}', [DevelopmentApiController::class, 'getDevelopmentDetails']);
+    Route::post('/v1/development', [DevelopmentApiController::class, 'createDevelopment']);
     Route::post('/v1/development/{id}/edit', [DevelopmentApiController::class, 'updateDevelopment']);
+
     Route::get('/v1/development/{id}/lote_types', [DevelopmentApiController::class, 'getLoteTypeByDevelopment']);
     Route::post('/v1/development/{id}/assign_lote_type', [DevelopmentApiController::class, 'addLoteTypeToDevelopment']);
+
     Route::get('/v1/development/{id}/payment_plans', [DevelopmentApiController::class, 'getPaymentPlansByDevelopment']);
     Route::post('/v1/development/{development_id}/lote_type/{lote_type_id}/assign_payment_plan', [DevelopmentApiController::class, 'addPaymentPlanToDevelopment']);
-    Route::get('/v1/development/{developmentId}/lotes', [DevelopmentApiController::class, 'getLotes']);
-    Route::post('/v1/development/{developmentId}/lote', [DevelopmentApiController::class, 'createLote']);
+
+    Route::get('/v1/development/{development_id}/lotes', [DevelopmentApiController::class, 'getLotes']);
+    Route::post('/v1/development/{development_id}/lote', [DevelopmentApiController::class, 'creatGeLote']);
     Route::get('/v1/lote/{id}', [DevelopmentApiController::class, 'getLoteDetails']);
+    Route::get('/v1/development/{id}/lote/price', [DevelopmentApiController::class, 'getPriceByLote']);
+
     Route::post('/v1/lote/{id}/metadata', [DevelopmentApiController::class, 'addLoteMetadata']);
-    Route::get('/v1/lote/{id}/price', [DevelopmentApiController::class, 'getPriceByLote']);
-    Route::post('/v1/development/{id}/appointment', [DevelopmentApiController::class, 'createAppointment']);
+    
     Route::get('/v1/development/{id}/appointments', [DevelopmentApiController::class, 'getAppointments']);
+    Route::post('/v1/development/{id}/appointment', [DevelopmentApiController::class, 'createAppointment']);
     Route::get('/v1/appointment/{id}', [DevelopmentApiController::class, 'getAppointmentDetails']);
 });
