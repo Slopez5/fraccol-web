@@ -104,7 +104,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/v1/development/{development_id}/lote_type/{lote_type_id}/assign_payment_plan', [DevelopmentApiController::class, 'addPaymentPlanToDevelopment']);
 
     Route::get('/v1/development/{development_id}/lotes', [DevelopmentApiController::class, 'getLotes']);
-    Route::post('/v1/development/{development_id}/lote', [DevelopmentApiController::class, 'creatGeLote']);
+    Route::post('/v1/development/{development_id}/lote', [DevelopmentApiController::class, 'createLote']);
     Route::get('/v1/lote/{id}', [DevelopmentApiController::class, 'getLoteDetails']);
     Route::get('/v1/development/{id}/lote/price', [DevelopmentApiController::class, 'getPriceByLote']);
 
