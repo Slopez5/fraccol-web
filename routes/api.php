@@ -28,12 +28,13 @@ Route::post('/v1/register', [AuthApiController::class, 'register']);
 Route::post('/v1/forget_password', [AuthApiController::class, 'forgetPassword']);
 
 Route::middleware(['auth:api'])->group(function () {
+    Route::post('/v1/role', [RolesApiController::class, 'addRole']);
     Route::post('/v1/create_user', [AuthApiController::class, 'createUser']);
 
     /**
      * Settings System Apis
      */
-    Route::post('/v1/role', [RolesApiController::class, 'addRole']);
+
     Route::get('/v1/countries', [CountryApiController::class, 'getCountries']);
     Route::post('/v1/create_country', [CountryApiController::class, 'createCountry']);
     Route::get('/v1/country/{id}', [CountryApiController::class, 'countryDetails']);
@@ -109,7 +110,7 @@ Route::middleware(['auth:api'])->group(function () {
     Route::get('/v1/development/{id}/lote/price', [DevelopmentApiController::class, 'getPriceByLote']);
 
     Route::post('/v1/lote/{id}/metadata', [DevelopmentApiController::class, 'addLoteMetadata']);
-    
+
     Route::get('/v1/development/{id}/appointments', [DevelopmentApiController::class, 'getAppointments']);
     Route::post('/v1/development/{id}/appointment', [DevelopmentApiController::class, 'createAppointment']);
     Route::get('/v1/appointment/{id}', [DevelopmentApiController::class, 'getAppointmentDetails']);

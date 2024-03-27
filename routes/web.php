@@ -3,6 +3,7 @@
 use App\Http\Controllers\Chatbot\WaController as ChatbotWaController;
 use App\Http\Controllers\ConfigurationsController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\DevelopmentController;
 use App\Http\Controllers\EnterpriseController;
 use App\Http\Controllers\LandingPage\LandingPageDevelopmentController;
@@ -25,8 +26,6 @@ use Illuminate\Support\Facades\Storage;
 Route::get('/webhook', [ChatbotWaController::class, 'webhook']);
 Route::post('/webhook', [ChatbotWaController::class, 'recibe']);
 
-Route::get('/test', [ConfigurationsController::class,'test'])->name('test');
+Route::get('/', [DashboardController::class,'index'])->name('home');
+Route::get('/property-list', [DashboardController::class,'propertyList'])->name('propertyList');
 
-Route::get('/developments',[DevelopmentController::class,'index'])->name('developments');
-Route::get('/development/{id}',[DevelopmentController::class,'show'])->name('show.development');
-Route::get('/development/{id}/configurations',[DevelopmentController::class,'developmentConfiguration'])->name('configuration.development');
