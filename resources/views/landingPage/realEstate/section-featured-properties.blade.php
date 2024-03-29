@@ -1,7 +1,7 @@
 <section class="featured portfolio bg-white-2 rec-pro full-l">
     <div class="container-fluid">
         <div class="sec-title">
-            <h2><span>Propiedades </span>Destacadas</h2>
+            <h2><span>Fraccionamientos </span>Destacadas</h2>
         </div>
         <livewire:landing-page.featured-properties></livewire:landing-page.featured-properties>
         <div class="bg-all">
