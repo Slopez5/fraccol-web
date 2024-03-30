@@ -22,15 +22,15 @@ class PopularProperties extends Component
             "services" => [
                 [
                     "name"=>"agua",
-                    "icon"=>"flaticon-bed"
+                    "icon"=>"fal fa-droplet"
                 ],
                 [
                     "name"=>"luz",
-                    "icon"=>"flaticon-bed"
+                    "icon"=>"fal fa-droplet"
                 ],
                 [
                     "name"=>"calles",
-                    "icon"=>"flaticon-bed"
+                    "icon"=>"fal fa-droplet"
                 ]
             ]
         ],
