@@ -16,9 +16,7 @@
     <link href="https://fonts.googleapis.com/css?family=Lato:300,300i,400,400i%7CMontserrat:600,800" rel="stylesheet">
     <!-- FONT AWESOME -->
     <link rel="stylesheet" href="{{ asset('findhouses/font/flaticon.css') }}">
-    <link rel="stylesheet" href="{{ asset('findhouses/css/fontawesome-all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('findhouses/css/fontawesome-5-all.min.css') }}">
-    <link rel="stylesheet" href="{{ asset('findhouses/css/font-awesome.min.css') }}">
+    <link href="https://cdn.jsdelivr.net/gh/eliyantosarage/font-awesome-pro@main/fontawesome-pro-6.5.1-web/css/all.min.css" rel="stylesheet">
     <!-- ARCHIVES CSS -->
     <link rel="stylesheet" href="{{ asset('findhouses/css/search.css') }}">
     <link rel="stylesheet" href="{{ asset('findhouses/css/animate.css') }}">

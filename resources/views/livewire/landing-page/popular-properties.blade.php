@@ -40,7 +40,7 @@
                             </li>
                             @foreach ($property['services'] as $index => $service)
                                 <li class="the-icons">
-                                    <i class="flaticon-bed mr-2" aria-hidden="true"></i>
+                                    <i class="{{$service['icon']}} mr-2" aria-hidden="true"></i>
                                     <span>{{ $service['name'] }}</span>
                                 </li>
                             @endforeach

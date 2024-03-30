@@ -51,7 +51,7 @@
                                         <!-- Form Property Status -->
                                         <div class="form-group categories">
                                             <div class="nice-select form-control wide" tabindex="0"><span
-                                                    class="current"><i class="fa fa-home"></i>Property Status</span>
+                                                    class="current"><i class="fas fa-home"></i>Property Status</span>
                                                 <ul class="list">
                                                     <li data-value="1" class="option selected ">For Sale</li>
                                                     <li data-value="2" class="option">For Rent</li>
