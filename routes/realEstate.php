@@ -18,7 +18,6 @@ Route::middleware(['guest'])->group(function () {
 
 });
 
-
 Route::middleware(['auth.realEstate'])->group(function () {
 
    

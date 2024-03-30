@@ -1,2 +1,2 @@
-@extends('layouts.template')
+@extends('layouts.dashboard.template')
 
