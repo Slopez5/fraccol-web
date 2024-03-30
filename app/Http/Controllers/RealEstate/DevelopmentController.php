@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\Controller;
+use App\Models\Development;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class DevelopmentController extends Controller
 {
@@ -11,21 +13,109 @@ class DevelopmentController extends Controller
 
     public function createDevelopment()
     {
-        return view('realEstates.developments.create');
+        $realEstateBranches = Auth::user()->realEstates->first()->branches;
+        return view('realEstates.developments.create', compact('realEstateBranches'));
     }
 
     public function storeDevelopment(Request $request)
     {
+        $request->validate([
+            'real_estate_branch_id' => 'required',
+            'name' => 'required',
+            'location' => 'required',
+            'total_land_area' => 'required',
+            'total_lots' => 'required',
+            'available_lots' => 'required',
+        ]);
+
+        $development = new Development();
+        $development->real_estate_id = Auth::user()->realEstates->first()->id;
+        $development->real_estate_branch_id = $request->get('real_estate_branch_id');
+        $development->name = $request->get('name');
+        if ($request->hasFile('logo')) {
+            $development->logo = $request->file('logo')->store('developments');
+        }
+        if ($request->file('blueprint')->isValid()) {
+            $blueprint = $request->file('blueprint');
+            $storagePath = $blueprint->storeAs('public/developments/blueprints', $blueprint->getClientOriginalName());
+            $development->blueprint = $storagePath;
+        }
+        $development->location = $request->get('location');
+        $development->total_land_area = $request->get('total_land_area');
+        $development->total_lots = $request->get('total_lots');
+        $development->available_lots = $request->get('available_lots');
+        if ($request->get('start_date')) {
+            $development->start_date = $request->get('start_date');
+        }
+        if ($request->get('end_date')) {
+            $development->end_date = $request->get('end_date');
+        }
+        if ($request->get('sort_description')) {
+            $development->sort_description = $request->get('sort_description');
+        }
+        if ($request->get('full_description')) {
+            $development->full_description = $request->get('full_description');
+        }
+        $development->status = 'active';
+        if ($request->get('image')) {
+            $development->image = $request->get('image');
+        }
+        $development->save();
         return redirect()->route('realEstate.developments');
     }
 
     public function editDevelopment($id)
     {
-        return view('realEstates.developments.edit');
+        $development = Development::find($id);
+        $realEstateBranches = Auth::user()->realEstates->first()->branches;
+        return view('realEstates.developments.edit', compact('development', 'realEstateBranches'));
     }
 
     public function updateDevelopment(Request $request, $id)
     {
+        $request->validate([
+            'real_estate_branch_id' => 'required',
+            'name' => 'required',
+            'location' => 'required',
+            'total_land_area' => 'required',
+            'total_lots' => 'required',
+            'available_lots' => 'required',
+        ]);
+        $development = Development::find($id);
+        $development->real_estate_id = Auth::user()->realEstates->first()->id;
+        $development->real_estate_branch_id = $request->get('real_estate_branch_id');
+        $development->name = $request->get('name');
+        if ($request->hasFile('logo')) {
+            $development->logo = $request->file('logo')->store('developments');
+        }
+        if ($request->file('blueprint')->isValid()) {
+            $blueprint = $request->file('blueprint');
+            $storagePath = $blueprint->storeAs('public/developments/blueprints', $blueprint->getClientOriginalName());
+            $storagePath = str_replace('public/', 'storage/', $storagePath);
+            $development->blueprint = $storagePath;
+        }
+        $development->location = $request->get('location');
+        $development->total_land_area = $request->get('total_land_area');
+        $development->total_lots = $request->get('total_lots');
+        $development->available_lots = $request->get('available_lots');
+        if ($request->get('start_date')) {
+            $development->start_date = $request->get('start_date');
+        }
+        if ($request->get('end_date')) {
+            $development->end_date = $request->get('end_date');
+        }
+        if ($request->get('sort_description')) {
+            $development->sort_description = $request->get('sort_description');
+        }
+        if ($request->get('full_description')) {
+            $development->full_description = $request->get('full_description');
+        }
+        $development->status = 'active';
+        if ($request->get('image')) {
+            $development->image = $request->get('image');
+        }
+        $development->save();
+
         return redirect()->route('realEstate.developments');
     }
 
@@ -186,9 +276,4 @@ class DevelopmentController extends Controller
     {
         return view('realEstates.developments.loteTypes.paymentPlans.show');
     }
-
-
-
-
-
 }
