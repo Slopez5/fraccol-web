@@ -7,6 +7,10 @@ use App\Models\Appointment;
 use App\Models\Development;
 use App\Models\Invoice;
 use App\Models\Lead;
+use App\Models\Lot;
+use App\Models\Payment;
+use App\Models\Permission;
+use App\Models\User;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -24,47 +28,58 @@ class DashboardController extends Controller
 
     public function users()
     {
-        return view('realEstates.users');
+        $users = User::where('role_id',3)->get();
+        return view('realEstates.users', compact('users'));
     }
 
     public function appointments()
     {
-        return view('realEstates.appointments');
+        $appointments = Appointment::all();
+        return view('realEstates.appointments', compact('appointments'));
     }
 
     public function permissions()
     {
-        return view('realEstates.permissions');
+        $permissions = Permission::all();
+        return view('realEstates.permissions', compact('permissions'));
     }
 
     public function developments()
     {
-        return view('realEstates.developments');
+        $developments = Development::all();
+
+        return view('realEstates.developments', compact('developments'));
     }
 
     public function properties()
     {
-        return view('realEstates.properties');
+        $properties = Lot::all();
+        return view('realEstates.properties', compact('properties'));
     }
 
     public function leads()
     {
-        return view('realEstates.leads');
+
+        $leads = Lead::all();
+        return view('realEstates.leads', compact('leads'));
     }
 
     public function payments()
     {
-        return view('realEstates.payments');
+        $payments = Payment::all();
+        return view('realEstates.payments', compact('payments') );
     }
 
     public function invoices()
     {
-        return view('realEstates.invoices');
+        $invoices = Invoice::all();
+        return view('realEstates.invoices', compact('invoices') );
     }
 
     public function reports()
     {
-        return view('realEstates.reports');
+        $reports = [];
+        return view('realEstates.reports', compact('reports'));
     }
 
 
