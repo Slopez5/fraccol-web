@@ -83,7 +83,7 @@
 
                 </div>
             </div>
-            <div class="col-md-6">
+            <div class="col-md-12">
                 <div class="card">
                     <div class="card-header">Leads</div>
                     <div class="card-body">
@@ -91,20 +91,20 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
-                                    <th>Email</th>
+                                    <th>Nombre</th>
+                                    <th>Apellidos</th>
                                     <th>Phone</th>
-                                    <th>Development</th>
+                                  
                                     <th>Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($leads as $lead)
                                     <tr>
-                                        <td>{{ $lead->name }}</td>
-                                        <td>{{ $lead->email }}</td>
+                                        <td>{{ $lead->first_name }}</td>
+                                        <td>{{ $lead->last_name }}</td>
                                         <td>{{ $lead->phone }}</td>
-                                        <td>{{ $lead->development->name }}</td>
+                                       
                                         <td>
                                             <a href="{{ route('realEstate.lead.edit', $lead->id) }}"
                                                 class="btn btn-primary">Edit</a>

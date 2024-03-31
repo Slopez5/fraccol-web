@@ -5,15 +5,19 @@
         <div class="row">
             <div class="card col-12">
                 <div class="card-header">
-                    <h4>Leads</h4>
+                    <h4 class="card-title">Leads</h4>
+                    <div class="card-tools">
+                        <a href="{{ route('realEstate.lead.import') }}" class="btn btn-primary">Import Leads</a>
+                    </div>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Real Estate</th>
-                                <th>Client</th>
+                                <th>Nombre</th>
+                                <th>Apellido</th>
+                                <th>Teléfono</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -21,8 +25,9 @@
                             @foreach ($leads as $lead)
                                 <tr>
                                     <td>{{ $lead->id }}</td>
-                                    <td>{{ $lead->realEstate->name }}</td>
-                                    <td>{{ $lead->client->first_name }}</td>
+                                    <td>{{ $lead->first_name }}</td>
+                                    <td>{{ $lead->last_name }}</td>
+                                    <td>{{ $lead->phone }}</td>
                                     <td>
                                         <a href="{{ route('realEstate.lead.edit', $lead->id) }}"
                                             class="btn btn-primary">Edit</a>
@@ -38,6 +43,9 @@
                             @endforeach
                         </tbody>
                     </table>
+                    <div class="d-flex justify-content-center">
+                        {{ $leads->links('pagination::bootstrap-4') }}
+                    </div>
                 </div>
             </div>
             <div class="col-4">

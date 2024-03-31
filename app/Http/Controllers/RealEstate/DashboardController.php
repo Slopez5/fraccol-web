@@ -4,12 +4,15 @@ namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
+use App\Models\City;
+use App\Models\Country;
 use App\Models\Development;
 use App\Models\Invoice;
 use App\Models\Lead;
 use App\Models\Lot;
 use App\Models\Payment;
 use App\Models\Permission;
+use App\Models\State;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -59,8 +62,8 @@ class DashboardController extends Controller
 
     public function leads()
     {
+        $leads = Lead::paginate(50);
 
-        $leads = Lead::all();
         return view('realEstates.leads', compact('leads'));
     }
 

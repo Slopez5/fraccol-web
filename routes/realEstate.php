@@ -105,6 +105,8 @@ Route::middleware(['auth.realEstate'])->group(function () {
 
     // Lead
     Route::get('/lead/create', [LeadController::class, 'createLead'])->name('realEstate.lead.create');
+    Route::get('/lead/import', [LeadController::class, 'importLead'])->name('realEstate.lead.import');
+    Route::post('/lead/import', [LeadController::class, 'importLeadStore'])->name('realEstate.lead.import');
     Route::post('/lead/store', [LeadController::class, 'storeLead'])->name('realEstate.lead.store');
     Route::get('/lead/edit/{id}', [LeadController::class, 'editLead'])->name('realEstate.lead.edit');
     Route::put('/lead/update/{id}', [LeadController::class, 'updateLead'])->name('realEstate.lead.update');

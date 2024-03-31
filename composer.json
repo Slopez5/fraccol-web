@@ -9,6 +9,7 @@
         "consoletvs/charts": "^6.6",
         "dompdf/dompdf": "^2.0",
         "guzzlehttp/guzzle": "^7.2",
+        "jeroendesloovere/vcard": "^1.7",
         "laravel/framework": "^10.10",
         "laravel/passport": "^11.10",
         "laravel/sanctum": "^3.2",
