@@ -4,6 +4,10 @@ namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Development;
+use App\Models\Lot;
+use App\Models\LotType;
+use App\Models\Payment;
+use App\Models\PaymentPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -33,11 +37,15 @@ class DevelopmentController extends Controller
         $development->real_estate_branch_id = $request->get('real_estate_branch_id');
         $development->name = $request->get('name');
         if ($request->hasFile('logo')) {
-            $development->logo = $request->file('logo')->store('developments');
+            $logo = $request->file('logo');
+            $storagePath = $logo->storeAs('public/developments/logos', $logo->getClientOriginalName());
+            $storagePath = str_replace('public/', 'storage/', $storagePath);
+            $development->logo = $storagePath;
         }
         if ($request->file('blueprint')->isValid()) {
             $blueprint = $request->file('blueprint');
             $storagePath = $blueprint->storeAs('public/developments/blueprints', $blueprint->getClientOriginalName());
+            $storagePath = str_replace('public/', 'storage/', $storagePath);
             $development->blueprint = $storagePath;
         }
         $development->location = $request->get('location');
@@ -57,8 +65,11 @@ class DevelopmentController extends Controller
             $development->full_description = $request->get('full_description');
         }
         $development->status = 'active';
-        if ($request->get('image')) {
-            $development->image = $request->get('image');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $storagePath = $image->storeAs('public/developments/images', $image->getClientOriginalName());
+            $storagePath = str_replace('public/', 'storage/', $storagePath);
+            $development->image = $storagePath;
         }
         $development->save();
         return redirect()->route('realEstate.developments');
@@ -86,7 +97,10 @@ class DevelopmentController extends Controller
         $development->real_estate_branch_id = $request->get('real_estate_branch_id');
         $development->name = $request->get('name');
         if ($request->hasFile('logo')) {
-            $development->logo = $request->file('logo')->store('developments');
+            $logo = $request->file('logo');
+            $storagePath = $logo->storeAs('public/developments/logos', $logo->getClientOriginalName());
+            $storagePath = str_replace('public/', 'storage/', $storagePath);
+            $development->logo = $storagePath;
         }
         if ($request->file('blueprint')->isValid()) {
             $blueprint = $request->file('blueprint');
@@ -111,8 +125,11 @@ class DevelopmentController extends Controller
             $development->full_description = $request->get('full_description');
         }
         $development->status = 'active';
-        if ($request->get('image')) {
-            $development->image = $request->get('image');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $storagePath = $image->storeAs('public/developments/images', $image->getClientOriginalName());
+            $storagePath = str_replace('public/', 'storage/', $storagePath);
+            $development->image = $storagePath;
         }
         $development->save();
 
@@ -126,39 +143,101 @@ class DevelopmentController extends Controller
 
     public function showDevelopment($id)
     {
-        return view('realEstates.developments.show');
-    }
-
-    public function developmentLots($id)
-    {
-        return view('realEstates.developments.lots.index');
-    }
-
-    public function developmentMetadata($id)
-    {
-        return view('realEstates.developments.metadata.index');
-    }
-
-    public function developmentLoteTypes($id)
-    {
-        return view('realEstates.developments.loteTypes.index');
-    }
-
-    public function developmentLoteTypePaymentPlans($developmentId, $loteTypeId)
-    {
-        return view('realEstates.developments.loteTypes.paymentPlans.index');
+        $development = Development::find($id);
+        $development->lotes = $development->lotes->map(function ($lote) {
+            $loteType = $lote->development->lotTypes->where('id', $lote->lot_type_id)->first();
+            $lote->price = $loteType->pivot->price * $lote->lot_size;
+            $lote->paymentPlans = $loteType->paymentPlans->map(function ($paymentPlan) use ($lote) {
+                $paymentPlan->price = $paymentPlan->pivot->price_per_sqm * $lote->lot_size;
+                $paymentPlan->down_payment = $paymentPlan->pivot->down_payment;
+                unset($paymentPlan->pivot);
+                return $paymentPlan;
+            });
+            unset($lote->development);
+            return $lote;
+        })->sortBy(function ($lote) {
+            return [$lote->block_number, $lote->lot_number];
+        }, SORT_ASC);
+        
+        $development->metadata = [];
+        $development->paymentPlans = $development->paymentPlans->map(function ($paymentPlan) {
+            $paymentPlan->pivot->lotType;
+            return $paymentPlan;
+        });
+        return view('realEstates.developments.show', compact('development'));
     }
 
     // Development -> Lotes
 
     public function createDevelopmentLot($developmentId)
     {
-        return view('realEstates.developments.lots.create');
+        $development = Development::find($developmentId);
+        $lotTypes = $development->lotTypes;
+        return view('realEstates.developments.lots.create', compact('development', 'lotTypes'));
     }
 
     public function storeDevelopmentLot(Request $request, $developmentId)
     {
-        return redirect()->route('realEstate.developments.show', $developmentId);
+        $request->validate([
+            'lot_type_id' => 'required',
+            'lot_number' => 'required',
+            'block_number' => 'required',
+            'lot_size' => 'required',
+            'status' => 'required',
+        ]);
+
+        $development = Development::find($developmentId);
+
+        $lotType = LotType::find($request->get('lot_type_id'));
+        if ($request->get('isMultiples') == '1') {
+            $lotes = explode(',', $request->get('lot_number'));
+            foreach ($lotes as $lot) {
+                $lote = new Lot();
+                $lote->development_id = $development->id;
+                $lote->lot_type_id = $lotType->id;
+                $lote->lot_number = $lot;
+                $lote->block_number = $request->get('block_number');
+                $lote->lot_size = $request->get('lot_size');
+                $lote->status = $request->get('status');
+                if ($request->hasFile('image')) {
+                    $image = $request->file('image');
+                    $storagePath = $image->storeAs('public/developments/lotes', $image->getClientOriginalName());
+                    $storagePath = str_replace('public/', 'storage/', $storagePath);
+                    $lote->image_url = $storagePath;
+                }
+                if ($request->get('location')) {
+                    $lote->location = $request->get('location');
+                }
+                if ($request->get('description')) {
+                    $lote->description = $request->get('description');
+                }
+                $development->lotes()->save($lote);
+            }
+        } else {
+            $lote = new Lot();
+            $lote->development_id = $development->id;
+            $lote->lot_type_id = $lotType->id;
+            $lote->lot_number = $request->get('lot_number');
+            $lote->block_number = $request->get('block_number');
+            $lote->lot_size = $request->get('lot_size');
+            $lote->status = $request->get('status');
+            if ($request->hasFile('image')) {
+                $image = $request->file('image');
+                $storagePath = $image->storeAs('public/developments/lotes', $image->getClientOriginalName());
+                $storagePath = str_replace('public/', 'storage/', $storagePath);
+                $lote->image_url = $storagePath;
+            }
+            if ($request->get('location')) {
+                $lote->location = $request->get('location');
+            }
+            if ($request->get('description')) {
+                $lote->description = $request->get('description');
+            }
+            $development->lotes()->save($lote);
+        }
+
+        $development->save();
+        return redirect()->route('realEstate.development.show', $developmentId);
     }
 
     public function editDevelopmentLot($developmentId, $id)
@@ -217,63 +296,53 @@ class DevelopmentController extends Controller
 
     public function createDevelopmentLoteType($developmentId)
     {
-        return view('realEstates.developments.loteTypes.create');
+        $development = Development::find($developmentId);
+        $loteTypes = LotType::all();
+
+        return view('realEstates.developments.loteTypes.create', compact('development', 'loteTypes', 'paymentPlans'));
     }
 
     public function storeDevelopmentLoteType(Request $request, $developmentId)
     {
-        return redirect()->route('realEstate.developments.show', $developmentId);
-    }
-
-    public function editDevelopmentLoteType($developmentId, $id)
-    {
-        return view('realEstates.developments.loteTypes.edit');
-    }
-
-    public function updateDevelopmentLoteType(Request $request, $developmentId, $id)
-    {
-        return redirect()->route('realEstate.developments.show', $developmentId);
+        $development = Development::find($developmentId);
+        $loteType = LotType::find($request->get('lote_type_id'));
+        $development->lotTypes()->attach($loteType, [
+            'price' => $request->get('price'),
+        ]);
+        return redirect()->route('realEstate.development.show', $developmentId);
     }
 
     public function deleteDevelopmentLoteType($developmentId, $id)
     {
-        return redirect()->route('realEstate.developments.show', $developmentId);
-    }
-
-    public function showDevelopmentLoteType($developmentId, $id)
-    {
-        return view('realEstates.developments.loteTypes.show');
+        return redirect()->route('realEstate.development.show', $developmentId);
     }
 
     // Development -> lote types -> payment plans
 
-    public function createDevelopmentLoteTypePaymentPlan($developmentId, $loteTypeId)
+    public function createDevelopmentLoteTypePaymentPlan($developmentId)
     {
-        return view('realEstates.developments.loteTypes.paymentPlans.create');
+        $development = Development::find($developmentId);
+        $loteTypes = $development->lotTypes;
+        $paymentPlans = PaymentPlan::all();
+        return view('realEstates.developments.paymentPlans.create', compact('development', 'paymentPlans', 'loteTypes'));
     }
 
-    public function storeDevelopmentLoteTypePaymentPlan(Request $request, $developmentId, $loteTypeId)
+    public function storeDevelopmentLoteTypePaymentPlan(Request $request, $developmentId)
+    {
+        $development = Development::find($developmentId);
+        $loteType = LotType::find($request->get('lote_type_id'));
+        $paymentPlan = PaymentPlan::find($request->get('payment_plan_id'));
+        $development->paymentPlans()->attach($paymentPlan, [
+            'lot_type_id' => $loteType->id,
+            'down_payment' => $request->get('down_payment'),
+            'price_per_sqm' => $request->get('price'),
+        ]);
+        return redirect()->route('realEstate.development.show', [$developmentId]);
+    }
+
+
+    public function deleteDevelopmentLoteTypePaymentPlan($developmentId, $loteTypeId)
     {
         return redirect()->route('realEstate.developments.loteTypes.show', [$developmentId, $loteTypeId]);
-    }
-
-    public function editDevelopmentLoteTypePaymentPlan($developmentId, $loteTypeId, $id)
-    {
-        return view('realEstates.developments.loteTypes.paymentPlans.edit');
-    }
-
-    public function updateDevelopmentLoteTypePaymentPlan(Request $request, $developmentId, $loteTypeId, $id)
-    {
-        return redirect()->route('realEstate.developments.loteTypes.show', [$developmentId, $loteTypeId]);
-    }
-
-    public function deleteDevelopmentLoteTypePaymentPlan($developmentId, $loteTypeId, $id)
-    {
-        return redirect()->route('realEstate.developments.loteTypes.show', [$developmentId, $loteTypeId]);
-    }
-
-    public function showDevelopmentLoteTypePaymentPlan($developmentId, $loteTypeId, $id)
-    {
-        return view('realEstates.developments.loteTypes.paymentPlans.show');
     }
 }

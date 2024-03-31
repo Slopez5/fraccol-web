@@ -65,10 +65,7 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::put('/development/update/{id}', [DevelopmentController::class, 'updateDevelopment'])->name('realEstate.development.update');
     Route::delete('/development/delete/{id}', [DevelopmentController::class, 'deleteDevelopment'])->name('realEstate.development.delete');
     Route::get('/development/show/{id}', [DevelopmentController::class, 'showDevelopment'])->name('realEstate.development.show');
-    Route::get('/development/{development}/lot', [DevelopmentController::class, 'developmentLots'])->name('realEstate.development.lot');
-    Route::get('/development/{development}/metadata', [DevelopmentController::class, 'developmentMetadata'])->name('realEstate.development.metadata');
-    Route::get('/development/{development}/lotType', [DevelopmentController::class, 'developmentLoteTypes'])->name('realEstate.development.lotType');
-    Route::get('/development/{development}/lotType/{lotType}/paymentPlan', [DevelopmentController::class, 'developmentLoteTypePaymentPlans'])->name('realEstate.development.lotType.paymentPlan');
+
 
     // Development -> Lotes
     Route::get('/development/{development}/lot/create', [DevelopmentController::class, 'createDevelopmentLot'])->name('realEstate.development.lot.create');
@@ -89,18 +86,14 @@ Route::middleware(['auth.realEstate'])->group(function () {
     // Development -> Lote Types
     Route::get('/development/{development}/lotType/create', [DevelopmentController::class, 'createDevelopmentLoteType'])->name('realEstate.development.lotType.create');
     Route::post('/development/{development}/lotType/store', [DevelopmentController::class, 'storeDevelopmentLoteType'])->name('realEstate.development.lotType.store');
-    Route::get('/development/{development}/lotType/edit/{id}', [DevelopmentController::class, 'editDevelopmentLoteType'])->name('realEstate.development.lotType.edit');
-    Route::put('/development/{development}/lotType/update/{id}', [DevelopmentController::class, 'updateDevelopmentLoteType'])->name('realEstate.development.lotType.update');
     Route::delete('/development/{development}/lotType/delete/{id}', [DevelopmentController::class, 'deleteDevelopmentLoteType'])->name('realEstate.development.lotType.delete');
     Route::get('/development/{development}/lotType/show/{id}', [DevelopmentController::class, 'showDevelopmentLoteType'])->name('realEstate.development.lotType.show');
 
     // Development -> Lote Types -> Payment Plans
-    Route::get('/development/{development}/lotType/{lotType}/paymentPlan/create', [DevelopmentController::class, 'createDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.lotType.paymentPlan.create');
-    Route::post('/development/{development}/lotType/{lotType}/paymentPlan/store', [DevelopmentController::class, 'storeDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.lotType.paymentPlan.store');
-    Route::get('/development/{development}/lotType/{lotType}/paymentPlan/edit/{id}', [DevelopmentController::class, 'editDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.lotType.paymentPlan.edit');
-    Route::put('/development/{development}/lotType/{lotType}/paymentPlan/update/{id}', [DevelopmentController::class, 'updateDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.lotType.paymentPlan.update');
-    Route::delete('/development/{development}/lotType/{lotType}/paymentPlan/delete/{id}', [DevelopmentController::class, 'deleteDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.lotType.paymentPlan.delete');
-    Route::get('/development/{development}/lotType/{lotType}/paymentPlan/show/{id}', [DevelopmentController::class, 'showDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.lotType.paymentPlan.show');
+    Route::get('/development/{development}/paymentPlan/create', [DevelopmentController::class, 'createDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.paymentPlan.create');
+    Route::post('/development/{development}/paymentPlan/store', [DevelopmentController::class, 'storeDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.paymentPlan.store');
+    Route::delete('/development/{development}/paymentPlan/delete/{loteTypeId}', [DevelopmentController::class, 'deleteDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.paymentPlan.delete');
+    Route::get('/development/{development}/paymentPlan/show/{id}', [DevelopmentController::class, 'showDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.paymentPlan.show');
 
     // Property
     Route::get('/property/create', [PropertyController::class, 'createProperty'])->name('realEstate.property.create');
@@ -141,6 +134,15 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::put('/report/update/{id}', [ReportController::class, 'updateReport'])->name('realEstate.report.update');
     Route::delete('/report/delete/{id}', [ReportController::class, 'deleteReport'])->name('realEstate.report.delete');
     Route::get('/report/show/{id}', [ReportController::class, 'showReport'])->name('realEstate.report.show');
+
+
+    //Settings
+    Route::get('/settings', [DashboardController::class, 'settings'])->name('realEstate.settings');
+    Route::get('/settings/loteTypes', [DashboardController::class, 'loteTypes'])->name('realEstate.settings.loteTypes');
+    Route::get('/settings/paymentPlans', [DashboardController::class, 'paymentPlans'])->name('realEstate.settings.paymentPlans');
+    Route::get('/settings/countries', [DashboardController::class, 'countries'])->name('realEstate.settings.countries');
+    Route::get('/settings/cities', [DashboardController::class, 'cities'])->name('realEstate.settings.cities');
+    Route::get('/settings/states', [DashboardController::class, 'states'])->name('realEstate.settings.states');
 
     // Logout
     Route::get('/logout', [LoginController::class, 'logout'])->name('realEstate.logout');

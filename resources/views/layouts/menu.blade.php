@@ -95,6 +95,14 @@
                             </p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('realEstate.settings') }}" class="nav-link">
+                            <i class="nav-icon fas fa-cogs"></i>
+                            <p>
+                                Configuración
+                            </p>
+                        </a>
+                    </li>
                 </ul>
          </nav>
          <!-- /.sidebar-menu -->

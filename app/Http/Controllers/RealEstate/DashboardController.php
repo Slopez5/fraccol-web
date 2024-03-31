@@ -82,5 +82,37 @@ class DashboardController extends Controller
         return view('realEstates.reports', compact('reports'));
     }
 
+    //settings
+    public function settings()
+    {
+        return view('realEstates.settings');
+    }
+
+    public function loteTypes()
+    {
+        return view('realEstates.settings.loteTypes');
+    }
+
+    public function paymentPlans()
+    {
+        return view('realEstates.settings.paymentPlans');
+    }
+
+    public function countries()
+    {
+        return view('realEstates.settings.countries');
+    }
+
+    public function states()
+    {
+        return view('realEstates.settings.states');
+    }
+
+    public function cities()
+    {
+        return view('realEstates.settings.cities');
+    }
+
+
 
 }
