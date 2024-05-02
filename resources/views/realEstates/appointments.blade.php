@@ -12,10 +12,11 @@
                         <thead>
                             <tr>
                                 <th>Id</th>
-                                <th>Real Estate</th>
-                                <th>Client</th>
+                                <th>Development</th>
+                                <th>Nombre</th>
+                                <th>Teléfono</th>
                                 <th>Date</th>
-                                <th>Time</th>
+                                <th>Notas</th>
                                 <th>Actions</th>
                             </tr>
                         </thead>
@@ -23,20 +24,23 @@
                             @foreach ($appointments as $appointment)
                                 <tr>
                                     <td>{{ $appointment->id }}</td>
-                                    <td>{{ $appointment->realEstate->name }}</td>
-                                    <td>{{ $appointment->client->first_name }}</td>
-                                    <td>{{ $appointment->date }}</td>
-                                    <td>{{ $appointment->time }}</td>
+                                    <td>{{ $appointment->development->name }}</td>
+                                    <td>{{ $appointment->customer_name }}</td>
+                                    <td>{{ $appointment->customer_phone }}</td>
+                                    <td>{{ $appointment->appointment_date }}</td>
+                                    <td>{{ $appointment->notes }}</td>
                                     <td>
-                                        <a href="{{ route('realEstate.appointment.edit', $appointment->id) }}"
-                                            class="btn btn-primary">Edit</a>
-                                        <a href="{{ route('realEstate.appointment.show', $appointment->id) }}"
-                                            class="btn btn-info">Show</a>
+                                        <a href="{{ route('realEstate.appointment.edit', $appointment->id) }}"><i
+                                                class="fas fa-edit"></i></a>
+                                        <a href="{{ route('realEstate.appointment.show', $appointment->id) }}"><i
+                                                class="fas fa-eye"></i></a>
                                         <form action="{{ route('realEstate.appointment.delete', $appointment->id) }}"
                                             method="POST" style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="border-0 padding-0 bg-transparent text-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </form>
                                 </tr>
                             @endforeach

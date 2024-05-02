@@ -138,6 +138,16 @@ class DevelopmentController extends Controller
 
     public function deleteDevelopment($id)
     {
+        $development = Development::find($id);
+        $development->status = 'deleted';
+        $development->save();
+        return redirect()->route('realEstate.developments');
+    }
+
+    public function restoreDevelopment($id)
+    {
+        $development = Development::withTrashed()->find($id);
+        $development->restore();
         return redirect()->route('realEstate.developments');
     }
 
@@ -242,17 +252,40 @@ class DevelopmentController extends Controller
 
     public function editDevelopmentLot($developmentId, $id)
     {
-        return view('realEstates.developments.lots.edit');
+        $development = Development::find($developmentId);
+        $lotTypes = $development->lotTypes;
+        $lot = Lot::find($id);
+        return view('realEstates.developments.lots.edit', compact('development', 'lotTypes', 'lot'));
     }
 
     public function updateDevelopmentLot(Request $request, $developmentId, $id)
     {
-        return redirect()->route('realEstate.developments.show', $developmentId);
+        $lot = Lot::find($id);
+        $lot->lot_number = $request->get('lot_number');
+        $lot->block_number = $request->get('block_number');
+        $lot->lot_size = $request->get('lot_size');
+        $lot->status = $request->get('status');
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $storagePath = $image->storeAs('public/developments/lotes', $image->getClientOriginalName());
+            $storagePath = str_replace('public/', 'storage/', $storagePath);
+            $lot->image_url = $storagePath;
+        }
+        if ($request->get('location')) {
+            $lot->location = $request->get('location');
+        }
+        if ($request->get('description')) {
+            $lot->description = $request->get('description');
+        }
+        $lot->save();
+        return redirect()->route('realEstate.development.show', $developmentId);
     }
 
     public function deleteDevelopmentLot($developmentId, $id)
     {
-        return redirect()->route('realEstate.developments.show', $developmentId);
+        $lot = Lot::find($id);
+        $lot->delete();
+        return redirect()->route('realEstate.development.show', $developmentId);
     }
 
     public function showDevelopmentLot($developmentId, $id)

@@ -24,16 +24,19 @@
                                     <td>{{ $report->realEstate->name }}</td>
                                     <td>{{ $report->client->first_name }}</td>
                                     <td>
-                                        <a href="{{ route('realEstate.report.edit', $report->id) }}"
-                                            class="btn btn-primary">Edit</a>
-                                        <a href="{{ route('realEstate.report.show', $report->id) }}"
-                                            class="btn btn-info">Show</a>
-                                        <form action="{{ route('realEstate.report.delete', $report->id) }}"
-                                            method="POST" style="display: inline;">
+                                        <a href="{{ route('realEstate.report.edit', $report->id) }}"><i
+                                                class="fas fa-edit"></i></a>
+                                        <a href="{{ route('realEstate.report.show', $report->id) }}"><i
+                                                class="fas fa-eye"></i></a>
+                                        <form action="{{ route('realEstate.report.delete', $report->id) }}" method="POST"
+                                            style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="border-0 padding-0 bg-transparent text-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

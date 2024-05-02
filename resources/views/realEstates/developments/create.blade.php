@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-md-12">
                 <h1>Create Development</h1>
-                <form action="{{ route('realEstate.development.store') }}" method="POST">
+                <form action="{{ route('realEstate.development.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
                         <label for="real_estate_branch_id">Real Estate Branch</label>

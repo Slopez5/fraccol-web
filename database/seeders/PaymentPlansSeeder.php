@@ -17,27 +17,27 @@ class PaymentPlansSeeder extends Seeder
         PaymentPlan::insert([
             [
                 "financing_months" => 12,
-                "name" => "",
+                "name" => "Financiamiento a 1 año",
                 "description" => ""
             ],
             [
                 "financing_months" => 24,
-                "name" => "",
+                "name" => "Financiamiento a 2 años",
                 "description" => ""
             ],
             [
                 "financing_months" => 36,
-                "name" => "",
+                "name" => "Financiamiento a 3 años",
                 "description" => ""
             ],
             [
                 "financing_months" => 48,
-                "name" => "",
+                "name" => "Financiamiento a 4 años",
                 "description" => ""
             ],
             [
                 "financing_months" => 60,
-                "name" => "",
+                "name" => "Financiamiento a 5 años",
                 "description" => ""
             ]
         ]);

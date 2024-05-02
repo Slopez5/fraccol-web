@@ -5,14 +5,14 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RealEstate\DashboardController;
 use App\Http\Controllers\RealEstate\UserController;
 use App\Http\Controllers\RealEstate\AppointmentController;
-use App\Http\Controllers\RealEstate\PermissionController;
+use App\Http\Controllers\RealEstate\ExpenseController;
 use App\Http\Controllers\RealEstate\DevelopmentController;
 use App\Http\Controllers\RealEstate\PropertyController;
 use App\Http\Controllers\RealEstate\LeadController;
 use App\Http\Controllers\RealEstate\PaymentController;
 use App\Http\Controllers\RealEstate\InvoiceController;
 use App\Http\Controllers\RealEstate\ReportController;
-
+use App\Http\Controllers\RealEstate\SettingsController;
 
 Route::middleware(['guest'])->group(function () {
     Route::get('/login', [LoginController::class, 'showLogin'])->name('realEstate.login');
@@ -26,7 +26,7 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('realEstate.dashboard');
     Route::get('/users', [DashboardController::class, 'users'])->name('realEstate.users');
     Route::get('/Appointments', [DashboardController::class, 'appointments'])->name('realEstate.appointments');
-    Route::get('/Permissions', [DashboardController::class, 'permissions'])->name('realEstate.permissions');
+    Route::get('/expenses', [DashboardController::class, 'expenses'])->name('realEstate.expenses');
     Route::get('/Developments', [DashboardController::class, 'developments'])->name('realEstate.developments');
     Route::get('/Properties', [DashboardController::class, 'properties'])->name('realEstate.properties');
     Route::get('/Leads', [DashboardController::class, 'leads'])->name('realEstate.leads');
@@ -50,13 +50,13 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::delete('/appointment/delete/{id}', [AppointmentController::class, 'deleteAppointment'])->name('realEstate.appointment.delete');
     Route::get('/appointment/show/{id}', [AppointmentController::class, 'showAppointment'])->name('realEstate.appointment.show');
 
-    // Permissions
-    Route::get('/permission/create', [PermissionController::class, 'createPermission'])->name('realEstate.permission.create');
-    Route::post('/permission/store', [PermissionController::class, 'storePermission'])->name('realEstate.permission.store');
-    Route::get('/permission/edit/{id}', [PermissionController::class, 'editPermission'])->name('realEstate.permission.edit');
-    Route::put('/permission/update/{id}', [PermissionController::class, 'updatePermission'])->name('realEstate.permission.update');
-    Route::delete('/permission/delete/{id}', [PermissionController::class, 'deletePermission'])->name('realEstate.permission.delete');
-    Route::get('/permission/show/{id}', [PermissionController::class, 'showPermission'])->name('realEstate.permission.show');
+    // Expenses
+    Route::get('/expense/create', [ExpenseController::class, 'createExpense'])->name('realEstate.expense.create');
+    Route::post('/expense/store', [ExpenseController::class, 'storeExpense'])->name('realEstate.expense.store');
+    Route::get('/expense/edit/{id}', [ExpenseController::class, 'editExpense'])->name('realEstate.expense.edit');
+    Route::put('/expense/update/{id}', [ExpenseController::class, 'updateExpense'])->name('realEstate.expense.update');
+    Route::delete('/expense/delete/{id}', [ExpenseController::class, 'deleteExpense'])->name('realEstate.expense.delete');
+    Route::get('/expense/show/{id}', [ExpenseController::class, 'showExpense'])->name('realEstate.expense.show');
 
     // Development
     Route::get('/development/create', [DevelopmentController::class, 'createDevelopment'])->name('realEstate.development.create');
@@ -139,12 +139,19 @@ Route::middleware(['auth.realEstate'])->group(function () {
 
 
     //Settings
-    Route::get('/settings', [DashboardController::class, 'settings'])->name('realEstate.settings');
-    Route::get('/settings/loteTypes', [DashboardController::class, 'loteTypes'])->name('realEstate.settings.loteTypes');
-    Route::get('/settings/paymentPlans', [DashboardController::class, 'paymentPlans'])->name('realEstate.settings.paymentPlans');
-    Route::get('/settings/countries', [DashboardController::class, 'countries'])->name('realEstate.settings.countries');
-    Route::get('/settings/cities', [DashboardController::class, 'cities'])->name('realEstate.settings.cities');
-    Route::get('/settings/states', [DashboardController::class, 'states'])->name('realEstate.settings.states');
+    Route::get('/settings/expenses/categories', [SettingsController::class, 'expenseCategories'])->name('realEstate.settings.expenseCategories');
+    Route::get('/settings/expenses/categories/create', [SettingsController::class, 'createExpenseCategory'])->name('realEstate.settings.expenseCategories.create');
+    Route::post('/settings/expenses/categories/store', [SettingsController::class, 'storeExpenseCategory'])->name('realEstate.settings.expenseCategories.store');
+    Route::get('/settings/expenses/categories/edit/{id}', [SettingsController::class, 'editExpenseCategory'])->name('realEstate.settings.expenseCategories.edit');
+    Route::put('/settings/expenses/categories/update/{id}', [SettingsController::class, 'updateExpenseCategory'])->name('realEstate.settings.expenseCategories.update');
+    Route::delete('/settings/expenses/categories/delete/{id}', [SettingsController::class, 'deleteExpenseCategory'])->name('realEstate.settings.expenseCategories.delete');
+    
+    Route::get('/settings/property_types', [SettingsController::class, 'propertyTypes'])->name('realEstate.settings.propertyTypes');
+    Route::get('/settings/lote_types', [SettingsController::class, 'loteTypes'])->name('realEstate.settings.loteTypes');
+    Route::get('/settings/payment_plans', [SettingsController::class, 'paymentPlans'])->name('realEstate.settings.paymentPlans');
+    Route::get('/settings/counties', [SettingsController::class, 'counties'])->name('realEstate.settings.counties');
+    Route::get('/settings/contracts', [SettingsController::class, 'contracts'])->name('realEstate.settings.contracts');
+
 
     // Logout
     Route::get('/logout', [LoginController::class, 'logout'])->name('realEstate.logout');

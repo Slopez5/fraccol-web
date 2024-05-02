@@ -17,23 +17,23 @@ class LotTypeSeeder extends Seeder
         LotType::insert([
             [
                 "name" => "En esquina",
-                "description" => ""
+                "description" => "Lote en esquina"
             ],
             [
                 "name" => "Frente al camino",
-                "description" => ""
+                "description" => "Lote frente a camino"
             ],
             [
                 "name" => "Comerciales",
-                "description" => ""
+                "description" => "Lote comercial"
             ],
             [
                 "name" => "Dentro del predio",
-                "description" => ""
+                "description" => "Lote dentro del predio"
             ],
             [
                 "name" => "Frente a carretera",
-                "description" => ""
+                "description" => "lote frente a carretera"
             ]
         ]);
     }

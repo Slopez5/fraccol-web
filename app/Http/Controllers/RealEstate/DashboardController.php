@@ -13,6 +13,7 @@ use App\Models\Lot;
 use App\Models\Payment;
 use App\Models\Permission;
 use App\Models\State;
+use App\Models\Unit;
 use App\Models\User;
 use Illuminate\Http\Request;
 
@@ -23,7 +24,7 @@ class DashboardController extends Controller
     public function index()
     {
         $developments = Development::all();
-        $leads = Lead::all();
+        $leads = Lead::paginate(10);
         $invoices = Invoice::all();
         $appointments = Appointment::all();
         return view('realEstates.home', compact('developments', 'leads', 'invoices', 'appointments'));
@@ -31,7 +32,7 @@ class DashboardController extends Controller
 
     public function users()
     {
-        $users = User::where('role_id',3)->get();
+        $users = User::where('role_id', 3)->get();
         return view('realEstates.users', compact('users'));
     }
 
@@ -41,10 +42,10 @@ class DashboardController extends Controller
         return view('realEstates.appointments', compact('appointments'));
     }
 
-    public function permissions()
+    public function expenses()
     {
-        $permissions = Permission::all();
-        return view('realEstates.permissions', compact('permissions'));
+        $expenses = [];
+        return view('realEstates.expenses', compact('expenses'));
     }
 
     public function developments()
@@ -56,7 +57,7 @@ class DashboardController extends Controller
 
     public function properties()
     {
-        $properties = Lot::all();
+        $properties = Unit::all();
         return view('realEstates.properties', compact('properties'));
     }
 
@@ -70,13 +71,13 @@ class DashboardController extends Controller
     public function payments()
     {
         $payments = Payment::all();
-        return view('realEstates.payments', compact('payments') );
+        return view('realEstates.payments', compact('payments'));
     }
 
     public function invoices()
     {
         $invoices = Invoice::all();
-        return view('realEstates.invoices', compact('invoices') );
+        return view('realEstates.invoices', compact('invoices'));
     }
 
     public function reports()
@@ -115,7 +116,4 @@ class DashboardController extends Controller
     {
         return view('realEstates.settings.cities');
     }
-
-
-
 }

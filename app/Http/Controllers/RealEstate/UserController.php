@@ -5,6 +5,7 @@ namespace App\Http\Controllers\RealEstate;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -16,6 +17,7 @@ class UserController extends Controller
 
     public function storeUser(Request $request)
     {
+        $realEstate = Auth::user()->realEstates->first();
         $user = new User([
             'first_name' => $request->get('first_name'),
             'last_name' => $request->get('last_name'),
@@ -26,6 +28,7 @@ class UserController extends Controller
             'role_id' => 3,
         ]);
         $user->save();
+        $user->realEstates()->attach($realEstate->id);
         return redirect()->route('realEstate.users');
     }
 
@@ -51,6 +54,15 @@ class UserController extends Controller
 
     public function deleteUser($id)
     {
+        $user = User::find($id);
+        $user->delete();
+        return redirect()->route('realEstate.users');
+    }
+
+    public function restoreUser($id)
+    {
+        $user = User::withTrashed()->find($id);
+        $user->restore();
         return redirect()->route('realEstate.users');
     }
 

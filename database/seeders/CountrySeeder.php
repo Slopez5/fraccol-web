@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\LotImage;
+use App\Models\Country;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class LotImagesSeeder extends Seeder
+class CountrySeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,5 +14,11 @@ class LotImagesSeeder extends Seeder
     public function run(): void
     {
         //
+        $country = new Country([
+            "code" => "MX",
+            "name" => "México"
+        ]);
+
+        $country->save();
     }
 }

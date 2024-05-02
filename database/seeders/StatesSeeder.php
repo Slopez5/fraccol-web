@@ -16,6 +16,7 @@ class StatesSeeder extends Seeder
         //
         State::insert([
             [
+                "country_id" => 1,
                 "name" => "Colima",
                 "abbreviation" => "Col"
             ]

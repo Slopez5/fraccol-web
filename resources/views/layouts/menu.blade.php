@@ -40,10 +40,10 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('realEstate.permissions') }}" class="nav-link">
-                            <i class="nav-icon fas fa-user-lock"></i>
+                        <a href="{{ route('realEstate.expenses') }}" class="nav-link">
+                            <i class="nav-icon fas fa-money-bill"></i>
                             <p>
-                                Permisos
+                                Gastos
                             </p>
                         </a>
                     </li>
@@ -95,13 +95,40 @@
                             </p>
                         </a>
                     </li>
-                    <li class="nav-item">
-                        <a href="{{ route('realEstate.settings') }}" class="nav-link">
+                    <li class="nav-item has-treeview">
+                        <a href="#" class="nav-link">
                             <i class="nav-icon fas fa-cogs"></i>
                             <p>
                                 Configuración
+                                <i class="right fas fa-angle-right"></i>
                             </p>
                         </a>
+                        <ul class="nav nav-treeview">
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.expenseCategories') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>categorías de gastos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.counties') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Paises</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.contracts') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Contratos</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.propertyTypes') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tipos de propiedades</p>
+                                </a>
+                            </li>
+                        </ul>
                     </li>
                 </ul>
          </nav>

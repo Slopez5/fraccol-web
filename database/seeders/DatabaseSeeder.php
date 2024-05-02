@@ -16,22 +16,14 @@ class DatabaseSeeder extends Seeder
     {
        $this->call(
         [
+            LotTypeSeeder::class,
+            PaymentPlansSeeder::class,
             RoleSeeder::class,
             UserSeeder::class,
-            RealStateAgencySeeder::class,
+            CountrySeeder::class,
             StatesSeeder::class,
             CitySeeder::class,
-            AddressSeeder::class,
-            RealStateBranchesSeeder::class,
-            DevelopmentSeeder::class,
-            DevelopmentImagesSedder::class,
-            LotTypeSeeder::class,
-            DevelopmentLotTypeSeeder::class,
-            LotSeeder::class,
-            LotImagesSeeder::class,
-            PaymentPlansSeeder::class,
-            WhatsappQuestionSeeder::class,
-            WhatsappAnswerSeeder::class
+            
         ]
        );
     }

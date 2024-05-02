@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
@@ -18,6 +19,10 @@ class RealEstateAgency extends Model
 
     public function admin(): BelongsTo {
         return $this->BelongsTo(User::class,'admin_id');
+    }
+
+    public function agents(): BelongsToMany {
+        return $this->belongsToMany(User::class,'real_estate_user','real_estate_id','user_id');
     }
 
     public function branches(): HasMany

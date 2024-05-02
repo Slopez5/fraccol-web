@@ -4,38 +4,85 @@ namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Development;
+use App\Models\Lead;
+use App\Models\User;
+use App\Models\Appointment;
 
 class AppointmentController extends Controller
 {
-     // Appointments
+    // Appointments
 
-     public function createAppointment()
-     {
-         return view('realEstates.appointments.create');
-     }
- 
-     public function storeAppointment(Request $request)
-     {
-         return redirect()->route('realEstate.appointments');
-     }
- 
-     public function editAppointment($id)
-     {
-         return view('realEstates.appointments.edit');
-     }
- 
-     public function updateAppointment(Request $request, $id)
-     {
-         return redirect()->route('realEstate.appointments');
-     }
- 
-     public function deleteAppointment($id)
-     {
-         return redirect()->route('realEstate.appointments');
-     }
- 
-     public function showAppointment($id)
-     {
-         return view('realEstates.appointments.show');
-     }
+    public function createAppointment()
+    {
+        $developments = Development::all();
+        $leads = Lead::all();
+        $leadAgents = User::where('role_id', 3)->get();
+        $saleClosers = User::where('role_id', 4)->get();
+        return view('realEstates.appointments.create', compact('developments', 'leads', 'leadAgents', 'saleClosers'));
+    }
+
+    public function storeAppointment(Request $request)
+    {
+        $request->validate([
+            'appointment_date' => 'required'
+        ]);
+        $appointment = new Appointment();
+        $appointment->development_id = $request['development_id'];
+        if ($request['lead_id']) {
+            $lead = Lead::find($request['lead_id']);
+            //$appointment->lead_id = $request->lead_id;
+            $appointment->customer_name =  $lead->first_name . ' ' . $lead->last_name;
+            $appointment->customer_phone = $lead->phone;
+            $appointment->customer_email = $lead->email;
+        } else {
+            $appointment->customer_name = $request['customer_name'];
+            $appointment->customer_phone = $request['customer_phone'];
+            $appointment->customer_email = $request['customer_email'];
+        }
+        $appointment->appointment_date = $request['appointment_date'];
+        $appointment->status = $request['status'];
+        $appointment->notes = $request['notes'];
+
+        if ($request['lead_agent_id']) {
+            $appointment->lead_agent_id = $request['lead_agent_id'];
+        }
+        if ($request['sale_closer_id']) {
+            $appointment->sale_closer_agent_id = $request['sale_closer_id'];
+        }
+
+        $appointment->save();
+        return redirect()->route('realEstate.appointments');
+    }
+
+    public function editAppointment($id)
+    {
+        $appointment = Appointment::find($id);
+        $appointment->development;
+        $developments = Development::all();
+        return view('realEstates.appointments.edit', compact('appointment', 'developments'));
+    }
+
+    public function updateAppointment(Request $request, $id)
+    {
+        $appointment = Appointment::find($id);
+        $appointment->development_id = $request['development_id'];
+        $appointment->customer_name = $request['customer_name'];
+        $appointment->customer_phone = $request['customer_phone'];
+        $appointment->customer_email = $request['customer_email'];
+        $appointment->appointment_date = $request['appointment_date'];
+        $appointment->notes = $request['notes'];
+        $appointment->save();
+        return redirect()->route('realEstate.appointments');
+    }
+
+    public function deleteAppointment($id)
+    {
+        return redirect()->route('realEstate.appointments');
+    }
+
+    public function showAppointment($id)
+    {
+        return view('realEstates.appointments.show');
+    }
 }

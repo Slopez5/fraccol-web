@@ -22,20 +22,23 @@
                             @foreach ($properties as $property)
                                 <tr>
                                     <td>{{ $property->id }}</td>
-                                    <td>{{ $property->development->name }}</td>
+                                    <td>{{  $property->development->name }}</td>
                                     <td>{{ $property->propertyType->name }}</td>
                                     <td>{{ $property->price }}</td>
                                     <td>
-                                        <a href="{{ route('realEstate.property.edit', $property->id) }}"
-                                            class="btn btn-primary">Edit</a>
-                                        <a href="{{ route('realEstate.property.show', $property->id) }}"
-                                            class="btn btn-info">Show</a>
-                                        <form action="{{ route('realEstate.property.delete', $property->id) }}"
-                                            method="POST" style="display: inline;">
+                                        <a href="{{ route('realEstate.property.edit', $property->id) }}"><i
+                                                class="fas fa-edit"></i></a>
+                                        <a href="{{ route('realEstate.property.show', $property->id) }}"><i
+                                                class="fas fa-eye"></i></a>
+                                        <form action="{{ route('realEstate.property.delete', $property->id) }}" method="POST"
+                                            style="display: inline;">
                                             @csrf
                                             @method('DELETE')
-                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                            <button type="submit" class="border-0 padding-0 bg-transparent text-danger">
+                                                <i class="fas fa-trash"></i>
+                                            </button>
                                         </form>
+                                    </td>
                                 </tr>
                             @endforeach
                         </tbody>

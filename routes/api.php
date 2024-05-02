@@ -26,10 +26,11 @@ use Illuminate\Support\Facades\Route;
 Route::post('/v1/login', [AuthApiController::class, 'login']);
 Route::post('/v1/register', [AuthApiController::class, 'register']);
 Route::post('/v1/forget_password', [AuthApiController::class, 'forgetPassword']);
+Route::post('/v1/create_user', [AuthApiController::class, 'createUser']);
 
 Route::middleware(['auth:api'])->group(function () {
     Route::post('/v1/role', [RolesApiController::class, 'addRole']);
-    Route::post('/v1/create_user', [AuthApiController::class, 'createUser']);
+    
 
     /**
      * Settings System Apis

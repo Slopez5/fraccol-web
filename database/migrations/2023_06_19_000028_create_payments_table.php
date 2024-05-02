@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('payment_status_id');
             $table->unsignedBigInteger('sale_id');
+            $table->morphs('paymentable');
             $table->date('payment_date');
             $table->decimal('payment_amount', 8, 2);
             $table->decimal('balance', 8, 2);

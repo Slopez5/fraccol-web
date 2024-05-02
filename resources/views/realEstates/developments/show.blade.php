@@ -29,7 +29,9 @@
                                                 method="POST" style="display: inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                                <button type="submit" class="border-0 padding-0 bg-transparent text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -65,11 +67,13 @@
                                         <td>{{ $paymentPlan->pivot->down_payment }}</td>
                                         <td>{{ $paymentPlan->pivot->price_per_sqm }}</td>
                                         <td>
-                                            <form action="{{ route('realEstate.development.paymentPlan.delete', [$development->id, $paymentPlan->pivot->lot_type_id]) }}"
+                                            <form action="{{ route('realEstate.development.paymentPlan.delete', [$development->id, $paymentPlan->id]) }}"
                                                 method="POST" style="display: inline">
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                                <button type="submit" class="border-0 padding-0 bg-transparent text-danger">
+                                                    <i class="fas fa-trash"></i>
+                                                </button>
                                             </form>
                                         </td>
                                     </tr>
@@ -90,7 +94,7 @@
                         <table class="table table-bordered table-striped">
                             <thead>
                                 <tr>
-                                    <th>Financiamiento</th>
+                                    <th></th>
                                     <th>Manzana</th>
                                     <th>Lote</th>
                                     <th>Superficie</th>
@@ -104,23 +108,27 @@
                                     @foreach ($development->lotes as $lot)
                                         <tr>
                                             <td>
-                                                <button class="btn btn-primary btn-sm" data-toggle="collapse"
-                                                    data-target="#lotDetails{{ $lot->id }}">Ver</button></td>
+                                                <button class="border-0 padding-0 bg-transparent" data-toggle="collapse"
+                                                    data-target="#lotDetails{{ $lot->id }}">
+                                                    <i class="fas fa-angle-right"></i>
+                                                </button>
                                             <td>{{ $lot->block_number }}</td>
                                             <td>{{ $lot->lot_number }}</td>
                                             <td>{{ $lot->lot_size }}</td>
                                             <td>{{ $lot->price }}</td>
                                             <td>{{ $lot->status }}</td>
                                             <td>
-                                                <a href="{{ route('realEstate.development.lot.show', [$development->id,$lot->id]) }}"
-                                                    class="btn btn-primary btn-sm">Ver</a>
-                                                <a href="{{ route('realEstate.development.lot.edit',[$development->id ,$lot->id]) }}"
-                                                    class="btn btn-warning btn-sm">Editar</a>
-                                                <form action="{{ route('realEstate.development.lot.delete', [$development->id,$lot->id]) }}" method="POST"
-                                                    style="display: inline">
+                                                <a href="{{ route('realEstate.development.lot.edit', [$development->id, $lot->id]) }}"><i
+                                                        class="fas fa-edit"></i></a>
+                                                <a href="{{ route('realEstate.development.lot.show', [$development->id, $lot->id]) }}"><i
+                                                        class="fas fa-eye"></i></a>
+                                                <form action="{{ route('realEstate.development.lot.delete', [$development->id, $lot->id]) }}"
+                                                    method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
-                                                    <button type="submit" class="btn btn-danger btn-sm">Eliminar</button>
+                                                    <button type="submit" class="border-0 padding-0 bg-transparent text-danger">
+                                                        <i class="fas fa-trash"></i>
+                                                    </button>
                                                 </form>
                                             </td>
                                         </tr>

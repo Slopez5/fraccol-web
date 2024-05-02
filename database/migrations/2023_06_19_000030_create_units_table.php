@@ -20,6 +20,7 @@ return new class extends Migration
             $table->unsignedBigInteger('address_id')->nullable();
             $table->unsignedBigInteger('development_id')->nullable();
             $table->unsignedBigInteger('lot_id')->nullable();
+            $table->double('price')->nullable();
             $table->timestamps();
             $table->softDeletes();
 
