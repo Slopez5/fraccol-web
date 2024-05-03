@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Passport\HasApiTokens;
+use App\Classes\RoleType;
 
 class User extends Authenticatable
 {
@@ -65,15 +66,15 @@ class User extends Authenticatable
     }
 
     public function isAdmin() {
-        return $this->role_id == 1;
+        return $this->role_id == RoleType::ADMIN;
     }
 
     public function isRealState() {
-        return $this->role_id == 2;
+        return $this->role_id == RoleType::REAL_ESTATE;
     }
 
     public function isAgent() {
-        return $this->role_id == 3;
+        return $this->role_id == RoleType::REAL_ESTATE_AGENT;
     }
 
     public function subdomain():MorphOne {

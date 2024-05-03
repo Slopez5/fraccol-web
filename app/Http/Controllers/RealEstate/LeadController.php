@@ -12,14 +12,14 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 use JeroenDesloovere\VCard\VCardParser;
-use Illuminate\Pagination\Paginator;
+use App\Classes\RoleType;
 
 class LeadController extends Controller
 {
     // Lead
     public function createLead()
     {
-        $agents = User::where('role_id', 3)->get();
+        $agents = User::where('role_id', RoleType::REAL_ESTATE_AGENT)->get();
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();
@@ -67,7 +67,7 @@ class LeadController extends Controller
     public function editLead($id)
     {
         $lead = Lead::find($id);
-        $agents = User::where('role_id', 3)->get();
+        $agents = User::where('role_id', RoleType::REAL_ESTATE_AGENT)->get();
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();

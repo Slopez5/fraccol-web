@@ -4,6 +4,7 @@ namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Development;
+use App\Models\DevelopmentType;
 use App\Models\Lot;
 use App\Models\LotType;
 use App\Models\Payment;
@@ -18,7 +19,8 @@ class DevelopmentController extends Controller
     public function createDevelopment()
     {
         $realEstateBranches = Auth::user()->realEstates->first()->branches;
-        return view('realEstates.developments.create', compact('realEstateBranches'));
+        $developmentTypes = DevelopmentType::all();
+        return view('realEstates.developments.create', compact('realEstateBranches', 'developmentTypes'));
     }
 
     public function storeDevelopment(Request $request)
@@ -42,11 +44,13 @@ class DevelopmentController extends Controller
             $storagePath = str_replace('public/', 'storage/', $storagePath);
             $development->logo = $storagePath;
         }
-        if ($request->file('blueprint')->isValid()) {
-            $blueprint = $request->file('blueprint');
-            $storagePath = $blueprint->storeAs('public/developments/blueprints', $blueprint->getClientOriginalName());
-            $storagePath = str_replace('public/', 'storage/', $storagePath);
-            $development->blueprint = $storagePath;
+        if ($request->hasFile('blueprint')){
+            if ($request->file('blueprint')->isValid()) {
+                $blueprint = $request->file('blueprint');
+                $storagePath = $blueprint->storeAs('public/developments/blueprints', $blueprint->getClientOriginalName());
+                $storagePath = str_replace('public/', 'storage/', $storagePath);
+                $development->blueprint = $storagePath;
+            }
         }
         $development->location = $request->get('location');
         $development->total_land_area = $request->get('total_land_area');
@@ -71,6 +75,7 @@ class DevelopmentController extends Controller
             $storagePath = str_replace('public/', 'storage/', $storagePath);
             $development->image = $storagePath;
         }
+        $development->development_type_id = $request->get('development_type_id');
         $development->save();
         return redirect()->route('realEstate.developments');
     }
@@ -131,6 +136,7 @@ class DevelopmentController extends Controller
             $storagePath = str_replace('public/', 'storage/', $storagePath);
             $development->image = $storagePath;
         }
+        $development->development_type_id = $request->get('development_type_id');
         $development->save();
 
         return redirect()->route('realEstate.developments');

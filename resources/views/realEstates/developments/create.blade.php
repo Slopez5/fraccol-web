@@ -16,6 +16,14 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="development_type_id">Development Type</label>
+                        <select name="development_type_id" id="development_type_id" class="form-control">
+                            @foreach ($developmentTypes as $developmentType)
+                                <option value="{{ $developmentType->id }}">{{ $developmentType->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="name">Name<span>*</span></label>
                         <input type="text" name="name" id="name" class="form-control">
                         @error('name')

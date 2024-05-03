@@ -4,7 +4,12 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
+use App\Models\Expense;
+use App\Models\ExpenseCategory;
+use App\Models\Invoice;
+use App\Models\InvoiceStatus;
 use App\Models\RealStateBranch;
+use App\Models\ResourceType;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -16,6 +21,14 @@ class DatabaseSeeder extends Seeder
     {
        $this->call(
         [
+            DevelopmentTypeSeeder::class,
+            ExpenseCategorySeeder::class,
+            InvoiceStatusSeeder::class,
+            PaymentMethodSeeder::class,
+            PaymentStatusSeeder::class,
+            ResourceTypeSeeder::class,
+            UnitTypeSeeder::class,
+            ActivityTypeSeeder::class,
             LotTypeSeeder::class,
             PaymentPlansSeeder::class,
             RoleSeeder::class,
@@ -23,7 +36,6 @@ class DatabaseSeeder extends Seeder
             CountrySeeder::class,
             StatesSeeder::class,
             CitySeeder::class,
-            
         ]
        );
     }

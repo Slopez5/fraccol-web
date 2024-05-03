@@ -49,7 +49,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('realEstate.developments') }}" class="nav-link">
-                            <i class="nav-icon fa fa-buildings"></i>
+                            <i class="nav-icon fas fa-building"></i>
                             <p>
                                 Fraccionamientos
                             </p>
@@ -105,13 +105,67 @@
                         </a>
                         <ul class="nav nav-treeview">
                             <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.activityCategories') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tipos de actividad</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
                                 <a href="{{ route('realEstate.settings.expenseCategories') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>categorías de gastos</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('realEstate.settings.counties') }}" class="nav-link">
+                                <a href="{{ route('realEstate.settings.realEstateAgencies') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Agencias inmobiliarias</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.realEstateBranches') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Sucursales inmobiliarias</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.invoiceStatuses') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Estados de factura</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.lotStatuses') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Estados de lote</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.lotTypes') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Tipos de lote</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.paymentPlans') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Planes de pago</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.paymentMethods') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Metodos de pago</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.paymentStatuses') }}" class="nav-link">
+                                    <i class="far fa-circle nav-icon"></i>
+                                    <p>Estados de pago</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('realEstate.settings.countries') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Paises</p>
                                 </a>

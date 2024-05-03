@@ -2,9 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Classes\RoleType;
 use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+
 
 class UserSeeder extends Seeder
 {
@@ -14,15 +15,27 @@ class UserSeeder extends Seeder
     public function run(): void
     {
         //
-        $user = new User([
-            "role_id" => 2,
-            "username" => "inface",
-            "first_name" => "Inface Desarrollos",
-            "last_name" => "",
-            "phone" => "3123094127",
-            "email" => "admin@inface.com",
-            "password" => bcrypt("\$InfaceDesarrollos\$")
-        ]);
-        $user->save();
+        User::insert(
+            [
+                [
+                    "role_id" => RoleType::ADMIN,
+                    "username" => "root",
+                    "first_name" => "Sergio Omar",
+                    "last_name" => "Lopez Ceballos",
+                    "phone" => "3121769109",
+                    "email" => "admin@fraccionamientoscolima.com",
+                    "password" => bcrypt("Locs9506068k3")
+                ],
+                [
+                    "role_id" => RoleType::REAL_ESTATE,
+                    "username" => "inface",
+                    "first_name" => "Inface",
+                    "last_name" => "Desarrollos",
+                    "phone" => "3121769109",
+                    "email" => "admin@inface.com", 
+                    "password" => bcrypt("\$InfaceDesarrollos\$")
+                ],
+            ]
+        );
     }
 }

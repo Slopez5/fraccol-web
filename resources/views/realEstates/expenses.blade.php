@@ -5,7 +5,7 @@
         <div class="row">
             <div class="card col-12">
                 <div class="card-header">
-                    <h4>Permissions</h4>
+                    <h4>Gastos</h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">
@@ -42,7 +42,7 @@
                 </div>
             </div>
             <div class="col-4">
-                <a href="{{ route('realEstate.expense.create') }}" class="btn btn-success">Create Permission</a>
+                <a href="{{ route('realEstate.expense.create') }}" class="btn btn-success">Agregar Gasto</a>
             </div>
         </div>
     </div>

@@ -4,18 +4,13 @@ namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\Controller;
 use App\Models\Appointment;
-use App\Models\City;
-use App\Models\Country;
 use App\Models\Development;
 use App\Models\Invoice;
 use App\Models\Lead;
-use App\Models\Lot;
 use App\Models\Payment;
-use App\Models\Permission;
-use App\Models\State;
 use App\Models\Unit;
 use App\Models\User;
-use Illuminate\Http\Request;
+use App\Classes\RoleType;
 
 class DashboardController extends Controller
 {
@@ -32,7 +27,7 @@ class DashboardController extends Controller
 
     public function users()
     {
-        $users = User::where('role_id', 3)->get();
+        $users = User::where('role_id', RoleType::REAL_ESTATE_AGENT)->get();
         return view('realEstates.users', compact('users'));
     }
 

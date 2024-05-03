@@ -16,6 +16,12 @@ return new class extends Migration
             $table->unsignedBigInteger('lead_id');
             $table->unsignedBigInteger('sale_id');
             $table->timestamps();
+
+
+
+            $table->foreign('contract_id')->references('id')->on('contracts');
+            $table->foreign('lead_id')->references('id')->on('leads');
+            $table->foreign('sale_id')->references('id')->on('sales');
         });
     }
 

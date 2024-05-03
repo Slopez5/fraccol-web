@@ -17,6 +17,14 @@
                         </select>
                     </div>
                     <div class="form-group">
+                        <label for="development_type_id">Development Type</label>
+                        <select name="development_type_id" id="development_type_id" class="form-control">
+                            @foreach ($developmentTypes as $developmentType)
+                                <option value="{{ $developmentType->id }}" @if ($developmentType->id == $development->development_type_id) selected @endif>{{ $developmentType->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="form-group">
                         <label for="name">Name<span>*</span></label>
                         <input type="text" name="name" id="name" class="form-control" value="{{ $development->name }}">
                         @error('name')

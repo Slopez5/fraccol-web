@@ -5,7 +5,7 @@
         <div class="row">
             <div class="card col-12">
                 <div class="card-header">
-                    <h4>Developments</h4>
+                    <h4>Fraccionamientos</h4>
                 </div>
                 <div class="card-body">
                     <table class="table table-bordered">

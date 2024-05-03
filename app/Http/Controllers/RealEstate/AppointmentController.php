@@ -8,6 +8,7 @@ use App\Models\Development;
 use App\Models\Lead;
 use App\Models\User;
 use App\Models\Appointment;
+use App\Classes\RoleType;
 
 class AppointmentController extends Controller
 {
@@ -17,8 +18,8 @@ class AppointmentController extends Controller
     {
         $developments = Development::all();
         $leads = Lead::all();
-        $leadAgents = User::where('role_id', 3)->get();
-        $saleClosers = User::where('role_id', 4)->get();
+        $leadAgents = User::where('role_id', RoleType::REAL_ESTATE_AGENT )->get();
+        $saleClosers = User::where('role_id', RoleType::DEVELOPMENT_MANAGER)->get();
         return view('realEstates.appointments.create', compact('developments', 'leads', 'leadAgents', 'saleClosers'));
     }
 

@@ -5,19 +5,19 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Developments</div>
+                    <div class="card-header">Fraccionamientos</div>
                     <div class="card-body">
-                        <a href="{{ route('realEstate.development.create') }}" class="btn btn-primary">Add Development</a>
+                        <a href="{{ route('realEstate.development.create') }}" class="btn btn-primary">Nuevo Fraccionamiento</a>
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th>Name</th>
+                                    <th>Nombre</th>
                                     <th>Address</th>
                                     <th>City</th>
                                     <th>State</th>
                                     <th>Zip</th>
                                     <th>Country</th>
-                                    <th>Actions</th>
+                                    <th>Acciones</th>
                                 </tr>
                             </thead>
                             <tbody>

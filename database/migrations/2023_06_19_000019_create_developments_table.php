@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('real_estate_id')->nullable();
             $table->unsignedBigInteger('real_estate_branch_id')->nullable();
+            $table->unsignedBigInteger('development_type_id');
             $table->string('name');
             $table->string('logo')->nullable();
             $table->string('blueprint')->nullable();
@@ -34,6 +35,7 @@ return new class extends Migration
             $table->softDeletes();
 
 
+            $table->foreign('development_type_id')->references('id')->on('development_types');
             $table->foreign('real_estate_id')->references('id')->on('real_estate_agencies');
             $table->foreign('real_estate_branch_id')->references('id')->on('real_estate_branches');
         });
