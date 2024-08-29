@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Models\LotType;
+use App\Models\LoteType;
 use Illuminate\Http\Request;
 
 class LoteApiController extends Controller
@@ -12,7 +12,7 @@ class LoteApiController extends Controller
 
     public function addLoteType(Request $request)
     {
-        $loteType = new LotType();
+        $loteType = new LoteType();
         $loteType->name = $request["name"];
         $loteType->description = $request["description"];
         $loteType->save();
@@ -20,17 +20,17 @@ class LoteApiController extends Controller
     }
 
     public function getLoteTypes(){
-        $loteTypes = LotType::all();
+        $loteTypes = LoteType::all();
         return response()->success(['lote_types' => $loteTypes], ["code" => 200, "message" => "tipos de lote"]);
     }
 
     public function LoteTypeDetails($id){
-        $loteType = LotType::find($id);
+        $loteType = LoteType::find($id);
         return response()->success(['lote_type' => $loteType], ["code" => 200, "message" => "tipo de lote"]);
     }
 
     public function updateLoteType($id, Request $request){
-        $loteType = LotType::find($id);
+        $loteType = LoteType::find($id);
         $loteType->name = $request["name"];
         $loteType->description = $request["description"];
         $loteType->save();
@@ -38,7 +38,7 @@ class LoteApiController extends Controller
     }
 
     public function deleteLoteType($id){
-        $loteType = LotType::find($id);
+        $loteType = LoteType::find($id);
         $loteType->delete();
         return response()->success(['lote_type' => $loteType], ["code" => 200, "message" => "tipo de lote eliminadoo correctamente"]);
     }

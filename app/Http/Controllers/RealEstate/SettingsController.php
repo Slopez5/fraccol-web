@@ -171,19 +171,51 @@ class SettingsController extends Controller
         return redirect()->route('realEstate.settings.realEstateBranches');
     }
 
+    public function editRealEstateBranch($id)
+    {
+        $realEstateBranch = RealEstateBranch::find($id);
+        return view('realEstates.settings.realEstateBranches.edit', compact('realEstateBranch'));
+    }
+
+    public function updateRealEstateBranch(Request $request, $id)
+    {
+        $realEstateBranch = RealEstateBranch::find($id);
+        $realEstateBranch->name = $request->name;
+        $realEstateBranch->email = $request->email;
+        $realEstateBranch->phone = $request->phone;
+        $address = $realEstateBranch->address;
+        $address->street = $request->street;
+        $address->neighborhood = $request->neighborhood;
+        $address->country_id = $request->country;
+        $address->state_id = $request->state;
+        $address->city_id = $request->city;
+        $address->zip_code = $request->zip_code;
+        $address->save();
+        $realEstateBranch->address()->associate($address);
+    }
+
+    public function deleteRealEstateBranch($id)
+    {
+        $realEstateBranch = RealEstateBranch::find($id);
+        $realEstateBranch->delete();
+        return redirect()->route('realEstate.settings.realEstateBranches');
+    }
+
+    
+
     public function invoiceStatuses()
     {
         return view('realEstates.settings.invoiceStatuses.index');
     }
 
-    public function lotStatuses()
+    public function loteStatuses()
     {
-        return view('realEstates.settings.lotStatuses.index');
+        return view('realEstates.settings.loteStatuses.index');
     }
 
-    public function lotTypes()
+    public function loteTypes()
     {
-        return view('realEstates.settings.lotTypes.index');
+        return view('realEstates.settings.loteTypes.index');
     }
 
     public function paymentPlans()
@@ -214,6 +246,11 @@ class SettingsController extends Controller
     public function unitTypes()
     {
         return view('realEstates.settings.unitTypes.index');
+    }
+
+    public function propertyTypes()
+    {
+        return view('realEstates.settings.propertyTypes.index');
     }
 
 

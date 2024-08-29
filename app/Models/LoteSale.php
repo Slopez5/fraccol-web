@@ -4,6 +4,6 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Relations\Pivot;
 
-class LotSale extends Pivot
+class LoteSale extends Pivot
 {
 }

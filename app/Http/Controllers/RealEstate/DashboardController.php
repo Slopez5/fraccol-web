@@ -11,6 +11,7 @@ use App\Models\Payment;
 use App\Models\Unit;
 use App\Models\User;
 use App\Classes\RoleType;
+use App\Models\Sale;
 
 class DashboardController extends Controller
 {
@@ -29,6 +30,12 @@ class DashboardController extends Controller
     {
         $users = User::where('role_id', RoleType::REAL_ESTATE_AGENT)->get();
         return view('realEstates.users', compact('users'));
+    }
+
+    public function sales()
+    {
+        $sales = Sale::all();
+        return view('realEstates.sales', compact('sales'));
     }
 
     public function appointments()

@@ -12,6 +12,7 @@ use App\Http\Controllers\RealEstate\LeadController;
 use App\Http\Controllers\RealEstate\PaymentController;
 use App\Http\Controllers\RealEstate\InvoiceController;
 use App\Http\Controllers\RealEstate\ReportController;
+use App\Http\Controllers\RealEstate\SalesController;
 use App\Http\Controllers\RealEstate\SettingsController;
 
 Route::middleware(['guest'])->group(function () {
@@ -25,6 +26,7 @@ Route::middleware(['guest'])->group(function () {
 Route::middleware(['auth.realEstate'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('realEstate.dashboard');
     Route::get('/users', [DashboardController::class, 'users'])->name('realEstate.users');
+    Route::get('/sales', [DashboardController::class, 'sales'])->name('realEstate.sales');
     Route::get('/Appointments', [DashboardController::class, 'appointments'])->name('realEstate.appointments');
     Route::get('/expenses', [DashboardController::class, 'expenses'])->name('realEstate.expenses');
     Route::get('/Developments', [DashboardController::class, 'developments'])->name('realEstate.developments');
@@ -42,6 +44,14 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::delete('/user/delete/{id}', [UserController::class, 'deleteUser'])->name('realEstate.user.delete');
     Route::get('/user/show/{id}', [UserController::class, 'showUser'])->name('realEstate.user.show');
 
+    // Sales
+    Route::get('/sale/create', [SalesController::class, 'createSale'])->name('realEstate.sale.create');
+    Route::post('/sale/store', [SalesController::class, 'storeSale'])->name('realEstate.sale.store');
+    Route::get('/sale/edit/{id}', [SalesController::class, 'editSale'])->name('realEstate.sale.edit');
+    Route::put('/sale/update/{id}', [SalesController::class, 'updateSale'])->name('realEstate.sale.update');
+    Route::delete('/sale/delete/{id}', [SalesController::class, 'deleteSale'])->name('realEstate.sale.delete');
+    Route::get('/sale/show/{id}', [SalesController::class, 'showSale'])->name('realEstate.sale.show');
+
     // Appointments
     Route::get('/appointment/create', [AppointmentController::class, 'createAppointment'])->name('realEstate.appointment.create');
     Route::post('/appointment/store', [AppointmentController::class, 'storeAppointment'])->name('realEstate.appointment.store');
@@ -49,6 +59,9 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::put('/appointment/update/{id}', [AppointmentController::class, 'updateAppointment'])->name('realEstate.appointment.update');
     Route::delete('/appointment/delete/{id}', [AppointmentController::class, 'deleteAppointment'])->name('realEstate.appointment.delete');
     Route::get('/appointment/show/{id}', [AppointmentController::class, 'showAppointment'])->name('realEstate.appointment.show');
+
+    //Appointment -> Activities
+    Route::post('/appointment/{appointment}/activity/store', [AppointmentController::class, 'storeActivity'])->name('realEstate.appointment.activity.store');
 
     // Expenses
     Route::get('/expense/create', [ExpenseController::class, 'createExpense'])->name('realEstate.expense.create');
@@ -68,12 +81,12 @@ Route::middleware(['auth.realEstate'])->group(function () {
 
 
     // Development -> Lotes
-    Route::get('/development/{development}/lot/create', [DevelopmentController::class, 'createDevelopmentLot'])->name('realEstate.development.lot.create');
-    Route::post('/development/{development}/lot/store', [DevelopmentController::class, 'storeDevelopmentLot'])->name('realEstate.development.lot.store');
-    Route::get('/development/{development}/lot/edit/{id}', [DevelopmentController::class, 'editDevelopmentLot'])->name('realEstate.development.lot.edit');
-    Route::put('/development/{development}/lot/update/{id}', [DevelopmentController::class, 'updateDevelopmentLot'])->name('realEstate.development.lot.update');
-    Route::delete('/development/{development}/lot/delete/{id}', [DevelopmentController::class, 'deleteDevelopmentLot'])->name('realEstate.development.lot.delete');
-    Route::get('/development/{development}/lot/show/{id}', [DevelopmentController::class, 'showDevelopmentLot'])->name('realEstate.development.lot.show');
+    Route::get('/development/{development}/lote/create', [DevelopmentController::class, 'createDevelopmentLote'])->name('realEstate.development.lot.create');
+    Route::post('/development/{development}/lote/store', [DevelopmentController::class, 'storeDevelopmentLote'])->name('realEstate.development.lot.store');
+    Route::get('/development/{development}/lote/edit/{id}', [DevelopmentController::class, 'editDevelopmentLote'])->name('realEstate.development.lot.edit');
+    Route::put('/development/{development}/lote/update/{id}', [DevelopmentController::class, 'updateDevelopmentLote'])->name('realEstate.development.lot.update');
+    Route::delete('/development/{development}/lote/delete/{id}', [DevelopmentController::class, 'deleteDevelopmentLote'])->name('realEstate.development.lot.delete');
+    Route::get('/development/{development}/lot/show/{id}', [DevelopmentController::class, 'showDevelopmentLote'])->name('realEstate.development.lot.show');
 
     // Development -> metadata
     Route::get('/development/{development}/metadata/create', [DevelopmentController::class, 'createDevelopmentMetadata'])->name('realEstate.development.metadata.create');
@@ -84,10 +97,10 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::get('/development/{development}/metadata/show/{id}', [DevelopmentController::class, 'showDevelopmentMetadata'])->name('realEstate.development.metadata.show');
 
     // Development -> Lote Types
-    Route::get('/development/{development}/lotType/create', [DevelopmentController::class, 'createDevelopmentLoteType'])->name('realEstate.development.lotType.create');
-    Route::post('/development/{development}/lotType/store', [DevelopmentController::class, 'storeDevelopmentLoteType'])->name('realEstate.development.lotType.store');
-    Route::delete('/development/{development}/lotType/delete/{id}', [DevelopmentController::class, 'deleteDevelopmentLoteType'])->name('realEstate.development.lotType.delete');
-    Route::get('/development/{development}/lotType/show/{id}', [DevelopmentController::class, 'showDevelopmentLoteType'])->name('realEstate.development.lotType.show');
+    Route::get('/development/{development}/loteType/create', [DevelopmentController::class, 'createDevelopmentLoteType'])->name('realEstate.development.loteType.create');
+    Route::post('/development/{development}/loteType/store', [DevelopmentController::class, 'storeDevelopmentLoteType'])->name('realEstate.development.loteType.store');
+    Route::delete('/development/{development}/loteType/delete/{id}', [DevelopmentController::class, 'deleteDevelopmentLoteType'])->name('realEstate.development.loteType.delete');
+    Route::get('/development/{development}/loteType/show/{id}', [DevelopmentController::class, 'showDevelopmentLoteType'])->name('realEstate.development.loteType.show');
 
     // Development -> Lote Types -> Payment Plans
     Route::get('/development/{development}/paymentPlan/create', [DevelopmentController::class, 'createDevelopmentLoteTypePaymentPlan'])->name('realEstate.development.paymentPlan.create');
@@ -165,9 +178,9 @@ Route::middleware(['auth.realEstate'])->group(function () {
     
     Route::get('/settings/invoices/statuses', [SettingsController::class, 'invoiceStatuses'])->name('realEstate.settings.invoiceStatuses');
     
-    Route::get('/settings/lots/statuses', [SettingsController::class, 'lotStatuses'])->name('realEstate.settings.lotStatuses');
+    Route::get('/settings/lotes/statuses', [SettingsController::class, 'loteStatuses'])->name('realEstate.settings.loteStatuses');
     
-    Route::get('/settings/lots/types', [SettingsController::class, 'lotTypes'])->name('realEstate.settings.lotTypes');
+    Route::get('/settings/lotes/types', [SettingsController::class, 'loteTypes'])->name('realEstate.settings.loteTypes');
     
     Route::get('/settings/payment_plans/types', [SettingsController::class, 'paymentPlans'])->name('realEstate.settings.paymentPlans');
     

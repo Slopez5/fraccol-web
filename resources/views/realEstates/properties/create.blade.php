@@ -23,11 +23,11 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="lot_id">Lot</label>
-                        <select name="lot_id" id="lot_id" class="form-control">
+                        <label for="lote_id">Lot</label>
+                        <select name="lote_id" id="lote_id" class="form-control">
                             <option value="">Select Lot</option>
-                            @foreach ($lots as $lot)
-                                <option value="{{ $lot->id }}">L{{ $lot->lot_number }}M{{$lot->block_number}}</option>
+                            @foreach ($lotes as $lote)
+                                <option value="{{ $lote->id }}">L{{ $lote->lote_number }}M{{$lote->block_number}}</option>
                             @endforeach
                         </select>
                     </div>

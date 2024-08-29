@@ -1,16 +1,8 @@
 <?php
 
 use App\Http\Controllers\Chatbot\WaController as ChatbotWaController;
-use App\Http\Controllers\ConfigurationsController;
-use App\Http\Controllers\Controller;
 use App\Http\Controllers\DashboardController;
-use App\Http\Controllers\DevelopmentController;
-use App\Http\Controllers\EnterpriseController;
-use App\Http\Controllers\LandingPage\LandingPageDevelopmentController;
-use App\Http\Controllers\SubdomainController;
-use App\Http\Controllers\WaController;
 use Illuminate\Support\Facades\Route;
-use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------

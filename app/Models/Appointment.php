@@ -11,7 +11,7 @@ class Appointment extends Model
     use HasFactory;
 
     protected $table = 'appointments';
-    protected $fillable = ['development_id','customer_name','customer_phone','customer_email','customer_date','sattus','note','sale_closer_id','lead_agent_id'];
+    protected $fillable = ['lead_id','customer_name','customer_phone','customer_email','appointment_date','status','notes','development_id','sale_closer_agent_id','lead_agent_id'];
 
     public function development():BelongsTo
     {

@@ -62,18 +62,18 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="total_lots">Total Lots<span>*</span></label>
-                        <input type="text" name="total_lots" id="total_lots" class="form-control" value="{{ $development->total_lots }}">
-                        @error('total_lots')
+                        <label for="total_lotes">Total Lotes<span>*</span></label>
+                        <input type="text" name="total_lotes" id="total_lotes" class="form-control" value="{{ $development->total_lotes }}">
+                        @error('total_lotes')
                             <div class="alert alert-danger mt-1">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="available_lots">Available Lots<span>*</span></label>
-                        <input type="text" name="available_lots" id="available_lots" class="form-control" value="{{ $development->available_lots }}">
-                        @error('available_lots')
+                        <label for="available_lotes">Available Lotes<span>*</span></label>
+                        <input type="text" name="available_lotes" id="available_lotes" class="form-control" value="{{ $development->available_lotes }}">
+                        @error('available_lotes')
                             <div class="alert alert-danger mt-1">
                                 {{ $message }}
                             </div>

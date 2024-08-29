@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class DevelopmentPaymentPlan extends Pivot
 {
-    protected $table = 'development_lot_type_payment_plan';
+    protected $table = 'development_lote_type_payment_plan';
     public function development(): BelongsTo
     {
         return $this->belongsTo(Development::class, 'development_id');
@@ -20,8 +20,8 @@ class DevelopmentPaymentPlan extends Pivot
         return $this->belongsTo(PaymentPlan::class, 'payment_plan_id');
     }
 
-    public function lotType(): BelongsTo
+    public function loteType(): BelongsTo
     {
-        return $this->belongsTo(LotType::class,'lot_type_id');
+        return $this->belongsTo(LoteType::class,'lote_type_id');
     }
 }

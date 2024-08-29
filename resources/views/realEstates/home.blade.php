@@ -58,9 +58,9 @@
             </div>
             <div class="col-md-12">
                 <div class="card">
-                    <div class="card-header">Leads</div>
+                    <div class="card-header">Prospectos</div>
                     <div class="card-body">
-                        <a href="{{ route('realEstate.lead.create') }}" class="btn btn-primary">Add Lead</a>
+                        <a href="{{ route('realEstate.lead.create') }}" class="btn btn-primary">Nuevo Prospecto</a>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -105,7 +105,7 @@
                 <div class="card">
                     <div class="card-header">Citas</div>
                     <div class="card-body">
-                        <a href="{{ route('realEstate.appointment.create') }}" class="btn btn-primary">Add Appointment</a>
+                        <a href="{{ route('realEstate.appointment.create') }}" class="btn btn-primary">Nueva Cita</a>
                         <table class="table">
                             <thead>
                                 <tr>
@@ -143,9 +143,9 @@
             </div>
             <div class="col-md-6">
                 <div class="card">
-                    <div class="card-header">Invoices</div>
+                    <div class="card-header">Facturas</div>
                     <div class="card-body">
-                        <a href="{{ route('realEstate.invoice.create') }}" class="btn btn-primary">Add Invoice</a>
+                        <a href="{{ route('realEstate.invoice.create') }}" class="btn btn-primary">Nueva Factura</a>
                         <table class="table">
                             <thead>
                                 <tr>

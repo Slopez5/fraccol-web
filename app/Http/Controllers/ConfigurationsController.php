@@ -438,7 +438,7 @@ En virtud de lo anterior la "PROMITENTE COMPRADORA" deja como beneficiario o her
 
     //InvoiceStatus
 
-    //LotStatus
+    //LoteStatus
 
     //
 

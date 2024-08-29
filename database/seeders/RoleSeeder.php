@@ -16,24 +16,24 @@ class RoleSeeder extends Seeder
         //
         Role::insert([
             [
-                "name"=>"Admin",
+                "name"=>"Root",
                 "description"=>"Administrador del sistema",
             ],
             [
-                "name"=>"Inmobiliaria",
+                "name"=>"Real_Estate",
                 "description"=>"Inmobiliaria",
             ],
             [
-                "name"=>"Secretaria",
-                "description"=>"Secretaria",
+                "name"=>"Real_Estate_Agent",
+                "description"=>"Agente inmobiliario",
             ],
             [
-                "name"=>"Encargado",
-                "description"=>"Encargado de fraccionamiento",
+                "name"=>"Development_Manager",
+                "description"=>"Encargado de Fraccionamiento",
             ],
             [
-                "name"=>"Vendedor",
-                "description"=>"Vendedor",
+                "name"=>"Secretary",
+                "description"=>"Secretario/a",
             ],
             [
                 "name"=>"Cliente",

@@ -23,8 +23,8 @@ return new class extends Migration
             $table->string('blueprint')->nullable();
             $table->string('location');
             $table->decimal('total_land_area', 8, 2)->nullable();
-            $table->integer('total_lots')->nullable();
-            $table->integer('available_lots')->nullable();
+            $table->integer('total_lotes')->nullable();
+            $table->integer('available_lotes')->nullable();
             $table->date('start_date')->nullable();
             $table->date('end_date')->nullable();
             $table->text('sort_description')->nullable();

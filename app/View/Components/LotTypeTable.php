@@ -6,7 +6,7 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
-class LotTypeTable extends Component
+class LoteTypeTable extends Component
 {
     public $loteTypes;
     /**
@@ -23,6 +23,6 @@ class LotTypeTable extends Component
      */
     public function render(): View|Closure|string
     {
-        return view('components.lot-type-table');
+        return view('components.lote-type-table');
     }
 }

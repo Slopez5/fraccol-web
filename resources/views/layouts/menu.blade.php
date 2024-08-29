@@ -32,6 +32,14 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('realEstate.sales') }}" class="nav-link">
+                            <i class="nav-icon fas fa-dollar-sign"></i>
+                            <p>
+                                Ventas
+                            </p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('realEstate.appointments') }}" class="nav-link">
                             <i class="nav-icon fas fa-calendar-alt"></i>
                             <p>
@@ -135,13 +143,13 @@
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('realEstate.settings.lotStatuses') }}" class="nav-link">
+                                <a href="{{ route('realEstate.settings.loteStatuses') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Estados de lote</p>
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('realEstate.settings.lotTypes') }}" class="nav-link">
+                                <a href="{{ route('realEstate.settings.loteTypes') }}" class="nav-link">
                                     <i class="far fa-circle nav-icon"></i>
                                     <p>Tipos de lote</p>
                                 </a>

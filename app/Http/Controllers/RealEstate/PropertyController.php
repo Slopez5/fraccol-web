@@ -5,12 +5,12 @@ namespace App\Http\Controllers\RealEstate;
 use App\Http\Controllers\Controller;
 use App\Models\City;
 use App\Models\Development;
-use App\Models\Lot;
 use App\Models\Unit;
 use App\Models\UnitImage;
 use App\Models\UnitType;
 use Illuminate\Http\Request;
 use App\Models\Country;
+use App\Models\Lote;
 use App\Models\State;
 
 class PropertyController extends Controller
@@ -20,13 +20,13 @@ class PropertyController extends Controller
     public function createProperty()
     {
         $developments = Development::all();
-        $lots = Lot::all();
+        $lotes = Lote::all();
         $unitTypes = UnitType::all();
         $propertyTypes = UnitType::all();
         $countries = Country::all();
         $states = State::all();
         $cities = City::all();
-        return view('realEstates.properties.create', compact('developments', 'unitTypes', 'lots', 'propertyTypes', 'countries', 'states', 'cities'));
+        return view('realEstates.properties.create', compact('developments', 'unitTypes', 'lotes', 'propertyTypes', 'countries', 'states', 'cities'));
     }
 
     public function storeProperty(Request $request)
@@ -36,7 +36,7 @@ class PropertyController extends Controller
             'description' => 'nullable|string|max:255',
             'address_id' => 'required|integer',
             'development_id' => 'required|integer',
-            'lot_id' => 'required|integer',
+            'lote_id' => 'required|integer',
         ]);
         $property = new Unit();
         $property->name = $request->name;
@@ -49,8 +49,8 @@ class PropertyController extends Controller
         if ($request->development_id) {
             $property->development_id = $request->development_id;
         }
-        if ($request->lot_id) {
-            $property->lot_id = $request->lot_id;
+        if ($request->lote_id) {
+            $property->lote_id = $request->lote_id;
         }
         if ($request->images) {
             foreach ($request->images as $image) {

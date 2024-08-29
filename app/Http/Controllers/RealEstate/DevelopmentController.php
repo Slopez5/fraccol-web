@@ -5,9 +5,8 @@ namespace App\Http\Controllers\RealEstate;
 use App\Http\Controllers\Controller;
 use App\Models\Development;
 use App\Models\DevelopmentType;
-use App\Models\Lot;
-use App\Models\LotType;
-use App\Models\Payment;
+use App\Models\Lote;
+use App\Models\LoteType;
 use App\Models\PaymentPlan;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,8 +29,8 @@ class DevelopmentController extends Controller
             'name' => 'required',
             'location' => 'required',
             'total_land_area' => 'required',
-            'total_lots' => 'required',
-            'available_lots' => 'required',
+            'total_lotes' => 'required',
+            'available_lotes' => 'required',
         ]);
 
         $development = new Development();
@@ -54,8 +53,8 @@ class DevelopmentController extends Controller
         }
         $development->location = $request->get('location');
         $development->total_land_area = $request->get('total_land_area');
-        $development->total_lots = $request->get('total_lots');
-        $development->available_lots = $request->get('available_lots');
+        $development->total_lotes = $request->get('total_lotes');
+        $development->available_lotes = $request->get('available_lotes');
         if ($request->get('start_date')) {
             $development->start_date = $request->get('start_date');
         }
@@ -94,8 +93,8 @@ class DevelopmentController extends Controller
             'name' => 'required',
             'location' => 'required',
             'total_land_area' => 'required',
-            'total_lots' => 'required',
-            'available_lots' => 'required',
+            'total_lotes' => 'required',
+            'available_lotes' => 'required',
         ]);
         $development = Development::find($id);
         $development->real_estate_id = Auth::user()->realEstates->first()->id;
@@ -115,8 +114,8 @@ class DevelopmentController extends Controller
         }
         $development->location = $request->get('location');
         $development->total_land_area = $request->get('total_land_area');
-        $development->total_lots = $request->get('total_lots');
-        $development->available_lots = $request->get('available_lots');
+        $development->total_lotes = $request->get('total_lotes');
+        $development->available_lotes = $request->get('available_lotes');
         if ($request->get('start_date')) {
             $development->start_date = $request->get('start_date');
         }
@@ -161,10 +160,10 @@ class DevelopmentController extends Controller
     {
         $development = Development::find($id);
         $development->lotes = $development->lotes->map(function ($lote) {
-            $loteType = $lote->development->lotTypes->where('id', $lote->lot_type_id)->first();
-            $lote->price = $loteType->pivot->price * $lote->lot_size;
+            $loteType = $lote->development->loteTypes->where('id', $lote->lote_type_id)->first();
+            $lote->price = $loteType->pivot->price * $lote->lote_size;
             $lote->paymentPlans = $loteType->paymentPlans->map(function ($paymentPlan) use ($lote) {
-                $paymentPlan->price = $paymentPlan->pivot->price_per_sqm * $lote->lot_size;
+                $paymentPlan->price = $paymentPlan->pivot->price_per_sqm * $lote->lote_size;
                 $paymentPlan->down_payment = $paymentPlan->pivot->down_payment;
                 unset($paymentPlan->pivot);
                 return $paymentPlan;
@@ -172,12 +171,12 @@ class DevelopmentController extends Controller
             unset($lote->development);
             return $lote;
         })->sortBy(function ($lote) {
-            return [$lote->block_number, $lote->lot_number];
+            return [$lote->block_number, $lote->lote_number];
         }, SORT_ASC);
         
         $development->metadata = [];
         $development->paymentPlans = $development->paymentPlans->map(function ($paymentPlan) {
-            $paymentPlan->pivot->lotType;
+            $paymentPlan->pivot->loteType;
             return $paymentPlan;
         });
         return view('realEstates.developments.show', compact('development'));
@@ -185,35 +184,35 @@ class DevelopmentController extends Controller
 
     // Development -> Lotes
 
-    public function createDevelopmentLot($developmentId)
+    public function createDevelopmentLote($developmentId)
     {
         $development = Development::find($developmentId);
-        $lotTypes = $development->lotTypes;
-        return view('realEstates.developments.lots.create', compact('development', 'lotTypes'));
+        $loteTypes = $development->loteTypes;
+        return view('realEstates.developments.lotes.create', compact('development', 'loteTypes'));
     }
 
-    public function storeDevelopmentLot(Request $request, $developmentId)
+    public function storeDevelopmentLote(Request $request, $developmentId)
     {
         $request->validate([
-            'lot_type_id' => 'required',
-            'lot_number' => 'required',
+            'lote_type_id' => 'required',
+            'lote_number' => 'required',
             'block_number' => 'required',
-            'lot_size' => 'required',
+            'lote_size' => 'required',
             'status' => 'required',
         ]);
 
         $development = Development::find($developmentId);
 
-        $lotType = LotType::find($request->get('lot_type_id'));
+        $loteType = LoteType::find($request->get('lote_type_id'));
         if ($request->get('isMultiples') == '1') {
-            $lotes = explode(',', $request->get('lot_number'));
+            $lotes = explode(',', $request->get('lote_number'));
             foreach ($lotes as $lot) {
-                $lote = new Lot();
+                $lote = new Lote();
                 $lote->development_id = $development->id;
-                $lote->lot_type_id = $lotType->id;
-                $lote->lot_number = $lot;
+                $lote->lote_type_id = $loteType->id;
+                $lote->lote_number = $lot;
                 $lote->block_number = $request->get('block_number');
-                $lote->lot_size = $request->get('lot_size');
+                $lote->lote_size = $request->get('lote_size');
                 $lote->status = $request->get('status');
                 if ($request->hasFile('image')) {
                     $image = $request->file('image');
@@ -230,12 +229,12 @@ class DevelopmentController extends Controller
                 $development->lotes()->save($lote);
             }
         } else {
-            $lote = new Lot();
+            $lote = new Lote();
             $lote->development_id = $development->id;
-            $lote->lot_type_id = $lotType->id;
-            $lote->lot_number = $request->get('lot_number');
+            $lote->lote_type_id = $loteType->id;
+            $lote->lote_number = $request->get('lote_number');
             $lote->block_number = $request->get('block_number');
-            $lote->lot_size = $request->get('lot_size');
+            $lote->lote_size = $request->get('lote_size');
             $lote->status = $request->get('status');
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
@@ -256,47 +255,47 @@ class DevelopmentController extends Controller
         return redirect()->route('realEstate.development.show', $developmentId);
     }
 
-    public function editDevelopmentLot($developmentId, $id)
+    public function editDevelopmentLote($developmentId, $id)
     {
         $development = Development::find($developmentId);
-        $lotTypes = $development->lotTypes;
-        $lot = Lot::find($id);
-        return view('realEstates.developments.lots.edit', compact('development', 'lotTypes', 'lot'));
+        $loteTypes = $development->loteTypes;
+        $lote = Lote::find($id);
+        return view('realEstates.developments.lotes.edit', compact('development', 'loteTypes', 'lote'));
     }
 
-    public function updateDevelopmentLot(Request $request, $developmentId, $id)
+    public function updateDevelopmentLote(Request $request, $developmentId, $id)
     {
-        $lot = Lot::find($id);
-        $lot->lot_number = $request->get('lot_number');
-        $lot->block_number = $request->get('block_number');
-        $lot->lot_size = $request->get('lot_size');
-        $lot->status = $request->get('status');
+        $lote = Lote::find($id);
+        $lote->lote_number = $request->get('lote_number');
+        $lote->block_number = $request->get('block_number');
+        $lote->lote_size = $request->get('lote_size');
+        $lote->status = $request->get('status');
         if ($request->hasFile('image')) {
             $image = $request->file('image');
             $storagePath = $image->storeAs('public/developments/lotes', $image->getClientOriginalName());
             $storagePath = str_replace('public/', 'storage/', $storagePath);
-            $lot->image_url = $storagePath;
+            $lote->image_url = $storagePath;
         }
         if ($request->get('location')) {
-            $lot->location = $request->get('location');
+            $lote->location = $request->get('location');
         }
         if ($request->get('description')) {
-            $lot->description = $request->get('description');
+            $lote->description = $request->get('description');
         }
-        $lot->save();
+        $lote->save();
         return redirect()->route('realEstate.development.show', $developmentId);
     }
 
-    public function deleteDevelopmentLot($developmentId, $id)
+    public function deleteDevelopmentLote($developmentId, $id)
     {
-        $lot = Lot::find($id);
-        $lot->delete();
+        $lote = Lote::find($id);
+        $lote->delete();
         return redirect()->route('realEstate.development.show', $developmentId);
     }
 
-    public function showDevelopmentLot($developmentId, $id)
+    public function showDevelopmentLote($developmentId, $id)
     {
-        return view('realEstates.developments.lots.show');
+        return view('realEstates.developments.lotes.show');
     }
 
     // Development -> metadata
@@ -336,16 +335,16 @@ class DevelopmentController extends Controller
     public function createDevelopmentLoteType($developmentId)
     {
         $development = Development::find($developmentId);
-        $loteTypes = LotType::all();
+        $loteTypes = LoteType::all();
 
-        return view('realEstates.developments.loteTypes.create', compact('development', 'loteTypes', 'paymentPlans'));
+        return view('realEstates.developments.loteTypes.create', compact('development', 'loteTypes'));
     }
 
     public function storeDevelopmentLoteType(Request $request, $developmentId)
     {
         $development = Development::find($developmentId);
-        $loteType = LotType::find($request->get('lote_type_id'));
-        $development->lotTypes()->attach($loteType, [
+        $loteType = LoteType::find($request->get('lote_type_id'));
+        $development->loteTypes()->attach($loteType, [
             'price' => $request->get('price'),
         ]);
         return redirect()->route('realEstate.development.show', $developmentId);
@@ -356,12 +355,17 @@ class DevelopmentController extends Controller
         return redirect()->route('realEstate.development.show', $developmentId);
     }
 
+    public function showDevelopmentLoteType($developmentId, $id)
+    {
+        return view('realEstates.developments.loteTypes.show');
+    }
+
     // Development -> lote types -> payment plans
 
     public function createDevelopmentLoteTypePaymentPlan($developmentId)
     {
         $development = Development::find($developmentId);
-        $loteTypes = $development->lotTypes;
+        $loteTypes = $development->loteTypes;
         $paymentPlans = PaymentPlan::all();
         return view('realEstates.developments.paymentPlans.create', compact('development', 'paymentPlans', 'loteTypes'));
     }
@@ -369,10 +373,10 @@ class DevelopmentController extends Controller
     public function storeDevelopmentLoteTypePaymentPlan(Request $request, $developmentId)
     {
         $development = Development::find($developmentId);
-        $loteType = LotType::find($request->get('lote_type_id'));
+        $loteType = LoteType::find($request->get('lote_type_id'));
         $paymentPlan = PaymentPlan::find($request->get('payment_plan_id'));
         $development->paymentPlans()->attach($paymentPlan, [
-            'lot_type_id' => $loteType->id,
+            'lote_type_id' => $loteType->id,
             'down_payment' => $request->get('down_payment'),
             'price_per_sqm' => $request->get('price'),
         ]);
@@ -383,5 +387,10 @@ class DevelopmentController extends Controller
     public function deleteDevelopmentLoteTypePaymentPlan($developmentId, $loteTypeId)
     {
         return redirect()->route('realEstate.developments.loteTypes.show', [$developmentId, $loteTypeId]);
+    }
+
+    public function showDevelopmentLoteTypePaymentPlan($developmentId, $loteTypeId)
+    {
+        return view('realEstates.developments.paymentPlans.show');
     }
 }

@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\LotStatus;
+use App\Models\LoteStatus;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class LotStatusSeeder extends Seeder
+class LoteStatusSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,7 +14,7 @@ class LotStatusSeeder extends Seeder
     public function run(): void
     {
         //
-        $lotStatuses = [
+        $loteStatuses = [
             [
                 "name" => "Disponible para venta",
                 "description" => ""
@@ -97,6 +97,6 @@ class LotStatusSeeder extends Seeder
             ]
         ];
 
-        LotStatus::insert($lotStatuses);
+        LoteStatus::insert($loteStatuses);
     }
 }

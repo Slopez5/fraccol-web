@@ -2,11 +2,11 @@
 
 namespace Database\Seeders;
 
-use App\Models\LotType;
+use App\Models\LoteType;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class LotTypeSeeder extends Seeder
+class LoteTypeSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -14,14 +14,14 @@ class LotTypeSeeder extends Seeder
     public function run(): void
     {
         //
-        LotType::insert([
+        LoteType::insert([
             [
-                "name" => "En esquina",
-                "description" => "Lote en esquina"
+                "name" => "Estandar",
+                "description" => "Lote Estandar"
             ],
             [
-                "name" => "Frente al camino",
-                "description" => "Lote frente a camino"
+                "name" => "Lote en esquina",
+                "description" => "Lote en esquina"
             ],
             [
                 "name" => "Comerciales",

@@ -15,17 +15,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="lot_type_id">Tipo de lote<span>*</span></label>
-                        <select name="lot_type_id" id="lot_type_id" class="form-control">
-                            @foreach ($lotTypes as $lotType)
-                                <option value="{{ $lotType->id }}">{{ $lotType->name }}</option>
+                        <label for="lote_type_id">Tipo de lote<span>*</span></label>
+                        <select name="lote_type_id" id="lote_type_id" class="form-control">
+                            @foreach ($loteTypes as $loteType)
+                                <option value="{{ $loteType->id }}">{{ $loteType->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="lot_number">Número de lote<span>*</span></label>
-                        <input type="text" name="lot_number" id="lot_number" class="form-control">
-                        @error('lot_number')
+                        <label for="lote_number">Número de lote<span>*</span></label>
+                        <input type="text" name="lote_number" id="lote_number" class="form-control">
+                        @error('lote_number')
                             <div class="alert alert-danger mt-1">
                                 {{ $message }}
                             </div>
@@ -42,9 +42,9 @@
                         
                     </div>
                     <div class="form-group">
-                        <label for="lot_size">Tamaño del lote<span>*</span></label>
-                        <input type="text" name="lot_size" id="lot_size" class="form-control">
-                        @error('lot_size')
+                        <label for="lote_size">Tamaño del lote<span>*</span></label>
+                        <input type="text" name="lote_size" id="lote_size" class="form-control">
+                        @error('lote_size')
                             <div class="alert alert-danger mt-1">
                                 {{ $message }}
                             </div>

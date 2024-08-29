@@ -4,11 +4,11 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <h1>Create Development</h1>
+                <h1>Crear Fraccionamiento</h1>
                 <form action="{{ route('realEstate.development.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <div class="form-group">
-                        <label for="real_estate_branch_id">Real Estate Branch</label>
+                        <label for="real_estate_branch_id">Oficinas</label>
                         <select name="real_estate_branch_id" id="real_estate_branch_id" class="form-control">
                             @foreach ($realEstateBranches as $realEstateBranch)
                                 <option value="{{ $realEstateBranch->id }}">{{ $realEstateBranch->name }}</option>
@@ -16,7 +16,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="development_type_id">Development Type</label>
+                        <label for="development_type_id">Tipo de Fraccionamiento</label>
                         <select name="development_type_id" id="development_type_id" class="form-control">
                             @foreach ($developmentTypes as $developmentType)
                                 <option value="{{ $developmentType->id }}">{{ $developmentType->name }}</option>
@@ -24,7 +24,7 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="name">Name<span>*</span></label>
+                        <label for="name">Nombre<span>*</span></label>
                         <input type="text" name="name" id="name" class="form-control">
                         @error('name')
                             <div class="alert alert-danger mt-1">
@@ -61,18 +61,18 @@
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="total_lots">Total Lots<span>*</span></label>
-                        <input type="text" name="total_lots" id="total_lots" class="form-control">
-                        @error('total_lots')
+                        <label for="total_lotes">Total Lotes<span>*</span></label>
+                        <input type="text" name="total_lotes" id="total_lotes" class="form-control">
+                        @error('total_lotes')
                             <div class="alert alert-danger mt-1">
                                 {{ $message }}
                             </div>
                         @enderror
                     </div>
                     <div class="form-group">
-                        <label for="available_lots">Available Lots<span>*</span></label>
-                        <input type="text" name="available_lots" id="available_lots" class="form-control">
-                        @error('available_lots')
+                        <label for="available_lotes">Available Lotes<span>*</span></label>
+                        <input type="text" name="available_lotes" id="available_lotes" class="form-control">
+                        @error('available_lotes')
                             <div class="alert alert-danger mt-1">
                                 {{ $message }}
                             </div>

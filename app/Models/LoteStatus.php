@@ -5,10 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class LotStatus extends Model
+class LoteStatus extends Model
 {
     use HasFactory;
 
-    protected $table = 'lot_status';
+    protected $table = 'lote_statuses';
     protected $fillable = ['name','description','is_active'];
 }

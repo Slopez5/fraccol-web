@@ -11,15 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('development_lot_type', function (Blueprint $table) {
+        Schema::create('development_lote_type', function (Blueprint $table) {
             $table->unsignedBigInteger("development_id");
-            $table->unsignedBigInteger("lot_type_id");
+            $table->unsignedBigInteger("lote_type_id");
             $table->decimal('price',8,2);
             $table->timestamps();
             $table->softDeletes();
 
             $table->foreign('development_id')->references('id')->on('developments');
-            $table->foreign('lot_type_id')->references('id')->on('lot_types');
+            $table->foreign('lote_type_id',"lote_type_dev_foreign")->references('id')->on('lote_types');
         });
     }
 
@@ -28,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('development_lot_type');
+        Schema::dropIfExists('development_lote_type');
     }
 };

@@ -16,7 +16,7 @@ class Development extends Model
     use HasFactory, SoftDeletes;
 
     protected $table = 'developments';
-    protected $fillable = ['name', 'real_estate_id', 'real_estate_branch_id', 'location', 'total_land_area', 'total_lots', 'available_lots','logo','blueprint','start_date','end_date','sort_description','full_description','status','image'];
+    protected $fillable = ['name', 'real_estate_id', 'real_estate_branch_id', 'location', 'total_land_area', 'total_lotes', 'available_lotes','logo','blueprint','start_date','end_date','sort_description','full_description','status','image'];
     protected $hidden = ['created_at','updated_at','deleted_at'];
 
     public function subdomain(): MorphOne
@@ -34,14 +34,14 @@ class Development extends Model
         return $this->belongsTo(RealEstateBranch::class, 'real_estate_branch_id', 'id');
     }
 
-    public function lotTypes(): BelongsToMany
+    public function loteTypes(): BelongsToMany
     {
-        return $this->belongsToMany(LotType::class, 'development_lot_type', 'development_id', 'lot_type_id')->withPivot('price')->withTimestamps();
+        return $this->belongsToMany(LoteType::class, 'development_lote_type', 'development_id', 'lote_type_id')->withPivot('price')->withTimestamps();
     }
 
     public function lotes(): HasMany
     {
-        return $this->hasMany(Lot::class, 'development_id');
+        return $this->hasMany(Lote::class, 'development_id');
     }
 
     public function images(): HasMany
@@ -51,7 +51,7 @@ class Development extends Model
 
     public function paymentPlans(): belongsToMany
     {
-        return $this->belongsToMany(PaymentPlan::class, 'development_lot_type_payment_plan')->withPivot(['lot_type_id','price_per_sqm','down_payment'])->using(DevelopmentPaymentPlan::class)->withTimestamps();
+        return $this->belongsToMany(PaymentPlan::class, 'development_lote_type_payment_plan')->withPivot(['lote_type_id','price_per_sqm','down_payment'])->using(DevelopmentPaymentPlan::class)->withTimestamps();
     }
 
     public function contracts(): HasMany

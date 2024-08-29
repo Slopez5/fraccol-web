@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-12">
                 <h1>Asignar Tipo de Lote</h1>
-                <form action="{{ route('realEstate.development.lotType.store', $development->id) }}" method="POST">
+                <form action="{{ route('realEstate.development.loteType.store', $development->id) }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="lote_type_id">Tipo de lote<span>*</span></label>

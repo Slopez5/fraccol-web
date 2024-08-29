@@ -13,15 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('units_lots', function (Blueprint $table) {
-            $table->unsignedBigInteger('unit_id');
-            $table->unsignedBigInteger('lot_id');
+        Schema::create('lote_statuses', function (Blueprint $table) {
+            $table->id();
+            $table->string('name');
+            $table->string('description')->nullable();
             $table->timestamps();
             $table->softDeletes();
-
-            // Foreign key constraints
-            $table->foreign('unit_id')->references('id')->on('units');
-            $table->foreign('lot_id')->references('id')->on('lots');
         });
     }
 
@@ -32,7 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('units_lots');
+        Schema::dropIfExists('lote_statuses');
     }
 };
-

@@ -13,6 +13,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Storage;
 use JeroenDesloovere\VCard\VCardParser;
 use App\Classes\RoleType;
+use App\Models\Address;
 
 class LeadController extends Controller
 {
@@ -40,14 +41,15 @@ class LeadController extends Controller
         $lead->email = $request->input('email');
         $lead->phone = $request->input('phone');
         if (!empty($request->input('address'))) {
-            $lead->address()->save([
-                'street' => $request->input('address'),
-                'neighborhood' => $request->input('neighborhood'),
-                'zip_code' => $request->input('zip_code'),
-                'country_id' => $request->input('country'),
-                'state_id' => $request->input('state'),
-                'city_id' => $request->input('city'),
-            ]);
+            $address = new Address();
+            $address->street = $request->address;
+            $address->neighborhood = $request->neighborhood;
+            $address->country_id = $request->country;
+            $address->state_id = $request->state;
+            $address->city_id = $request->city;
+            $address->zip_code = $request->zip_code;
+            $address->save();
+            $lead->address()->associate($address);
         }
         $lead->lead_agent_id = $request->input('lead_agent_id');
         $lead->source = $request->input('source');
@@ -118,7 +120,9 @@ class LeadController extends Controller
 
     public function showLead($id)
     {
-        return view('realEstates.leads.show');
+        $lead = Lead::find($id);
+
+        return view('realEstates.leads.show', compact('lead'));
     }
 
     public function importLead(Request $request)

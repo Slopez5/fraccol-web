@@ -9,6 +9,7 @@ use App\Models\Lead;
 use App\Models\User;
 use App\Models\Appointment;
 use App\Classes\RoleType;
+use App\Models\ActivityType;
 
 class AppointmentController extends Controller
 {
@@ -84,6 +85,12 @@ class AppointmentController extends Controller
 
     public function showAppointment($id)
     {
-        return view('realEstates.appointments.show');
+        $appointment = Appointment::find($id);
+        $activities = Appointment::all();
+        $leads = Lead::all();
+        $leadAgents = User::where('role_id', RoleType::REAL_ESTATE_AGENT )->get();
+        $saleClosers = User::where('role_id', RoleType::DEVELOPMENT_MANAGER)->get();
+        $activityTypes = ActivityType::all();
+        return view('realEstates.appointments.show', compact('appointment', 'activities', 'leads', 'leadAgents', 'saleClosers', 'activityTypes'));
     }
 }

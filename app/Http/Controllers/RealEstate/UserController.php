@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\RealEstate;
 
+use App\Classes\RoleType;
 use App\Http\Controllers\Controller;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -25,10 +26,12 @@ class UserController extends Controller
             'phone' => $request->get('phone'),
             'email' => $request->get('email'),
             'password' => $request->get('password'),
-            'role_id' => 3,
+            'role_id' => RoleType::REAL_ESTATE_AGENT,
         ]);
         $user->save();
-        $user->realEstates()->attach($realEstate->id);
+        logger($user);
+        logger($realEstate->id);
+        $user->realEstateAgencies()->attach($realEstate->id);
         return redirect()->route('realEstate.users');
     }
 

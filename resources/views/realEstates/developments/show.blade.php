@@ -19,13 +19,13 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach ($development->lotTypes as $lotType)
+                                @foreach ($development->loteTypes as $loteType)
                                     <tr>
-                                        <td>{{ $lotType->name }}</td>
-                                        <td>{{ $lotType->description }}</td>
-                                        <td>{{ $lotType->pivot->price }}</td>
+                                        <td>{{ $loteType->name }}</td>
+                                        <td>{{ $loteType->description }}</td>
+                                        <td>{{ $loteType->pivot->price }}</td>
                                         <td>
-                                            <form action="{{ route('realEstate.development.lotType.delete', [$development->id, $lotType->id]) }}"
+                                            <form action="{{ route('realEstate.development.loteType.delete', [$development->id, $loteType->id]) }}"
                                                 method="POST" style="display: inline">
                                                 @csrf
                                                 @method('DELETE')
@@ -38,7 +38,7 @@
                                 @endforeach
                             </tbody>
                         </table>
-                        <a href="{{ route('realEstate.development.lotType.create', $development->id) }}"
+                        <a href="{{ route('realEstate.development.loteType.create', $development->id) }}"
                             class="btn btn-primary">Agregar</a>
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             <tbody>
                                 @foreach ($development->paymentPlans as $paymentPlan)
                                     <tr>
-                                        <td>{{ $paymentPlan->pivot->lotType->name }}</td>
+                                        <td>{{ $paymentPlan->pivot->loteType->name }}</td>
                                         <td>{{ $paymentPlan->name }}</td>
                                         <td>{{ $paymentPlan->pivot->down_payment }}</td>
                                         <td>{{ $paymentPlan->pivot->price_per_sqm }}</td>
@@ -105,24 +105,24 @@
                             </thead>
                             <tbody>
                               
-                                    @foreach ($development->lotes as $lot)
+                                    @foreach ($development->lotes as $lote)
                                         <tr>
                                             <td>
                                                 <button class="border-0 padding-0 bg-transparent" data-toggle="collapse"
-                                                    data-target="#lotDetails{{ $lot->id }}">
+                                                    data-target="#lotDetails{{ $lote->id }}">
                                                     <i class="fas fa-angle-right"></i>
                                                 </button>
-                                            <td>{{ $lot->block_number }}</td>
-                                            <td>{{ $lot->lot_number }}</td>
-                                            <td>{{ $lot->lot_size }}</td>
-                                            <td>{{ $lot->price }}</td>
-                                            <td>{{ $lot->status }}</td>
+                                            <td>{{ $lote->block_number }}</td>
+                                            <td>{{ $lote->lote_number }}</td>
+                                            <td>{{ $lote->lote_size }}</td>
+                                            <td>{{ $lote->price }}</td>
+                                            <td>{{ $lote->status }}</td>
                                             <td>
-                                                <a href="{{ route('realEstate.development.lot.edit', [$development->id, $lot->id]) }}"><i
+                                                <a href="{{ route('realEstate.development.lot.edit', [$development->id, $lote->id]) }}"><i
                                                         class="fas fa-edit"></i></a>
-                                                <a href="{{ route('realEstate.development.lot.show', [$development->id, $lot->id]) }}"><i
+                                                <a href="{{ route('realEstate.development.lot.show', [$development->id, $lote->id]) }}"><i
                                                         class="fas fa-eye"></i></a>
-                                                <form action="{{ route('realEstate.development.lot.delete', [$development->id, $lot->id]) }}"
+                                                <form action="{{ route('realEstate.development.lot.delete', [$development->id, $lote->id]) }}"
                                                     method="POST" style="display: inline;">
                                                     @csrf
                                                     @method('DELETE')
@@ -132,7 +132,7 @@
                                                 </form>
                                             </td>
                                         </tr>
-                                        <tr class="collapse" id="lotDetails{{ $lot->id }}">
+                                        <tr class="collapse" id="lotDetails{{ $lote->id }}">
                                             <td colspan="5">
                                                 <table class="table table-bordered table-striped">
                                                     <thead>
@@ -143,7 +143,7 @@
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        @foreach ($lot->paymentPlans as $paymentPlan)
+                                                        @foreach ($lote->paymentPlans as $paymentPlan)
                                                             <tr>
                                                                 <td>{{ $paymentPlan->name }}</td>
                                                                 <td>{{ $paymentPlan->down_payment }}</td>

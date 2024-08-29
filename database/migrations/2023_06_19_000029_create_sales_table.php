@@ -19,7 +19,6 @@ return new class extends Migration
             $table->unsignedBigInteger('lead_agent_id')->nullable();//A quien le dare la comisión
             $table->unsignedBigInteger('sale_closer_id')->nullable();//Regularmente sera el encargado de Fraccionamiento
             $table->unsignedBigInteger('activity_id')->nullable(); //Actividad con la que se realizo la venta
-            $table->unsignedBigInteger('development_id')->nullable(); //Fraccionamiento
             $table->double('total_price');
             $table->double('down_payment');
             $table->double('remaining_balance');
@@ -33,7 +32,6 @@ return new class extends Migration
             $table->foreign('lead_agent_id')->references('id')->on('users');
             $table->foreign('sale_closer_id')->references('id')->on('users');
             $table->foreign('activity_id')->references('id')->on('activities');
-            $table->foreign('development_id')->references('id')->on('developments');
         });
     }
 

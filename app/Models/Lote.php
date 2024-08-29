@@ -9,12 +9,12 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Lot extends Model
+class Lote extends Model
 {
     use HasFactory, SoftDeletes;
 
-    protected $table = 'lots';
-    protected $fillable = ['lot_type_id', 'lot_number', 'block_number', 'lot_size'];
+    protected $table = 'lotes';
+    protected $fillable = ['lote_type_id', 'lote_number', 'block_number', 'lote_size'];
     protected $hidden = ['created_at','updated_at','deleted_at'];
    
    public function development(): BelongsTo {
@@ -22,7 +22,7 @@ class Lot extends Model
    }
 
    public function loteType(): BelongsTo {
-    return $this->belongsTo(LotType::class,'lot_type_id');
+    return $this->belongsTo(LoteType::class,'lote_type_id');
    }
    
     public function metadata(): MorphMany
