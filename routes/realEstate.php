@@ -155,6 +155,7 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::get('/settings/activity/categories', [SettingsController::class, 'activityCategories'])->name('realEstate.settings.activityCategories');
     Route::get('/settings/activity/categories/create', [SettingsController::class, 'createActivityCategory'])->name('realEstate.settings.activityCategories.create');
 
+    // Expenses
     Route::get('/settings/expenses/categories', [SettingsController::class, 'expenseCategories'])->name('realEstate.settings.expenseCategories');
     Route::get('/settings/expenses/categories/create', [SettingsController::class, 'createExpenseCategory'])->name('realEstate.settings.expenseCategories.create');
     Route::post('/settings/expenses/categories/store', [SettingsController::class, 'storeExpenseCategory'])->name('realEstate.settings.expenseCategories.store');
@@ -162,6 +163,7 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::put('/settings/expenses/categories/update/{id}', [SettingsController::class, 'updateExpenseCategory'])->name('realEstate.settings.expenseCategories.update');
     Route::delete('/settings/expenses/categories/delete/{id}', [SettingsController::class, 'deleteExpenseCategory'])->name('realEstate.settings.expenseCategories.delete');
     
+    // Real Estate
     Route::get('/settings/real_estate/agencies', [SettingsController::class, 'realEstateAgencies'])->name('realEstate.settings.realEstateAgencies');
     Route::get('/settings/real_estate/agency/create', [SettingsController::class, 'createRealEstateAgency'])->name('realEstate.settings.realEstateAgency.create');
     Route::post('/settings/real_estate/agency/store', [SettingsController::class, 'storeRealEstateAgency'])->name('realEstate.settings.realEstateAgency.store');
@@ -169,6 +171,7 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::put('/settings/real_estate/agency/update/{id}', [SettingsController::class, 'updateRealEstateAgency'])->name('realEstate.settings.realEstateAgency.update');
     Route::delete('/settings/real_estate/agency/delete/{id}', [SettingsController::class, 'deleteRealEstateAgency'])->name('realEstate.settings.realEstateAgency.delete');
     
+    // Real Estate Branches
     Route::get('/settings/real_estate/branches', [SettingsController::class, 'realEstateBranches'])->name('realEstate.settings.realEstateBranches');
     Route::get('/settings/real_estate/branch/create', [SettingsController::class, 'createRealEstateBranch'])->name('realEstate.settings.realEstateBranch.create');
     Route::post('/settings/real_estate/branch/store', [SettingsController::class, 'storeRealEstateBranch'])->name('realEstate.settings.realEstateBranch.store');
@@ -176,25 +179,85 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::put('/settings/real_estate/branch/update/{id}', [SettingsController::class, 'updateRealEstateBranch'])->name('realEstate.settings.realEstateBranch.update');
     Route::delete('/settings/real_estate/branch/delete/{id}', [SettingsController::class, 'deleteRealEstateBranch'])->name('realEstate.settings.realEstateBranch.delete');
     
+    // Invoices
     Route::get('/settings/invoices/statuses', [SettingsController::class, 'invoiceStatuses'])->name('realEstate.settings.invoiceStatuses');
+    Route::get('/settings/invoices/status/create', [SettingsController::class, 'createInvoiceStatus'])->name('realEstate.settings.invoiceStatus.create');
+    Route::post('/settings/invoices/status/store', [SettingsController::class, 'storeInvoiceStatus'])->name('realEstate.settings.invoiceStatus.store');
+    Route::get('/settings/invoices/status/edit/{id}', [SettingsController::class, 'editInvoiceStatus'])->name('realEstate.settings.invoiceStatus.edit');
+    Route::put('/settings/invoices/status/update/{id}', [SettingsController::class, 'updateInvoiceStatus'])->name('realEstate.settings.invoiceStatus.update');
+    Route::delete('/settings/invoices/status/delete/{id}', [SettingsController::class, 'deleteInvoiceStatus'])->name('realEstate.settings.invoiceStatus.delete');
     
+    // Lotes Statuses
     Route::get('/settings/lotes/statuses', [SettingsController::class, 'loteStatuses'])->name('realEstate.settings.loteStatuses');
+    Route::get('/settings/lotes/status/create', [SettingsController::class, 'createLoteStatus'])->name('realEstate.settings.loteStatus.create');
+    Route::post('/settings/lotes/status/store', [SettingsController::class, 'storeLoteStatus'])->name('realEstate.settings.loteStatus.store');
+    Route::get('/settings/lotes/status/edit/{id}', [SettingsController::class, 'editLoteStatus'])->name('realEstate.settings.loteStatus.edit');
+    Route::put('/settings/lotes/status/update/{id}', [SettingsController::class, 'updateLoteStatus'])->name('realEstate.settings.loteStatus.update');
+    Route::delete('/settings/lotes/status/delete/{id}', [SettingsController::class, 'deleteLoteStatus'])->name('realEstate.settings.loteStatus.delete');
     
+    // Lotes Types
     Route::get('/settings/lotes/types', [SettingsController::class, 'loteTypes'])->name('realEstate.settings.loteTypes');
+    Route::get('/settings/lotes/type/create', [SettingsController::class, 'createLoteType'])->name('realEstate.settings.loteType.create');
+    Route::post('/settings/lotes/type/store', [SettingsController::class, 'storeLoteType'])->name('realEstate.settings.loteType.store');
+    Route::get('/settings/lotes/type/edit/{id}', [SettingsController::class, 'editLoteType'])->name('realEstate.settings.loteType.edit');
+    Route::put('/settings/lotes/type/update/{id}', [SettingsController::class, 'updateLoteType'])->name('realEstate.settings.loteType.update');
+    Route::delete('/settings/lotes/type/delete/{id}', [SettingsController::class, 'deleteLoteType'])->name('realEstate.settings.loteType.delete');
     
+    // Payment Plans
     Route::get('/settings/payment_plans/types', [SettingsController::class, 'paymentPlans'])->name('realEstate.settings.paymentPlans');
+    Route::get('/settings/payment_plans/type/create', [SettingsController::class, 'createPaymentPlan'])->name('realEstate.settings.paymentPlan.create');
+    Route::post('/settings/payment_plans/type/store', [SettingsController::class, 'storePaymentPlan'])->name('realEstate.settings.paymentPlan.store');
+    Route::get('/settings/payment_plans/type/edit/{id}', [SettingsController::class, 'editPaymentPlan'])->name('realEstate.settings.paymentPlan.edit');
+    Route::put('/settings/payment_plans/type/update/{id}', [SettingsController::class, 'updatePaymentPlan'])->name('realEstate.settings.paymentPlan.update');
+    Route::delete('/settings/payment_plans/type/delete/{id}', [SettingsController::class, 'deletePaymentPlan'])->name('realEstate.settings.paymentPlan.delete');
     
+    // Payment Methods
     Route::get('/settings/payments/methods', [SettingsController::class, 'paymentMethods'])->name('realEstate.settings.paymentMethods');
+    Route::get('/settings/payments/method/create', [SettingsController::class, 'createPaymentMethod'])->name('realEstate.settings.paymentMethod.create');
+    Route::post('/settings/payments/method/store', [SettingsController::class, 'storePaymentMethod'])->name('realEstate.settings.paymentMethod.store');
+    Route::get('/settings/payments/method/edit/{id}', [SettingsController::class, 'editPaymentMethod'])->name('realEstate.settings.paymentMethod.edit');
+    Route::put('/settings/payments/method/update/{id}', [SettingsController::class, 'updatePaymentMethod'])->name('realEstate.settings.paymentMethod.update');
+    Route::delete('/settings/payments/method/delete/{id}', [SettingsController::class, 'deletePaymentMethod'])->name('realEstate.settings.paymentMethod.delete');
     
+    // Payment Statuses
     Route::get('/settings/payments/statuses', [SettingsController::class, 'paymentStatuses'])->name('realEstate.settings.paymentStatuses');
+    Route::get('/settings/payments/status/create', [SettingsController::class, 'createPaymentStatus'])->name('realEstate.settings.paymentStatus.create');
+    Route::post('/settings/payments/status/store', [SettingsController::class, 'storePaymentStatus'])->name('realEstate.settings.paymentStatus.store');
+    Route::get('/settings/payments/status/edit/{id}', [SettingsController::class, 'editPaymentStatus'])->name('realEstate.settings.paymentStatus.edit');
+    Route::put('/settings/payments/status/update/{id}', [SettingsController::class, 'updatePaymentStatus'])->name('realEstate.settings.paymentStatus.update');
+    Route::delete('/settings/payments/status/delete/{id}', [SettingsController::class, 'deletePaymentStatus'])->name('realEstate.settings.paymentStatus.delete');
     
+    // Countries
     Route::get('/settings/countries', [SettingsController::class, 'countries'])->name('realEstate.settings.countries');
+    Route::get('/settings/countries/create', [SettingsController::class, 'createCountry'])->name('realEstate.settings.countries.create');
+    Route::post('/settings/countries/store', [SettingsController::class, 'storeCountry'])->name('realEstate.settings.countries.store');
+    Route::get('/settings/countries/edit/{id}', [SettingsController::class, 'editCountry'])->name('realEstate.settings.countries.edit');
+    Route::put('/settings/countries/update/{id}', [SettingsController::class, 'updateCountry'])->name('realEstate.settings.countries.update');
+    Route::delete('/settings/countries/delete/{id}', [SettingsController::class, 'deleteCountry'])->name('realEstate.settings.countries.delete');
     
+    // Contracts
     Route::get('/settings/contracts', [SettingsController::class, 'contracts'])->name('realEstate.settings.contracts');
+    Route::get('/settings/contracts/create', [SettingsController::class, 'createContract'])->name('realEstate.settings.contracts.create');
+    Route::post('/settings/contracts/store', [SettingsController::class, 'storeContract'])->name('realEstate.settings.contracts.store');
+    Route::get('/settings/contracts/edit/{id}', [SettingsController::class, 'editContract'])->name('realEstate.settings.contracts.edit');
+    Route::put('/settings/contracts/update/{id}', [SettingsController::class, 'updateContract'])->name('realEstate.settings.contracts.update');
+    Route::delete('/settings/contracts/delete/{id}', [SettingsController::class, 'deleteContract'])->name('realEstate.settings.contracts.delete');
     
+    // Units Types
     Route::get('/settings/units/types', [SettingsController::class, 'unitTypes'])->name('realEstate.settings.unitTypes');
+    Route::get('/settings/units/type/create', [SettingsController::class, 'createUnitType'])->name('realEstate.settings.unitType.create');
+    Route::post('/settings/units/type/store', [SettingsController::class, 'storeUnitType'])->name('realEstate.settings.unitType.store');
+    Route::get('/settings/units/type/edit/{id}', [SettingsController::class, 'editUnitType'])->name('realEstate.settings.unitType.edit');
+    Route::put('/settings/units/type/update/{id}', [SettingsController::class, 'updateUnitType'])->name('realEstate.settings.unitType.update');
+    Route::delete('/settings/units/type/delete/{id}', [SettingsController::class, 'deleteUnitType'])->name('realEstate.settings.unitType.delete');
     
+    // Property Types
     Route::get('/settings/property/types', [SettingsController::class, 'propertyTypes'])->name('realEstate.settings.propertyTypes');
+    Route::get('/settings/property/type/create', [SettingsController::class, 'createPropertyType'])->name('realEstate.settings.propertyType.create');
+    Route::post('/settings/property/type/store', [SettingsController::class, 'storePropertyType'])->name('realEstate.settings.propertyType.store');
+    Route::get('/settings/property/type/edit/{id}', [SettingsController::class, 'editPropertyType'])->name('realEstate.settings.propertyType.edit');
+    Route::put('/settings/property/type/update/{id}', [SettingsController::class, 'updatePropertyType'])->name('realEstate.settings.propertyType.update');
+    Route::delete('/settings/property/type/delete/{id}', [SettingsController::class, 'deletePropertyType'])->name('realEstate.settings.propertyType.delete');
 
 
 
