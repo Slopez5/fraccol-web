@@ -29,4 +29,9 @@ class Lote extends Model
     {
         return $this->morphMany(Metadata::class, 'metadatable');
     }
+
+    public function loteStatus(): BelongsTo
+    {
+        return $this->belongsTo(LoteStatus::class);
+    }
 }

@@ -29,8 +29,6 @@ class UserController extends Controller
             'role_id' => RoleType::REAL_ESTATE_AGENT,
         ]);
         $user->save();
-        logger($user);
-        logger($realEstate->id);
         $user->realEstateAgencies()->attach($realEstate->id);
         return redirect()->route('realEstate.users');
     }

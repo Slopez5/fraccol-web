@@ -3,45 +3,23 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="card col-12">
-                <div class="card-header">
-                    <h4>Expense Categories</h4>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($expenseCategories as $expenseCategory)
-                                <tr>
-                                    <td>{{ $expenseCategory->id }}</td>
-                                    <td>{{ $expenseCategory->name }}</td>
-                                    <td>
-                                        <a href="{{ route('realEstate.settings.expenseCategories.edit', $expenseCategory->id) }}"><i
-                                                class="fas fa-edit"></i></a>
-                                        <form action="{{ route('realEstate.settings.expenseCategories.delete', $expenseCategory->id) }}"
-                                            method="POST" style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="border-0 padding-0 bg-transparent text-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-4">
-                <a href="{{ route('realEstate.settings.expenseCategories.create') }}" class="btn btn-success">Create Expense Category</a>
-            </div>
+            <x-card :title="'Expense Categories'">
+                <x-slot:tools>
+                    <a href="{{ route('realEstate.settings.expenseCategories.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </x-slot>
+                <x-slot:body>
+                    <x-table :headers="['Id', 'Name']" :dataCell="$expenseCategories" :action="function ($expenseCategory) {
+                        return view('components.table.actions', [
+                            'data' => $expenseCategory,
+                            'edit' => route('realEstate.settings.expenseCategories.edit', $expenseCategory->id),
+                            'delete' => route('realEstate.settings.expenseCategories.delete', $expenseCategory->id),
+                        ]);
+                    }">
+                    </x-table>
+                </x-slot>
+            </x-card>
         </div>
     </div>
 @endsection

@@ -33,6 +33,7 @@ class DatabaseSeeder extends Seeder
             RealEstateAgencySeeder::class,
             RealEstateBranchSeeder::class,
             DevelopmentSeeder::class,
+            LoteStatusSeeder::class,
         ]
        );
     }

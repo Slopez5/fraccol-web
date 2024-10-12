@@ -83,7 +83,8 @@ class DevelopmentController extends Controller
     {
         $development = Development::find($id);
         $realEstateBranches = Auth::user()->realEstates->first()->branches;
-        return view('realEstates.developments.edit', compact('development', 'realEstateBranches'));
+        $developmentTypes = DevelopmentType::all();
+        return view('realEstates.developments.edit', compact('development', 'realEstateBranches', 'developmentTypes'));
     }
 
     public function updateDevelopment(Request $request, $id)
@@ -179,7 +180,10 @@ class DevelopmentController extends Controller
             $paymentPlan->pivot->loteType;
             return $paymentPlan;
         });
-        return view('realEstates.developments.show', compact('development'));
+        $loteTypes = $development->loteTypes;
+        $lotes = $development->lotes;
+        $paymentPlans = $development->paymentPlans;
+        return view('realEstates.developments.show', compact('development', 'loteTypes', 'lotes', 'paymentPlans'));
     }
 
     // Development -> Lotes
@@ -204,7 +208,8 @@ class DevelopmentController extends Controller
         $development = Development::find($developmentId);
 
         $loteType = LoteType::find($request->get('lote_type_id'));
-        if ($request->get('isMultiples') == '1') {
+
+        if (strpos($request->get('lote_number'), ',') !== false) {
             $lotes = explode(',', $request->get('lote_number'));
             foreach ($lotes as $lot) {
                 $lote = new Lote();
@@ -235,7 +240,7 @@ class DevelopmentController extends Controller
             $lote->lote_number = $request->get('lote_number');
             $lote->block_number = $request->get('block_number');
             $lote->lote_size = $request->get('lote_size');
-            $lote->status = $request->get('status');
+            $lote->loteStatus()->associate($request->get('status'));
             if ($request->hasFile('image')) {
                 $image = $request->file('image');
                 $storagePath = $image->storeAs('public/developments/lotes', $image->getClientOriginalName());

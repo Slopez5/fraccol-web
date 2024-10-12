@@ -3,27 +3,22 @@
 @section('content')
 <div class="container">
     <div class="row">
-        <div class="card col-12">
-            <div class="card-header">
-                <h4>Categoria de actividades</h4>
-            </div>
-            <div class="card-body">
-                <table class="table table-hover table-bordered">
-                    <thead>
-                        <tr>
-                            <th>Nombre</th>
-                            <th>Descripción</th>
-                            <th>Acciones</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       
-                    </tbody>
-                </table>
-            </div>
-        </div>
-        <div class="col-4">
-            <a href="{{ route('realEstate.settings.activityCategories.create') }}" class="btn btn-success">Create Activity Category</a>
-        </div>
+        <x-card :title="'Categoría de actividades'">
+            <x-slot:tools>
+                <a href="{{ route('realEstate.settings.activityCategories.create') }}" class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                </a>
+            </x-slot>
+            <x-slot:body>
+                <x-table :headers="['Nombre', 'Descripción']" :dataCell="$activityCategories" :action="function ($activityCategory) {
+                    return view('components.table.actions', [
+                        'data' => $activityCategory,
+                        'edit' => route('realEstate.settings.activityCategories.edit', $activityCategory->id),
+                        'delete' => route('realEstate.settings.activityCategories.delete', $activityCategory->id),
+                    ]);
+                }">
+                </x-table>
+            </x-slot>
+        </x-card>
     </div>
 @endsection

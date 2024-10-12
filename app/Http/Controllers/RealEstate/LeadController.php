@@ -51,7 +51,13 @@ class LeadController extends Controller
             $address->save();
             $lead->address()->associate($address);
         }
-        $lead->lead_agent_id = $request->input('lead_agent_id');
+        // validate if the lead agent is a real estate agent and validate != -1
+        if ($request->input('lead_agent_id') != -1) {
+            $lead_agent = User::find($request->input('lead_agent_id'));
+            if ($lead_agent && $lead_agent->role_id == RoleType::REAL_ESTATE_AGENT) {
+                $lead->lead_agent_id = $request->input('lead_agent_id');
+            }
+        }
         $lead->source = $request->input('source');
         $lead->status = $request->input('status');
         $lead->notes = $request->input('notes');

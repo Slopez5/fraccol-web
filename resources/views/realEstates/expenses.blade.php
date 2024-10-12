@@ -3,47 +3,23 @@
 @section('content')
     <div class="container">
         <div class="row">
-            <div class="card col-12">
-                <div class="card-header">
-                    <h4>Gastos</h4>
-                </div>
-                <div class="card-body">
-                    <table class="table table-bordered">
-                        <thead>
-                            <tr>
-                                <th>Id</th>
-                                <th>Name</th>
-                                <th>Actions</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach ($expenses as $expense)
-                                <tr>
-                                    <td>{{ $expense->id }}</td>
-                                    <td>{{ $expense->name }}</td>
-                                    <td>
-                                        <a href="{{ route('realEstate.expense.edit', $expense->id) }}"><i
-                                                class="fas fa-edit"></i></a>
-                                        <a href="{{ route('realEstate.expense.show', $expense->id) }}"><i
-                                                class="fas fa-eye"></i></a>
-                                        <form action="{{ route('realEstate.expense.delete', $expense->id) }}" method="POST"
-                                            style="display: inline;">
-                                            @csrf
-                                            @method('DELETE')
-                                            <button type="submit" class="border-0 padding-0 bg-transparent text-danger">
-                                                <i class="fas fa-trash"></i>
-                                            </button>
-                                        </form>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        </tbody>
-                    </table>
-                </div>
-            </div>
-            <div class="col-4">
-                <a href="{{ route('realEstate.expense.create') }}" class="btn btn-success">Agregar Gasto</a>
-            </div>
+            <x-card :title="'Gastos'">
+                <x-slot:tools>
+                    <a href="{{ route('realEstate.expense.create') }}" class="btn btn-primary">
+                        <i class="fas fa-plus"></i>
+                    </a>
+                </x-slot>
+                <x-slot:body>
+                    <x-table :headers="['Id', 'Nombre']" :dataCell="$expenses" :action="function ($expense) {
+                        return view('components.table.actions', [
+                            'data' => $expense,
+                            'edit' => route('realEstate.expense.edit', $expense->id),
+                            'delete' => route('realEstate.expense.delete', $expense->id),
+                        ]);
+                    }">
+                    </x-table>
+                </x-slot>
+            </x-card>
         </div>
     </div>
 @endsection

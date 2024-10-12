@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\V1\AuthApiController;
 use App\Http\Controllers\API\V1\CountryApiController;
 use App\Http\Controllers\API\V1\DevelopmentApiController;
+use App\Http\Controllers\Api\V1\LeadApiController;
 use App\Http\Controllers\API\V1\LoteApiController;
 use App\Http\Controllers\API\V1\PaymentPlansApiController;
 use App\Http\Controllers\API\V1\RealEstateApiController;
@@ -99,20 +100,56 @@ Route::middleware(['auth:api'])->group(function () {
     Route::post('/v1/development', [DevelopmentApiController::class, 'createDevelopment']);
     Route::post('/v1/development/{id}/edit', [DevelopmentApiController::class, 'updateDevelopment']);
 
+    /**
+     * Development Lote Types Apis
+     */
     Route::get('/v1/development/{id}/lote_types', [DevelopmentApiController::class, 'getLoteTypeByDevelopment']);
     Route::post('/v1/development/{id}/assign_lote_type', [DevelopmentApiController::class, 'addLoteTypeToDevelopment']);
 
+    /**
+     * Development Payment Plans Apis
+     */
     Route::get('/v1/development/{id}/payment_plans', [DevelopmentApiController::class, 'getPaymentPlansByDevelopment']);
     Route::post('/v1/development/{development_id}/lote_type/{lote_type_id}/assign_payment_plan', [DevelopmentApiController::class, 'addPaymentPlanToDevelopment']);
 
+    /**
+     * Development Lotes Apis
+     */
     Route::get('/v1/development/{development_id}/lotes', [DevelopmentApiController::class, 'getLotes']);
     Route::post('/v1/development/{development_id}/lote', [DevelopmentApiController::class, 'createLote']);
     Route::get('/v1/lote/{id}', [DevelopmentApiController::class, 'getLoteDetails']);
     Route::get('/v1/development/{id}/lote/price', [DevelopmentApiController::class, 'getPriceByLote']);
 
+    /**
+     * Development Lote Metadata Apis
+     */
     Route::post('/v1/lote/{id}/metadata', [DevelopmentApiController::class, 'addLoteMetadata']);
 
+    /**
+     * Development Appointments Apis
+     */
     Route::get('/v1/development/{id}/appointments', [DevelopmentApiController::class, 'getAppointments']);
     Route::post('/v1/development/{id}/appointment', [DevelopmentApiController::class, 'createAppointment']);
     Route::get('/v1/appointment/{id}', [DevelopmentApiController::class, 'getAppointmentDetails']);
+
+
+    /**
+     * Prospects Apis
+     */
+    Route::get('/v1/prospects', [LeadApiController::class, 'getProspects']);
+    Route::post('/v1/prospect', [LeadApiController::class, 'createProspect']);
+    Route::get('/v1/prospect/{id}', [LeadApiController::class, 'getProspectDetails']);
+    Route::post('/v1/prospect/{id}/update', [LeadApiController::class, 'updateProspect']);
+    Route::delete('/v1/prospect/{id}/delete', [LeadApiController::class, 'deleteProspect']);
+
+    /**
+     * Prospect Activities Apis
+     */
+
+    Route::get('/v1/prospect/{id}/activities', [LeadApiController::class, 'getActivities']);
+    Route::post('/v1/prospect/{id}/activity', [LeadApiController::class, 'createActivity']);
+    Route::get('/v1/activity/{id}', [LeadApiController::class, 'getActivityDetails']);
+    Route::post('/v1/activity/{id}/update', [LeadApiController::class, 'updateActivity']);
+    Route::delete('/v1/activity/{id}/delete', [LeadApiController::class, 'deleteActivity']);
+
 });

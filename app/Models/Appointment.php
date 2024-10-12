@@ -17,5 +17,20 @@ class Appointment extends Model
     {
         return $this->belongsTo(Development::class,'development_id');
     }
+
+    public function lead():BelongsTo
+    {
+        return $this->belongsTo(Lead::class,'lead_id');
+    }
+
+    public function leadAgent():BelongsTo
+    {
+        return $this->belongsTo(User::class,'lead_agent_id');
+    }
+
+    public function saleCloserAgent():BelongsTo
+    {
+        return $this->belongsTo(User::class,'sale_closer_agent_id');
+    }
     
 }

@@ -183,20 +183,25 @@ class DevelopmentApiController extends Controller
     public function createAppointment($developmentId, Request $reuqest)
     {
         $appointment = new Appointment();
+        if ($reuqest["lead_id"]) {
+            $appointment->lead()->associate($reuqest["lead_id"]);
+        }
         $appointment->customer_name = $reuqest["customer_name"];
         $appointment->customer_phone = $reuqest["customer_phone"];
         if ($reuqest["customer_email"]) {
             $appointment->customer_email = $reuqest["customer_email"];
         }
+        // Convert 05/10/2024 3:00 PM to 2024-10-05 15:00:00
+        $reuqest["appointment_date"] = date('Y-m-d H:i:s', strtotime(str_replace('/', '-', $reuqest["appointment_date"])));
         $appointment->appointment_date = $reuqest["appointment_date"];
         $appointment->status = 'citado';
         $appointment->notes = $reuqest["notes"];
         $appointment->development_id = $developmentId;
         if ($reuqest["sale_closer_agent_id"]) {
-            $appointment->sale_closer_agent_id = $reuqest["sale_closer_agent_id"];
+            $appointment->saleCloserAgent()->associate($reuqest["sale_closer_agent_id"]);
         }
         if ($reuqest["lead_agent_id"]) {
-            $appointment->lead_agent_id = $reuqest["lead_agent_id"];
+            $appointment->leadAgent()->associate($reuqest["lead_agent_id"]);
         }
         $appointment->save();
         return response()->success(['appointment' => $appointment], 200);

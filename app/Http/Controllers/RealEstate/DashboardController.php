@@ -19,7 +19,7 @@ class DashboardController extends Controller
 
     public function index()
     {
-        $developments = Development::all();
+        $developments = Development::all('id','name');
         $leads = Lead::paginate(10);
         $invoices = Invoice::all();
         $appointments = Appointment::all();

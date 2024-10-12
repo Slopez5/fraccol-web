@@ -81,12 +81,12 @@ Route::middleware(['auth.realEstate'])->group(function () {
 
 
     // Development -> Lotes
-    Route::get('/development/{development}/lote/create', [DevelopmentController::class, 'createDevelopmentLote'])->name('realEstate.development.lot.create');
-    Route::post('/development/{development}/lote/store', [DevelopmentController::class, 'storeDevelopmentLote'])->name('realEstate.development.lot.store');
-    Route::get('/development/{development}/lote/edit/{id}', [DevelopmentController::class, 'editDevelopmentLote'])->name('realEstate.development.lot.edit');
-    Route::put('/development/{development}/lote/update/{id}', [DevelopmentController::class, 'updateDevelopmentLote'])->name('realEstate.development.lot.update');
-    Route::delete('/development/{development}/lote/delete/{id}', [DevelopmentController::class, 'deleteDevelopmentLote'])->name('realEstate.development.lot.delete');
-    Route::get('/development/{development}/lot/show/{id}', [DevelopmentController::class, 'showDevelopmentLote'])->name('realEstate.development.lot.show');
+    Route::get('/development/{development}/lote/create', [DevelopmentController::class, 'createDevelopmentLote'])->name('realEstate.development.lote.create');
+    Route::post('/development/{development}/lote/store', [DevelopmentController::class, 'storeDevelopmentLote'])->name('realEstate.development.lote.store');
+    Route::get('/development/{development}/lote/edit/{id}', [DevelopmentController::class, 'editDevelopmentLote'])->name('realEstate.development.lote.edit');
+    Route::put('/development/{development}/lote/update/{id}', [DevelopmentController::class, 'updateDevelopmentLote'])->name('realEstate.development.lote.update');
+    Route::delete('/development/{development}/lote/delete/{id}', [DevelopmentController::class, 'deleteDevelopmentLote'])->name('realEstate.development.lote.delete');
+    Route::get('/development/{development}/lot/show/{id}', [DevelopmentController::class, 'showDevelopmentLote'])->name('realEstate.development.lote.show');
 
     // Development -> metadata
     Route::get('/development/{development}/metadata/create', [DevelopmentController::class, 'createDevelopmentMetadata'])->name('realEstate.development.metadata.create');
@@ -154,6 +154,11 @@ Route::middleware(['auth.realEstate'])->group(function () {
     //Settings
     Route::get('/settings/activity/categories', [SettingsController::class, 'activityCategories'])->name('realEstate.settings.activityCategories');
     Route::get('/settings/activity/categories/create', [SettingsController::class, 'createActivityCategory'])->name('realEstate.settings.activityCategories.create');
+    Route::post('/settings/activity/categories/store', [SettingsController::class, 'storeActivityCategory'])->name('realEstate.settings.activityCategories.store');
+    Route::get('/settings/activity/categories/edit/{id}', [SettingsController::class, 'editActivityCategory'])->name('realEstate.settings.activityCategories.edit');
+    Route::put('/settings/activity/categories/update/{id}', [SettingsController::class, 'updateActivityCategory'])->name('realEstate.settings.activityCategories.update');
+    Route::delete('/settings/activity/categories/delete/{id}', [SettingsController::class, 'deleteActivityCategory'])->name('realEstate.settings.activityCategories.delete');
+    
 
     // Expenses
     Route::get('/settings/expenses/categories', [SettingsController::class, 'expenseCategories'])->name('realEstate.settings.expenseCategories');

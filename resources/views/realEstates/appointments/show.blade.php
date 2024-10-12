@@ -15,17 +15,15 @@
 
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h3 class="card-title">Seguimiento</h3>
-                        <div class="card-tools">
-                            {{-- add button to open modal --}}
-                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addActivityModal">
-                                Agregar
-                            </button>
-                        </div>
-                    </div>
-                    <div class="card-body">
+                <x-card :title="'Seguimiento'">
+                    <x-slot:tools>
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addActivityModal">
+                            Agregar
+                        </button>
+                    </x-slot>
+                    <x-slot:body>
+                        <x-table :headers="['Prospecto', 'Vendedor(a)', 'Actividad de seguimiento', 'notas', 'Fecha y Hora de actividad', 'Fecha y Hora de completado']" :dataCell="$activities">
+                        </x-table>
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -50,8 +48,8 @@
                                 @endforeach
                             </tbody>
                         </table>
-                    </div>
-                </div>
+                    </x-slot>
+                </x-card>
             </div>
         </div>
     </div>

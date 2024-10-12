@@ -4,182 +4,80 @@
     <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Fraccionamientos</div>
-                    <div class="card-body">
-                        <a href="{{ route('realEstate.development.create') }}" class="btn btn-primary">Nuevo Fraccionamiento</a>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Address</th>
-                                    <th>City</th>
-                                    <th>State</th>
-                                    <th>Zip</th>
-                                    <th>Country</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($developments as $development)
-                                    <tr>
-                                        <td>{{ $development->name }}</td>
-                                        <td>{{ $development->address }}</td>
-                                        <td>{{ $development->city }}</td>
-                                        <td>{{ $development->state }}</td>
-                                        <td>{{ $development->zip }}</td>
-                                        <td>{{ $development->country }}</td>
-                                        <td>
-                                            <!-- edit action with icon -->
-                                            <a href="{{ route('realEstate.development.edit', $development->id) }}">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <!-- view action with icon -->
-                                            <a href="{{ route('realEstate.development.show', $development->id) }}">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <!-- delete action with icon using form and only icon-->
-                                            <form action="{{ route('realEstate.development.delete', $development->id) }}"
-                                                method="POST" style="display: inline;">
-                                                @csrf
-                                                @method('DELETE')
-                                                <button type="submit" class="border-0 padding-0 bg-transparent text-danger">
-                                                    <i class="fas fa-trash"></i>
-                                                </button>
-                                            </form>
-
-
-                                        </td>
-                                    </tr>
-                                @endforeach
-                        </table>
-                    </div>
-                </div>
+                <x-card :title="'Fraccionamientos'">
+                    <x-slot:tools>
+                        <a href="{{ route('realEstate.development.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </x-slot:tools>
+                    <x-slot:body>
+                        <x-table :headers="['id', 'Nombre']" :dataCell="$developments" :action="function ($item) {
+                            return view('components.table.actions', [
+                                'item' => $item,
+                                'edit' => route('realEstate.development.edit', $item->id),
+                                'delete' => route('realEstate.development.delete', $item->id),
+                            ]);
+                        }">
+                        </x-table>
+                    </x-slot>
+                </x-card>
             </div>
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-header">Prospectos</div>
-                    <div class="card-body">
-                        <a href="{{ route('realEstate.lead.create') }}" class="btn btn-primary">Nuevo Prospecto</a>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Nombre</th>
-                                    <th>Apellidos</th>
-                                    <th>Phone</th>
-
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($leads as $lead)
-                                    <tr>
-                                        <td>{{ $lead->first_name }}</td>
-                                        <td>{{ $lead->last_name }}</td>
-                                        <td>{{ $lead->phone }}</td>
-
-                                        <td>
-                                            <!-- edit action with icon -->
-                                            <a href="{{ route('realEstate.lead.edit', $lead->id) }}">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <!-- view action with icon -->
-                                            <a href="{{ route('realEstate.lead.show', $lead->id) }}">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <!-- delete action with icon -->
-                                            <a href="{{ route('realEstate.lead.delete', $lead->id) }}">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                        </table>
-                        <div class="d-flex justify-content-center">
-                            {{ $leads->links('pagination::bootstrap-4') }}
-                        </div>
-                    </div>
-                </div>
+                <x-card :title="'Prospectos'">
+                    <x-slot:tools>
+                        <a href="{{ route('realEstate.lead.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </x-slot>
+                    <x-slot:body>
+                        <x-table :headers="['Nombre', 'Apellidos', 'Phone']" :dataCell="$leads" :action="function ($item) {
+                            return view('components.table.actions', [
+                                'item' => $item,
+                                'edit' => route('realEstate.lead.edit', $item->id),
+                                'delete' => route('realEstate.lead.delete', $item->id),
+                            ]);
+                        }">
+                        </x-table>
+                    </x-slot>
+                </x-card>
             </div>
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Citas</div>
-                    <div class="card-body">
-                        <a href="{{ route('realEstate.appointment.create') }}" class="btn btn-primary">Nueva Cita</a>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Fraccionamiento</th>
-                                    <th>Nombre</th>
-                                    <th>Fecha</th>
-                                    <th colspan="2">Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($appointments as $appointment)
-                                    <tr>
-                                        <td>{{ $appointment->development->name }}</td>
-                                        <td>{{ $appointment->customer_name }}</td>
-                                        <td>{{ $appointment->appointment_date }}</td>
-                                        <td>
-                                            <!-- edit action with icon -->
-                                            <a href="{{ route('realEstate.appointment.edit', $appointment->id) }}">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            <!-- view action with icon -->
-                                            <a href="{{ route('realEstate.appointment.show', $appointment->id) }}">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            <!-- delete action with icon -->
-                                            <a href="{{ route('realEstate.appointment.delete', $appointment->id) }}">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                        </table>
-                    </div>
-                </div>
+                <x-card :title="'Citas'">
+                    <x-slot:tools>
+                        <a href="{{ route('realEstate.appointment.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </x-slot>
+                    <x-slot:body>
+                        <x-table :headers="['Fraccionamiento', 'Nombre', 'Fecha']" :dataCell="$appointments" :action="function ($item) {
+                            return view('components.table.actions', [
+                                'item' => $item,
+                                'edit' => route('realEstate.appointment.edit', $item->id),
+                                'delete' => route('realEstate.appointment.delete', $item->id),
+                            ]);
+                        }">
+                        </x-table>
+                    </x-slot>
+                </x-card>
             </div>
             <div class="col-md-6">
-                <div class="card">
-                    <div class="card-header">Facturas</div>
-                    <div class="card-body">
-                        <a href="{{ route('realEstate.invoice.create') }}" class="btn btn-primary">Nueva Factura</a>
-                        <table class="table">
-                            <thead>
-                                <tr>
-                                    <th>Amount</th>
-                                    <th>Due Date</th>
-                                    <th>Development</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach ($invoices as $invoice)
-                                    <tr>
-                                        <td>{{ $invoice->amount }}</td>
-                                        <td>{{ $invoice->due_date }}</td>
-                                        <td>{{ $invoice->development->name }}</td>
-                                        <td>
-                                            {{-- edit action with icon --}}
-                                            <a href="{{ route('realEstate.invoice.edit', $invoice->id) }}">
-                                                <i class="fas fa-edit"></i>
-                                            </a>
-                                            {{-- view action with icon --}}
-                                            <a href="{{ route('realEstate.invoice.show', $invoice->id) }}">
-                                                <i class="fas fa-eye"></i>
-                                            </a>
-                                            {{-- delete action with icon --}}
-                                            <a href="{{ route('realEstate.invoice.delete', $invoice->id) }}">
-                                                <i class="fas fa-trash"></i>
-                                            </a>
-                                        </td>
-                                    </tr>
-                                @endforeach
-                        </table>
-                    </div>
-                </div>
+                <x-card :title="'invoices'">
+                    <x-slot:tools>
+                        <a href="{{ route('realEstate.invoice.create') }}" class="btn btn-primary">
+                            <i class="fas fa-plus"></i>
+                        </a>
+                    </x-slot:tools>
+                    <x-slot:body>
+                        <x-table :headers="['Amount', 'Due Date', 'Development']" :dataCell="$invoices" :action="function ($item) {
+                            return view('components.table.actions', [
+                                'item' => $item,
+                                'edit' => route('realEstate.invoice.edit', $item->id),
+                                'delete' => route('realEstate.invoice.delete', $item->id),
+                            ]);
+                        }">
+                        </x-table>
+                    </x-slot:body>
+                </x-card>
             </div>
         </div>
     </div>

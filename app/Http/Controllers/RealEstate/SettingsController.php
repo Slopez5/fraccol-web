@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\RealEstate;
 
 use App\Http\Controllers\Controller;
+use App\Models\ActivityType;
 use App\Models\Address;
 use App\Models\Contract;
 use App\Models\Country;
@@ -26,12 +27,49 @@ class SettingsController extends Controller
 
     public function activityCategories()
     {
-        return view('realEstates.settings.activityCategories.index');
+        $activityCategories = ActivityType::all();
+        return view('realEstates.settings.activityCategories.index', compact('activityCategories'));
     }
 
     public function createActivityCategory()
     {
         return view('realEstates.settings.activityCategories.create');
+    }
+
+    public function storeActivityCategory(Request $request)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'description' => 'nullable|string|max:255',
+        ]);
+
+        ActivityType::create($request->all());
+
+        return redirect()->route('realEstate.settings.activityCategories');
+    }
+
+    public function editActivityCategory(ActivityType $activityCategory)
+    {
+        return view('realEstates.settings.activityCategories.edit', compact('activityCategory'));
+    }
+
+    public function updateActivityCategory(Request $request, ActivityType $activityCategory)
+    {
+        $request->validate([
+            'name' => 'required|string|max:255',
+        ]);
+
+        $activityCategory->update($request->all());
+
+        return redirect()->route('realEstate.settings.activityCategories');
+    }
+
+    public function deleteActivityCategory($id)
+    {
+        $activityCategory = ActivityType::find($id);
+        $activityCategory->delete();
+
+        return redirect()->route('realEstate.settings.activityCategories');
     }
 
     public function expenseCategories()
@@ -215,7 +253,8 @@ class SettingsController extends Controller
 
     public function invoiceStatuses()
     {
-        return view('realEstates.settings.invoiceStatuses.index');
+        $invoiceStatuses = InvoiceStatus::all();
+        return view('realEstates.settings.invoiceStatuses.index', compact('invoiceStatuses'));
     }
 
     public function createInvoiceStatus()
@@ -261,7 +300,8 @@ class SettingsController extends Controller
 
     public function loteStatuses()
     {
-        return view('realEstates.settings.loteStatuses.index');
+        $loteStatuses = LoteStatus::all();
+        return view('realEstates.settings.loteStatuses.index', compact('loteStatuses'));
     }
 
     public function createLoteStatus()
@@ -307,7 +347,9 @@ class SettingsController extends Controller
 
     public function loteTypes()
     {
-        return view('realEstates.settings.loteTypes.index');
+        
+        $loteTypes = LoteType::all();
+        return view('realEstates.settings.loteTypes.index', compact('loteTypes'));
     }
 
     public function createLoteType()
