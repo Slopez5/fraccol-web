@@ -186,6 +186,12 @@ class DevelopmentController extends Controller
         return view('realEstates.developments.show', compact('development', 'loteTypes', 'lotes', 'paymentPlans'));
     }
 
+    // Development Map Interactive
+    public function mapDevelopment($id) {
+        $development = Development::find($id);
+        return view('realEstates.developments.map', compact('development'));
+    }
+
     // Development -> Lotes
 
     public function createDevelopmentLote($developmentId)
@@ -218,7 +224,7 @@ class DevelopmentController extends Controller
                 $lote->lote_number = $lot;
                 $lote->block_number = $request->get('block_number');
                 $lote->lote_size = $request->get('lote_size');
-                $lote->status = $request->get('status');
+                $lote->loteStatus()->associate($request->get('status'));
                 if ($request->hasFile('image')) {
                     $image = $request->file('image');
                     $storagePath = $image->storeAs('public/developments/lotes', $image->getClientOriginalName());

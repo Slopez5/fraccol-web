@@ -195,10 +195,6 @@ class SettingsController extends Controller
     public function storeRealEstateBranch(Request $request)
     {
         $user = Auth::user();
-        
-        
-
-        logger($request->all());
 
         $realEstateBranch = new RealEstateBranch();
         $realEstateBranch->realEstate()->associate($user->realEstates->first());

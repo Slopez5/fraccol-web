@@ -27,14 +27,14 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('realEstate.dashboard');
     Route::get('/users', [DashboardController::class, 'users'])->name('realEstate.users');
     Route::get('/sales', [DashboardController::class, 'sales'])->name('realEstate.sales');
-    Route::get('/Appointments', [DashboardController::class, 'appointments'])->name('realEstate.appointments');
+    Route::get('/appointments', [DashboardController::class, 'appointments'])->name('realEstate.appointments');
     Route::get('/expenses', [DashboardController::class, 'expenses'])->name('realEstate.expenses');
-    Route::get('/Developments', [DashboardController::class, 'developments'])->name('realEstate.developments');
-    Route::get('/Properties', [DashboardController::class, 'properties'])->name('realEstate.properties');
-    Route::get('/Leads', [DashboardController::class, 'leads'])->name('realEstate.leads');
-    Route::get('/Payments', [DashboardController::class, 'payments'])->name('realEstate.payments');
-    Route::get('/Invoices', [DashboardController::class, 'invoices'])->name('realEstate.invoices');
-    Route::get('/Reports', [DashboardController::class, 'reports'])->name('realEstate.reports');
+    Route::get('/developments', [DashboardController::class, 'developments'])->name('realEstate.developments');
+    Route::get('/properties', [DashboardController::class, 'properties'])->name('realEstate.properties');
+    Route::get('/leads', [DashboardController::class, 'leads'])->name('realEstate.leads');
+    Route::get('/payments', [DashboardController::class, 'payments'])->name('realEstate.payments');
+    Route::get('/invoices', [DashboardController::class, 'invoices'])->name('realEstate.invoices');
+    Route::get('/reports', [DashboardController::class, 'reports'])->name('realEstate.reports');
 
     // Users
     Route::get('/user/create', [UserController::class, 'createUser'])->name('realEstate.user.create');
@@ -61,7 +61,13 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::get('/appointment/show/{id}', [AppointmentController::class, 'showAppointment'])->name('realEstate.appointment.show');
 
     //Appointment -> Activities
+    Route::get('/appointment/{appointment}/activities', [AppointmentController::class, 'activities'])->name('realEstate.appointment.activities');
+    Route::get('/appointment/{appointment}/activity/create', [AppointmentController::class, 'createActivity'])->name('realEstate.appointment.activity.create');
     Route::post('/appointment/{appointment}/activity/store', [AppointmentController::class, 'storeActivity'])->name('realEstate.appointment.activity.store');
+    Route::get('/appointment/{appointment}/activity/edit/{id}', [AppointmentController::class, 'editActivity'])->name('realEstate.appointment.activity.edit');
+    Route::put('/appointment/{appointment}/activity/update/{id}', [AppointmentController::class, 'updateActivity'])->name('realEstate.appointment.activity.update');
+    Route::delete('/appointment/{appointment}/activity/delete/{id}', [AppointmentController::class, 'deleteActivity'])->name('realEstate.appointment.activity.delete');
+    Route::get('/appointment/{appointment}/activity/show/{id}', [AppointmentController::class, 'showActivity'])->name('realEstate.appointment.activity.show');
 
     // Expenses
     Route::get('/expense/create', [ExpenseController::class, 'createExpense'])->name('realEstate.expense.create');
@@ -78,6 +84,9 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::put('/development/update/{id}', [DevelopmentController::class, 'updateDevelopment'])->name('realEstate.development.update');
     Route::delete('/development/delete/{id}', [DevelopmentController::class, 'deleteDevelopment'])->name('realEstate.development.delete');
     Route::get('/development/show/{id}', [DevelopmentController::class, 'showDevelopment'])->name('realEstate.development.show');
+
+    // Development Map Interactive
+    Route::get('/development/{development}/map', [DevelopmentController::class, 'mapDevelopment'])->name('realEstate.development.map');
 
 
     // Development -> Lotes
@@ -158,7 +167,7 @@ Route::middleware(['auth.realEstate'])->group(function () {
     Route::get('/settings/activity/categories/edit/{id}', [SettingsController::class, 'editActivityCategory'])->name('realEstate.settings.activityCategories.edit');
     Route::put('/settings/activity/categories/update/{id}', [SettingsController::class, 'updateActivityCategory'])->name('realEstate.settings.activityCategories.update');
     Route::delete('/settings/activity/categories/delete/{id}', [SettingsController::class, 'deleteActivityCategory'])->name('realEstate.settings.activityCategories.delete');
-    
+
 
     // Expenses
     Route::get('/settings/expenses/categories', [SettingsController::class, 'expenseCategories'])->name('realEstate.settings.expenseCategories');

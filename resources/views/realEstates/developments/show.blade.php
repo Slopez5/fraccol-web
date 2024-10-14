@@ -56,7 +56,7 @@
                         </a>
                     </x-slot>
                     <x-slot:body>
-                        <x-table :headers="['Manzana', 'Lote', 'Superficie', 'Precio', 'Estatus']" :dataCell="$lotes"
+                        <x-table :headers="['Lote', 'Manzana', 'Superficie', 'Precio', 'Estatus']" :dataCell="$lotes"
                             :action="function ($lote) use ($development) {
                                 return view('components.table.actions', [
                                     'data' => $lote,
